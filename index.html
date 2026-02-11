@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Year 11 History • Revision Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ────────────────────────────────────────────────
+       Flurs-inspired dark premium style
+    ──────────────────────────────────────────────── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #050505;
+      color: #e8e8e8;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background: 
+        radial-gradient(circle at 15% 85%, rgba(120,119,198,0.04) 0%, transparent 60%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.015) 0%, transparent 60%);
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) scale(0.3); opacity: 0; }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(0.7); opacity: 0; }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(8,8,8,0.94);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index: 9999;
+      padding: 1.1rem 0;
+      transition: all 0.35s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(5,5,5,0.97);
+      padding: 0.9rem 0;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 14px rgba(16,185,129,0.7);
+      animation: pulse 2.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50%     { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.7rem;
+    }
+
+    .nav-btn {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #c0c0c0;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.97rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      color: white;
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn.active {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    main {
+      padding-top: 110px;
+      padding-bottom: 6rem;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      text-align: center;
+      background: linear-gradient(90deg, #aaa, #fff, #aaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 1.15rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 2.5rem 0 4rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: rgba(20,20,20,0.8);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #b8b8b8;
+      padding: 1rem 2.4rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.08rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 0 24px rgba(255,255,255,0.08);
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: rgba(255,255,255,0.06);
+      color: white;
+    }
+
+    .accordion-card {
+      background: rgba(18,18,18,0.72);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      margin-bottom: 1.8rem;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .accordion-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .acc-header {
+      padding: 1.5rem 2.2rem;
+      background: rgba(12,12,12,0.6);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .acc-header:hover {
+      background: rgba(25,25,25,0.8);
+    }
+
+    .acc-body {
+      display: none;
+      padding: 2rem 2.2rem;
+      background: rgba(10,10,10,0.45);
+    }
+
+    .acc-body.active {
+      display: block;
+    }
+
+    .impact-box {
+      margin: 1.5rem 0;
+      padding: 1.4rem 1.8rem;
+      background: rgba(16,185,129,0.06);
+      border-left: 4px solid #10b981;
+      border-radius: 10px;
+      color: #d0d0d0;
+    }
+
+    .impact-box strong {
+      color: #34d399;
+    }
+
+    /* Quiz */
+    #quizPanel {
+      display: none;
+      max-width: 880px;
+      margin: 3rem auto;
+      background: rgba(18,18,18,0.78);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .progress-bar-outer {
+      height: 10px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 2.2rem;
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .question-text {
+      font-size: 1.55rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    #answerInput {
+      width: 100%;
+      padding: 1.2rem 1.6rem;
+      font-size: 1.18rem;
+      background: rgba(10,10,10,0.75);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      color: white;
+      margin-bottom: 1.8rem;
+    }
+
+    #answerInput:focus {
+      outline: none;
+      border-color: #34d399;
+      box-shadow: 0 0 0 4px rgba(52,211,153,0.18);
+    }
+
+    .quiz-controls {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .quiz-btn {
+      padding: 1.1rem 2.4rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .submit { background: #10b981; color: black; }
+    .next    { background: #2a2a2a; color: white; }
+    .exit    { background: #444; color: white; }
+
+    .submit:hover { background: #34d399; }
+    .next:hover,
+    .exit:hover { background: #555; }
+
+    .feedback-message {
+      margin-top: 2rem;
+      padding: 1.4rem;
+      border-radius: 12px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .correct { background: rgba(16,185,129,0.16); border: 1px solid #10b981; color: #34d399; }
+    .wrong   { background: rgba(239,68,68,0.16); border: 1px solid #ef4444; color: #f87171; }
+
+    .score-text {
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin: 3rem 0 1rem;
+      color: #34d399;
+    }
+
+    @media (max-width: 900px) {
+      .container { padding: 0 1.5rem; }
+      main { padding-top: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-particles"></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      History Revision Hub
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn active" onclick="switchTab('cold')">Cold War</button>
+      <button class="nav-btn" onclick="switchTab('elizabeth')">Elizabethan</button>
+      <button class="nav-btn" onclick="openQuiz()"><i class="fas fa-brain"></i> Quiz</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+  <section id="cold">
+    <h2 class="section-title">Cold War</h2>
+    <p class="section-subtitle">1945–1991 — detailed topics with causes, events & consequences</p>
+    <div id="coldAccordions"></div>
+  </section>
+
+  <section id="elizabeth" style="display:none;">
+    <h2 class="section-title">Elizabethan England</h2>
+    <p class="section-subtitle">1558–1603 — focused on Drake, Spain, Armada, Netherlands, trade, poverty</p>
+    <div id="elizAccordions"></div>
+  </section>
+
+  <section id="quizPanel" style="display:none;">
+    <h2 class="section-title">Knowledge Check – 60 Questions</h2>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-inner" id="progressBar"></div>
+    </div>
+    <div class="question-text" id="questionText"></div>
+    <input type="text" id="answerInput" placeholder="Your answer (1–3 words)" autocomplete="off"/>
+    <div class="quiz-controls">
+      <button class="quiz-btn submit" onclick="checkAnswer()">Submit</button>
+      <button class="quiz-btn next" onclick="nextQuestion()">Next</button>
+      <button class="quiz-btn exit" onclick="closeQuiz()">Exit Quiz</button>
+    </div>
+    <div id="feedback" class="feedback-message"></div>
+    <div class="score-text">Score: <span id="scoreDisplay">0</span> / <span id="totalDisplay">0</span></div>
+  </section>
+
+</main>
+
+<script>
+
+for (let i = 0; i < 35; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDelay = Math.random() * 30 + 's';
+  p.style.animationDuration = (18 + Math.random() * 30) + 's';
+  document.querySelector('.bg-particles').appendChild(p);
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+
+const coldWarTopics = [
+  { id: "early-tensions", title: "Early Tensions 1945–1949",
+    content: `
+      <p><strong>Causes:</strong> Fundamental clash between capitalism (USA) and communism (USSR) + deep mistrust built during World War II + power vacuum left in Europe after defeat of Nazi Germany.</p>
+      <p><strong>Key events:</strong></p>
+      <ul>
+        <li>Yalta Conference (Feb 1945): Germany divided into 4 zones, free elections promised in Eastern Europe (Stalin never allowed them).</li>
+        <li>Potsdam Conference (Jul–Aug 1945): Truman took harder line than Roosevelt, told Stalin about the atomic bomb → suspicion increased dramatically.</li>
+        <li>Churchill’s Iron Curtain speech (March 1946): Publicly declared that an "iron curtain" had fallen across Europe, making the East–West divide obvious to the world.</li>
+      </ul>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Truman Doctrine (1947) — USA promised to help any country resisting communism (first applied to Greece and Turkey).<br>
+        • Marshall Plan (1948) — $13 billion of American aid rebuilt Western Europe and reduced appeal of communism.<br>
+        • Soviet anger led directly to Berlin Blockade (1948–49).
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Europe permanently divided into capitalist West and communist East.<br>
+        • NATO formed in 1949 — first peacetime military alliance in US history.<br>
+        • Cold War became a worldwide ideological and political struggle.
+      </div>` },
+
+  { id: "berlin-blockade", title: "Berlin Blockade & Airlift 1948–49",
+    content: `
+      <p><strong>Causes:</strong> West introduced new currency (Deutsche Mark) in their zones including West Berlin → threatened Soviet economic control of East Germany → Stalin blocked all road and rail access to West Berlin.</p>
+      <p><strong>Key events:</strong> Blockade began June 1948 → Allies organised massive airlift → around 277,000 flights delivered 2.3 million tons of supplies → Stalin lifted blockade after 11 months (May 1949).</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • West Berlin survived without surrendering → enormous propaganda victory for the West.<br>
+        • Stalin appeared aggressive and was forced to back down.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Germany formally divided into West Germany (FRG) and East Germany (GDR) in 1949.<br>
+        • NATO created in April 1949 partly as a direct response to the crisis.<br>
+        • Military and political division of Europe became much deeper and more permanent.
+      </div>` },
+
+  { id: "korea", title: "Korean War 1950–1953",
+    content: `
+      <p><strong>Causes:</strong> Korea divided at 38th parallel after WW2 → communist North Korea (backed by USSR) invaded South Korea (backed by USA) in June 1950.</p>
+      <p><strong>Key events:</strong> UN (mainly US) forces pushed North Koreans back → General MacArthur invaded North Korea → China entered war with huge numbers → bloody stalemate → armistice signed July 1953 (no peace treaty).</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Around 3 million people killed, Korea still divided today along almost same line.<br>
+        • Very heavy strain on American money, troops and public support.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Showed USA would fight to contain communism → led to NSC-68 and huge increase in US military spending.<br>
+        • Set the pattern for future Cold War proxy wars (Vietnam, Afghanistan, etc.).
+      </div>` },
+
+  { id: "arms-space", title: "Arms Race & Space Race 1949–1969",
+    content: `
+      <p><strong>Key developments:</strong> USSR tested first atomic bomb 1949 → both sides built hydrogen bombs (1952 USA, 1953 USSR) → ICBMs developed → Mutually Assured Destruction (MAD) established.</p>
+      <p>Space race: Sputnik 1 (1957) shocked USA → Yuri Gagarin first man in space (1961) → USA landed on Moon with Apollo 11 (1969).</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Widespread nuclear fear → civil defence drills, fallout shelters, "duck and cover" in schools.<br>
+        • Sputnik panic led to creation of NASA (1958) and huge US investment in science & education.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Arms race used up enormous amounts of money on both sides.<br>
+        • Space technology created many spin-offs (weather satellites, GPS, improved computers).<br>
+        • Balance of terror (MAD) helped prevent direct war between superpowers.
+      </div>` },
+
+  { id: "hungary-56", title: "Hungarian Uprising 1956",
+    content: `
+      <p><strong>Causes:</strong> Khrushchev’s secret speech (Feb 1956) criticised Stalin → people in Eastern Europe hoped for real change and less Soviet control.</p>
+      <p><strong>Key events:</strong> Protests in Budapest (Oct 1956) → Imre Nagy became leader, promised reforms, free elections and to leave Warsaw Pact → Soviet tanks invaded (4 Nov 1956) and crushed uprising.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Around 3,000 Hungarians killed, about 200,000 fled as refugees.<br>
+        • Serious damage to Soviet Union’s moral reputation in the West.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Proved USSR would use military force to keep control of satellite states.<br>
+        • West reluctantly accepted that Iron Curtain division was permanent.<br>
+        • Discouraged serious reform attempts in Eastern Europe until Gorbachev era.
+      </div>` },
+
+  { id: "berlin-wall", title: "Berlin Wall 1961",
+    content: `
+      <p><strong>Causes:</strong> Between 1949–1961 about 3.5 million East Germans (many skilled workers) escaped to West through open Berlin → massive brain drain crippled East German economy.</p>
+      <p><strong>Key events:</strong> Night of 13 August 1961 → East Germany suddenly closed border, put up barbed wire → soon replaced with concrete wall and death strip.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Stopped mass exodus almost completely → East German economy became more stable for a while.<br>
+        • Huge propaganda disaster for communism worldwide.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Berlin Wall became the most powerful symbol of Cold War oppression and division.<br>
+        • Its fall in November 1989 marked the beginning of the end of the Cold War.
+      </div>` },
+
+  { id: "cuban-crisis", title: "Cuban Missile Crisis 1962",
+    content: `
+      <p><strong>Causes:</strong> Failed Bay of Pigs invasion (1961) humiliated USA → Fidel Castro allowed Soviet nuclear missiles in Cuba to protect his regime and balance US power.</p>
+      <p><strong>Key events:</strong> U-2 spy planes photographed missile sites (Oct 1962) → 13 days of extreme tension → US naval quarantine → secret deal (US removed missiles from Turkey) → Soviets withdrew missiles.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Closest the world ever came to full nuclear war.<br>
+        • Both Kennedy and Khrushchev backed down and appeared reasonable.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Moscow–Washington hotline set up (1963) to improve communication.<br>
+        • Partial Nuclear Test Ban Treaty signed (1963).<br>
+        • Moved superpowers towards more cautious coexistence and later détente.
+      </div>` },
+
+  { id: "detente", title: "Détente 1970s",
+    content: `
+      <p><strong>Key events:</strong> Strategic Arms Limitation Talks (SALT I signed 1972) → Nixon visited China (1972) and Moscow → Helsinki Accords (1975) recognised borders and included human rights promises.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Reduced tension between superpowers.<br>
+        • First serious arms control agreements signed.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Human rights clauses in Helsinki Accords later helped dissidents in Eastern Europe.<br>
+        • Détente was only temporary — ended with Soviet invasion of Afghanistan (1979).
+      </div>` },
+
+  { id: "afghanistan", title: "Soviet–Afghan War 1979–1989",
+    content: `
+      <p><strong>Causes:</strong> Communist government in Afghanistan faced growing rebellion → Soviet Union invaded (Dec 1979) to prop up the regime.</p>
+      <p><strong>Key events:</strong> USA, Saudi Arabia and others funded and armed mujahideen fighters → long, brutal guerrilla war → Soviets withdrew in 1989 after huge losses.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Very high Soviet casualties and enormous financial cost.<br>
+        • Complete end of détente period.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Severely weakened Soviet economy and morale.<br>
+        • Helped cause collapse of USSR in 1991.<br>
+        • Chaos in Afghanistan led to rise of Taliban and Al-Qaeda.
+      </div>` },
+
+  { id: "end-cold", title: "End of Cold War 1985–1991",
+    content: `
+      <p><strong>Key events:</strong> Gorbachev introduced glasnost (openness) and perestroika (restructuring) → protests spread across Eastern Europe → Berlin Wall fell (Nov 1989) → peaceful revolutions → Soviet Union dissolved (Dec 1991).</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Cold War ended peacefully after 45 years.<br>
+        • Germany reunited in 1990.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • United States became the world’s only superpower.<br>
+        • Spread of democracy and capitalism across former communist countries.<br>
+        • New world order created — but also new tensions (e.g. NATO expansion, instability in some regions).
+      </div>` }
+];
+
+const elizabethTopics = [
+  { id: "drake-privateer", title: "Sir Francis Drake & Privateering",
+    content: `
+      <p><strong>Key events:</strong> Circumnavigation voyage 1577–1580 — attacked Spanish colonies and captured huge treasure ship → knighted by Elizabeth in 1581.</p>
+      <p>Cadiz raid 1587 — Drake sailed into Spanish port and destroyed ships and supplies → delayed Spanish Armada by one year (“singeing the King of Spain’s beard”).</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • England gained massive wealth from stolen Spanish treasure.<br>
+        • Spain deeply humiliated → tensions rose sharply.<br>
+        • Armada delayed by a full year.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Helped provoke full-scale war with Spain (Armada 1588).<br>
+        • Greatly increased English confidence at sea.<br>
+        • Laid early foundations for England as a major maritime and naval power.
+      </div>` },
+
+  { id: "spain-tensions", title: "Causes of Conflict with Spain",
+    content: `
+      <p><strong>Main causes:</strong></p>
+      <ul>
+        <li>Religious divide: Protestant England vs very Catholic Spain.</li>
+        <li>Privateering: English captains attacked and robbed Spanish treasure fleets.</li>
+        <li>English support for Dutch Protestants rebelling against Spanish rule.</li>
+        <li>Trade rivalry: Spain claimed monopoly over Americas; England wanted to trade and settle there.</li>
+      </ul>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Continuous low-level naval war and raids throughout 1570s–80s.<br>
+        • Philip II saw England as a serious threat to his empire and faith.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Directly led to Philip launching the Spanish Armada in 1588.<br>
+        • Defeat of Armada began long-term decline of Spanish naval power.
+      </div>` },
+
+  { id: "netherlands-revolt", title: "England & the Dutch Revolt / Netherlands",
+    content: `
+      <p><strong>Key events:</strong> Dutch Protestants began revolt against Spain in 1568 → Elizabeth sent money and volunteers at first → Treaty of Nonsuch (1585) → England sent 6,000 troops led by Earl of Leicester.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Prevented quick Spanish victory over the Dutch rebels.<br>
+        • Kept important ports and coastline out of Spanish control.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • One of the main reasons Philip II decided to invade England (Armada).<br>
+        • Helped the Dutch eventually win independence.<br>
+        • Created a useful Protestant buffer zone protecting England.
+      </div>` },
+
+  { id: "armada-1588", title: "Spanish Armada 1588",
+    content: `
+      <p><strong>Key events:</strong> Around 130 Spanish ships sent to invade England → English ships were faster and had better long-range guns → harassed Armada for days → fireships sent at Calais → storms scattered and sank many ships.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Huge propaganda victory for England and Protestant cause.<br>
+        • Elizabeth’s Tilbury speech (“heart and stomach of a king”) boosted national unity and pride.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Marked the start of permanent decline of Spanish naval power.<br>
+        • England established as leading Protestant nation and rising sea power.
+      </div>` },
+
+  { id: "wool-sheep-trade", title: "Wool, Sheep Farming & Trade Growth",
+    content: `
+      <p><strong>Key developments:</strong> Landowners enclosed fields for sheep farming → wool and cloth exports grew rapidly → London became major European trade centre → East India Company founded 1600.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Large profits for landowners and merchants.<br>
+        • Price inflation made life harder for ordinary poor people.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • Strengthened England’s overall economy significantly.<br>
+        • Created wealth and commercial networks that supported later colonial and trading empire.
+      </div>` },
+
+  { id: "enclosures-poverty", title: "Enclosures, Poverty & Social Change",
+    content: `
+      <p><strong>Key developments:</strong> Enclosures removed common land and displaced many small farmers → more people became vagabonds → inflation made poverty worse → 1601 Poor Law set up parish-based relief system.</p>
+
+      <div class="impact-box">
+        <strong>Short-term consequences:</strong><br>
+        • Rise in vagrancy, unemployment and social unrest.<br>
+        • Local taxes (poor rates) introduced to help the poor.
+      </div>
+      <div class="impact-box">
+        <strong>Long-term consequences:</strong><br>
+        • 1601 Poor Law became first national poor relief system in Europe.<br>
+        • Shaped English attitudes and policies towards poverty for centuries.
+      </div>` }
+];
+
+const quizCold = [
+  { q: "What conference divided Germany in Feb 1945?", a: ["yalta"] },
+  { q: "Which conference saw Truman become more suspicious?", a: ["potsdam"] },
+  { q: "Who warned of an Iron Curtain in 1946?", a: ["churchill", "churchil"] },
+  { q: "What US policy aimed to contain communism?", a: ["containment"] },
+  { q: "Which doctrine promised aid against communism?", a: ["truman doctrine", "truman"] },
+  { q: "What plan gave $13 billion to Western Europe?", a: ["marshall plan", "marshall"] },
+  { q: "Which city was blockaded in 1948–49?", a: ["berlin"] },
+  { q: "What saved West Berlin during the blockade?", a: ["berlin airlift", "airlift"] },
+  { q: "How long did the Berlin Airlift last?", a: ["11 months"] },
+  { q: "Which two German states formed in 1949?", a: ["west germany", "east germany"] },
+  { q: "Who was sacked by Truman in 1951?", a: ["macarthur"] },
+  { q: "What does MAD stand for?", a: ["mutually assured destruction"] },
+  { q: "Which country tested atomic bomb in 1949?", a: ["ussr"] },
+  { q: "Which bomb tested by USA in 1952?", a: ["hydrogen bomb"] },
+  { q: "Which satellite shocked USA in 1957?", a: ["sputnik"] },
+  { q: "Who was first human in space?", a: ["gagarin"] },
+  { q: "In which year did USA land on Moon?", a: ["1969"] },
+  { q: "Which speech criticised Stalin in 1956?", a: ["secret speech"] },
+  { q: "Who led reforms in Hungary 1956?", a: ["nagy"] },
+  { q: "How many Hungarians fled after 1956?", a: ["200000"] },
+  { q: "Why was Berlin Wall built?", a: ["stop brain drain", "stop the brain drain" ] },
+  { q: "In which year was Berlin Wall built?", a: ["1961"] },
+  { q: "Who said 'Ich bin ein Berliner'?", a: ["kennedy"] },
+  { q: "When did Berlin Wall fall?", a: ["1989"] },
+  { q: "Which crisis happened in October 1962?", a: ["cuban missile crisis"] },
+  { q: "How many days did Cuban Missile Crisis last?", a: ["13"] },
+  { q: "What did Kennedy impose around Cuba?", a: ["quarantine"] },
+  { q: "Which missiles secretly removed from Turkey?", a: ["jupiter"] },
+  { q: "What link created after 1962 crisis?", a: ["hotline"] },
+  { q: "Which treaty banned atmospheric tests 1963?", a: ["partial test ban"] },
+  { q: "Who led Prague Spring?", a: ["dubcek"] },
+  { q: "Which doctrine justified 1968 invasion?", a: ["brezhnev doctrine"] },
+  { q: "Which US president visited China 1972?", a: ["nixon"] },
+  { q: "Which agreement signed in Helsinki 1975?", a: ["helsinki accords"] },
+  { q: "Which arms treaty signed 1972?", a: ["salt i"] },
+  { q: "Which country USSR invaded 1979?", a: ["afghanistan"] },
+  { q: "Which doctrine Carter announced after Afghanistan?", a: ["carter doctrine"] },
+  { q: "Who became Soviet leader 1985?", a: ["gorbachev"] },
+  { q: "What does glasnost mean?", a: ["openness"] },
+  { q: "What does perestroika mean?", a: ["restructuring"] },
+  { q: "In which year did USSR collapse?", a: ["1991"] },
+  { q: "Which organisation created April 1949?", a: ["nato"] },
+  { q: "What was Soviet military alliance called?", a: ["warsaw pact"] },
+  { q: "When was Warsaw Pact formed?", a: ["1955"] },
+  { q: "Which dog sent into space 1957?", a: ["laika"] },
+  { q: "What nickname given to 1961 wall?", a: ["berlin wall"] },
+  { q: "Who was Fidel Castro’s ally in 1962?", a: ["ussr"] },
+  { q: "Which officer prevented nuclear launch 1962?", a: ["arkhipov"] },
+  { q: "What signed 1972 to limit ABMs?", a: ["salt i"] },
+  { q: "Which Soviet leader removed 1964?", a: ["khrushchev"] },
+  { q: "What movement challenged communism Poland 1980s?", a: ["solidarity"] },
+  { q: "Which year saw revolutions Eastern Europe?", a: ["1989"] },
+  { q: "Which event symbolised end of Cold War?", a: ["berlin wall fall"] },
+  { q: "What was first Soviet atomic test year?", a: ["1949"] },
+  { q: "Which US program created after Sputnik?", a: ["nasa"] },
+  { q: "What was 1969 moon mission called?", a: ["apollo 11"] }
+];
+
+const quizElizabeth = [
+  { q: "What was Drake's ship called?", a: ["golden hind"] },
+  { q: "When did Drake circumnavigate globe?", a: ["1577-1580"] },
+  { q: "What title given to Drake 1581?", a: ["sir"] },
+  { q: "Which Spanish port raided 1587?", a: ["cadiz"] },
+  { q: "Phrase for 1587 Cadiz raid?", a: ["singeing the king's beard"] },
+  { q: "Drake's role in 1588 Armada?", a: ["vice admiral"] },
+  { q: "Main religious cause tension Spain?", a: ["protestant vs catholic"] },
+  { q: "What angered Spain about English sailors?", a: ["privateering"] },
+  { q: "What did England support against Spain?", a: ["dutch revolt"] },
+  { q: "Treaty sent troops to Netherlands?", a: ["nonsuch"] },
+  { q: "Who led English troops Netherlands 1585?", a: ["leicester"] },
+  { q: "Why fear Spanish control Netherlands?", a: ["invasion base"] },
+  { q: "Year Spanish Armada launched?", a: ["1588"] },
+  { q: "Rough number Armada ships?", a: ["130"] },
+  { q: "Who sent Spanish Armada?", a: ["philip ii"] },
+  { q: "Where fireships used vs Armada?", a: ["calais"] },
+  { q: "What helped defeat Armada besides navy?", a: ["storms"] },
+  { q: "Main naval clash 1588?", a: ["gravelines"] },
+  { q: "England's main export?", a: ["cloth"] },
+  { q: "Farming change increased wool?", a: ["enclosures"] },
+  { q: "Why prefer sheep over crops?", a: ["higher profits"] },
+  { q: "Cause rapid inflation?", a: ["silver"] },
+  { q: "Biggest English trading city?", a: ["london"] },
+  { q: "Company chartered 1600?", a: ["east india company"] },
+  { q: "Laws restricted clothing by rank?", a: ["sumptuary"] },
+  { q: "Social problem from enclosures?", a: ["vagrancy"] },
+  { q: "Wandering beggars called?", a: ["vagabonds"] },
+  { q: "Poor Law year?", a: ["1601"] },
+  { q: "Who collected poor rates?", a: ["overseers"] },
+  { q: "Idle poor expected to do?", a: ["work"] },
+  { q: "Deserving poor received?", a: ["relief"] },
+  { q: "Buildings housed some poor?", a: ["almshouses"] },
+  { q: "Economic change caused unemployment?", a: ["enclosures"] },
+  { q: "Explorer attempted Roanoke?", a: ["raleigh"] },
+  { q: "Main aim English privateers?", a: ["spanish treasure"] },
+  { q: "Nickname defeated Armada?", a: ["invincible"] },
+  { q: "Lord High Admiral 1588?", a: ["effingham"] },
+  { q: "Propaganda impact Armada victory?", a: ["national unity"] },
+  { q: "Long-term effect Armada on Spain?", a: ["naval decline"] },
+  { q: "Main English goal Netherlands?", a: ["prevent invasion"] },
+  { q: "English army victories Netherlands?", a: ["no"] },
+  { q: "Metal caused price rises?", a: ["silver"] },
+  { q: "Fabric made England wealthy?", a: ["wool"] },
+  { q: "Merchant group traded cloth?", a: ["merchant adventurers"] },
+  { q: "Increased after enclosures rural?", a: ["poverty"] },
+  { q: "Main cause vagabondage?", a: ["enclosures"] },
+  { q: "Law first organised poor relief?", a: ["1601 poor law"] },
+  { q: "Parishes had to do under Poor Law?", a: ["collect rates"] },
+  { q: "1588 victory boosted what?", a: ["naval confidence"] },
+  { q: "Drake famous attacking what?", a: ["spanish treasure"] },
+  { q: "Delayed Armada one year?", a: ["cadiz raid"] },
+  { q: "Country claimed New World monopoly?", a: ["spain"] },
+  { q: "Religious difference caused tension?", a: ["protestant vs catholic"] },
+  { q: "Main English textile export?", a: ["cloth"] },
+  { q: "Process created more sheep pasture?", a: ["enclosure"] },
+  { q: "Worsened poverty towns countryside?", a: ["inflation"] },
+  { q: "Port grew rich cloth exports?", a: ["london"] },
+  { q: "Company began long-distance trade?", a: ["east india company"] },
+  { q: "Problem grew rising population?", a: ["poverty"] },
+  { q: "Able-bodied poor expected to?", a: ["work"] }
+];
+
+// ────────────────────────────────────────────────
+// PAGE & QUIZ LOGIC
+// ────────────────────────────────────────────────
+
+let currentTab = 'cold';
+let quizOpen = false;
+let currentQIndex = 0;
+let score = 0;
+let totalAnswered = 0;
+
+const quizData = { cold: quizCold, elizabeth: quizElizabeth };
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('cold').style.display = tab === 'cold' ? 'block' : 'none';
+  document.getElementById('elizabeth').style.display = tab === 'elizabeth' ? 'block' : 'none';
+
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  if (quizOpen) closeQuiz();
+}
+
+function buildAccordions(containerId, topics) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  topics.forEach(topic => {
+    const card = document.createElement('div');
+    card.className = 'accordion-card';
+    card.innerHTML = `
+      <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('active')">
+        ${topic.title}
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="acc-body">
+        ${topic.content}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function openQuiz() {
+  currentQIndex = 0;
+  score = 0;
+  totalAnswered = 0;
+  document.getElementById('scoreDisplay').textContent = '0';
+  document.getElementById('totalDisplay').textContent = '0';
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('quizPanel').style.display = 'block';
+  quizOpen = true;
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const questions = quizData[currentTab];
+  if (currentQIndex >= questions.length) {
+    document.getElementById('questionText').innerHTML = `Quiz complete!<br>Final score: ${score} / ${totalAnswered}`;
+    document.getElementById('answerInput').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('questionText').textContent = questions[currentQIndex].q;
+  document.getElementById('answerInput').value = '';
+  totalAnswered++;
+  document.getElementById('totalDisplay').textContent = totalAnswered;
+  document.getElementById('progressBar').style.width = (currentQIndex / questions.length * 100) + '%';
+}
+
+function checkAnswer() {
+  const input = document.getElementById('answerInput').value.trim().toLowerCase();
+  const correct = quizData[currentTab][currentQIndex].a.map(a => a.toLowerCase());
+
+  const isCorrect = correct.some(c => input.includes(c));
+
+  const fb = document.getElementById('feedback');
+  fb.textContent = isCorrect ? 'Correct ✓' : `Wrong. Possible: ${correct.join(' / ')}`;
+  fb.className = 'feedback-message ' + (isCorrect ? 'correct' : 'wrong');
+  fb.style.display = 'block';
+
+  if (isCorrect) score++;
+  document.getElementById('scoreDisplay').textContent = score;
+}
+
+function nextQuestion() {
+  currentQIndex++;
+  loadQuestion();
+}
+
+function closeQuiz() {
+  document.getElementById('quizPanel').style.display = 'none';
+  quizOpen = false;
+}
+
+// Initialize
+buildAccordions('coldAccordions', coldWarTopics);
+buildAccordions('elizAccordions', elizabethTopics);
+
+</script>
+</body>
+</html>
