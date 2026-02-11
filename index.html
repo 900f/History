@@ -3,12 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Year 11 History • Revision Hub</title>
+  <title>Year 11 History Revision Hub | Professional Study Platform</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ────────────────────────────────────────────────
-       Flurs-inspired dark premium style
-    ──────────────────────────────────────────────── */
+    /* ═══════════════════════════════════════════════════════════
+       PROFESSIONAL HISTORY REVISION HUB - PREMIUM DESIGN SYSTEM
+    ═══════════════════════════════════════════════════════════ */
+    
+    :root {
+      --primary: #10b981;
+      --primary-light: #34d399;
+      --primary-dark: #059669;
+      --secondary: #6366f1;
+      --accent: #f59e0b;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #121212;
+      --bg-tertiary: #1a1a1a;
+      --bg-card: rgba(20, 20, 20, 0.8);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-muted: #6b6b6b;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -16,899 +43,3028 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: #050505;
-      color: #e8e8e8;
-      line-height: 1.6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
       min-height: 100vh;
       overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .bg-particles {
+    /* ═══════════════════════════════════════════════════════════
+       ANIMATED BACKGROUND
+    ═══════════════════════════════════════════════════════════ */
+    
+    .bg-gradient {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: -2;
+      z-index: -1;
       background: 
-        radial-gradient(circle at 15% 85%, rgba(120,119,198,0.04) 0%, transparent 60%),
-        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.015) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.15), transparent),
+        radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1), transparent),
+        radial-gradient(circle at 20% 50%, rgba(245, 158, 11, 0.08), transparent);
+      animation: gradientShift 20s ease infinite;
     }
 
-    .particle {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 50%;
-      animation: floatUp linear infinite;
+    @keyframes gradientShift {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
     }
 
-    @keyframes floatUp {
-      0%   { transform: translateY(100vh) scale(0.3); opacity: 0; }
-      10%  { opacity: 0.8; }
-      90%  { opacity: 0.8; }
-      100% { transform: translateY(-10vh) scale(0.7); opacity: 0; }
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100px 100px;
+      mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 0%, transparent 80%);
     }
 
-    /* Navbar */
+    /* ═══════════════════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════════════════ */
+    
     .navbar {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(8,8,8,0.94);
+      background: rgba(10, 10, 10, 0.85);
       backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid var(--border);
       z-index: 9999;
-      padding: 1.1rem 0;
-      transition: all 0.35s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .navbar.scrolled {
-      background: rgba(5,5,5,0.97);
-      padding: 0.9rem 0;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+      background: rgba(10, 10, 10, 0.95);
+      box-shadow: var(--shadow-lg);
     }
 
-    .nav-inner {
+    .nav-container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 2.5rem;
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 2rem;
     }
 
     .logo {
-      color: white;
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 14px rgba(16,185,129,0.7);
-      animation: pulse 2.2s infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% { transform: scale(1); opacity: 1; }
-      50%     { transform: scale(1.4); opacity: 0.6; }
-    }
-
-    .nav-buttons {
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: var(--radius-md);
       display: flex;
-      gap: 0.7rem;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      position: relative;
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: var(--radius-md);
+      opacity: 0.5;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .logo-icon i {
+      color: black;
+      font-size: 1.3rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
     }
 
     .nav-btn {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #c0c0c0;
-      padding: 0.75rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 500;
-      font-size: 0.97rem;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      padding: 0.7rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-btn:hover::before {
+      transform: translateX(0);
     }
 
     .nav-btn:hover {
-      color: white;
-      background: rgba(255,255,255,0.08);
-      transform: translateY(-1px);
+      color: var(--text-primary);
+      border-color: var(--border);
     }
 
     .nav-btn.active {
-      background: rgba(255,255,255,0.12);
-      color: white;
-      border-color: rgba(255,255,255,0.18);
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary-light);
+      border-color: rgba(16, 185, 129, 0.3);
     }
 
+    .nav-btn i {
+      font-size: 1rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════════════════════════════ */
+    
     main {
-      padding-top: 110px;
+      padding-top: 280px;
       padding-bottom: 6rem;
+      min-height: 100vh;
     }
 
     .container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 2.5rem;
+      padding: 0 2rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO SECTION
+    ═══════════════════════════════════════════════════════════ */
+    
+    .hero {
+      text-align: center;
+      padding: 3rem 0 4rem;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-light);
+      margin-bottom: 1.5rem;
+      margin-top: 3rem;
+      animation: fadeInDown 0.6s ease;
+      
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SECTION HEADERS
+    ═══════════════════════════════════════════════════════════ */
+    
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--secondary);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(99, 102, 241, 0.3);
     }
 
     .section-title {
-      font-size: 2.8rem;
-      font-weight: 700;
-      text-align: center;
-      background: linear-gradient(90deg, #aaa, #fff, #aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.8rem;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: -1px;
     }
 
-    .section-subtitle {
-      text-align: center;
-      color: #888;
-      font-size: 1.15rem;
-      margin-bottom: 3.5rem;
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      line-height: 1.7;
     }
 
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      margin: 2.5rem 0 4rem;
-      flex-wrap: wrap;
+    /* ═══════════════════════════════════════════════════════════
+       TOPIC CARDS (ACCORDIONS)
+    ═══════════════════════════════════════════════════════════ */
+    
+    .topics-grid {
+      display: grid;
+      gap: 1.5rem;
     }
 
-    .tab-btn {
-      background: rgba(20,20,20,0.8);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #b8b8b8;
-      padding: 1rem 2.4rem;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 1.08rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .tab-btn.active {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      border-color: rgba(255,255,255,0.22);
-      box-shadow: 0 0 24px rgba(255,255,255,0.08);
-    }
-
-    .tab-btn:hover:not(.active) {
-      background: rgba(255,255,255,0.06);
-      color: white;
-    }
-
-    .accordion-card {
-      background: rgba(18,18,18,0.72);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      margin-bottom: 1.8rem;
+    .topic-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      transition: all 0.4s ease;
-      backdrop-filter: blur(8px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+      scroll-margin-top: 120px;
     }
 
-    .accordion-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-      border-color: rgba(255,255,255,0.14);
+    .topic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(255, 255, 255, 0.15);
     }
 
-    .acc-header {
-      padding: 1.5rem 2.2rem;
-      background: rgba(12,12,12,0.6);
+    .topic-card.highlight {
+      animation: highlightPulse 2s ease-in-out;
+      border-color: var(--primary);
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+    }
+
+    @keyframes highlightPulse {
+      0%, 100% { 
+        border-color: var(--primary);
+        box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+      }
+      50% { 
+        border-color: var(--primary-light);
+        box-shadow: 0 0 60px rgba(16, 185, 129, 0.6);
+      }
+    }
+
+    .topic-header {
+      padding: 1.75rem 2rem;
+      background: rgba(255, 255, 255, 0.02);
       cursor: pointer;
-      font-weight: 600;
-      font-size: 1.3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    .acc-header:hover {
-      background: rgba(25,25,25,0.8);
-    }
-
-    .acc-body {
-      display: none;
-      padding: 2rem 2.2rem;
-      background: rgba(10,10,10,0.45);
-    }
-
-    .acc-body.active {
-      display: block;
-    }
-
-    .impact-box {
-      margin: 1.5rem 0;
-      padding: 1.4rem 1.8rem;
-      background: rgba(16,185,129,0.06);
-      border-left: 4px solid #10b981;
-      border-radius: 10px;
-      color: #d0d0d0;
-    }
-
-    .impact-box strong {
-      color: #34d399;
-    }
-
-    /* Quiz */
-    #quizPanel {
-      display: none;
-      max-width: 880px;
-      margin: 3rem auto;
-      background: rgba(18,18,18,0.78);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 20px;
-      padding: 3rem 2.5rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-
-    .progress-bar-outer {
-      height: 10px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 5px;
-      overflow: hidden;
-      margin-bottom: 2.2rem;
-    }
-
-    .progress-bar-inner {
-      height: 100%;
-      background: linear-gradient(90deg, #10b981, #34d399);
-      width: 0%;
-      transition: width 0.5s ease;
-    }
-
-    .question-text {
-      font-size: 1.55rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      color: white;
-    }
-
-    #answerInput {
-      width: 100%;
-      padding: 1.2rem 1.6rem;
-      font-size: 1.18rem;
-      background: rgba(10,10,10,0.75);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      color: white;
-      margin-bottom: 1.8rem;
-    }
-
-    #answerInput:focus {
-      outline: none;
-      border-color: #34d399;
-      box-shadow: 0 0 0 4px rgba(52,211,153,0.18);
-    }
-
-    .quiz-controls {
-      display: flex;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-
-    .quiz-btn {
-      padding: 1.1rem 2.4rem;
-      font-size: 1.08rem;
-      font-weight: 600;
-      border-radius: 12px;
-      cursor: pointer;
-      border: none;
+      gap: 1rem;
       transition: all 0.3s ease;
     }
 
-    .submit { background: #10b981; color: black; }
-    .next    { background: #2a2a2a; color: white; }
-    .exit    { background: #444; color: white; }
+    .topic-header:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
 
-    .submit:hover { background: #34d399; }
-    .next:hover,
-    .exit:hover { background: #555; }
+    .topic-header-content {
+      flex: 1;
+    }
 
-    .feedback-message {
-      margin-top: 2rem;
-      padding: 1.4rem;
-      border-radius: 12px;
+    .topic-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .topic-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item i {
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+
+    .topic-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .topic-icon i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .topic-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .topic-body.active {
+      max-height: 5000px;
+    }
+
+    .topic-body.active ~ .topic-header .topic-icon i {
+      transform: rotate(180deg);
+    }
+
+    .topic-content {
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .content-section {
+      margin-bottom: 2rem;
+    }
+
+    .content-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-light);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .content-heading i {
+      font-size: 1rem;
+    }
+
+    .content-text {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .content-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-list li {
+      padding: 0.75rem 0 0.75rem 2rem;
+      position: relative;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-left: 2px solid rgba(16, 185, 129, 0.2);
+      margin-left: 1rem;
+    }
+
+    .content-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0.5rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .impact-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .impact-box:hover {
+      border-left-width: 6px;
+      transform: translateX(4px);
+    }
+
+    .impact-title {
+      font-weight: 700;
+      color: var(--primary-light);
+      margin-bottom: 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .impact-content {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .key-point {
+      background: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--secondary);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .key-point-title {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+    }
+
+    .timeline-date {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 100px;
+      font-size: 0.95rem;
+    }
+
+    .timeline-content {
+      flex: 1;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       QUIZ PANEL
+    ═══════════════════════════════════════════════════════════ */
+    
+    #quizPanel {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .quiz-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .progress-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .progress-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .progress-numbers {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+    }
+
+    .current-q {
+      font-size: 1.5rem;
+      color: var(--primary-light);
+    }
+
+    .total-q {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      width: 0%;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      border-radius: 50px;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .question-container {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .question-number {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .question-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .answer-input {
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      font-size: 1.1rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .answer-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    }
+
+    .answer-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .quiz-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-family: inherit;
+    }
+
+    .quiz-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .quiz-btn:hover::before {
+      transform: translateY(0);
+    }
+
+    .quiz-btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: black;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-warning {
+      background: linear-gradient(135deg, var(--accent), #fb923c);
+      color: black;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+      position: relative;
+    }
+
+    .btn-warning::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      background: linear-gradient(135deg, var(--accent), #fb923c);
+      border-radius: var(--radius-md);
+      opacity: 0.3;
+      filter: blur(12px);
+      z-index: -1;
+    }
+
+    .btn-warning:hover {
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.1);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .feedback {
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
       font-weight: 600;
       display: none;
+      animation: slideIn 0.4s ease;
+      margin-bottom: 2rem;
     }
 
-    .correct { background: rgba(16,185,129,0.16); border: 1px solid #10b981; color: #34d399; }
-    .wrong   { background: rgba(239,68,68,0.16); border: 1px solid #ef4444; color: #f87171; }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-    .score-text {
+    .feedback.correct {
+      background: rgba(16, 185, 129, 0.15);
+      border: 2px solid var(--primary);
+      color: var(--primary-light);
+    }
+
+    .feedback.wrong {
+      background: rgba(239, 68, 68, 0.15);
+      border: 2px solid #ef4444;
+      color: #f87171;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+
+    .score-item {
       text-align: center;
-      font-size: 2.1rem;
-      font-weight: 700;
-      margin: 3rem 0 1rem;
-      color: #34d399;
     }
 
-    @media (max-width: 900px) {
-      .container { padding: 0 1.5rem; }
-      main { padding-top: 140px; }
+    .score-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .score-value.correct {
+      color: var(--primary-light);
+    }
+
+    .score-value.total {
+      color: var(--text-muted);
+    }
+
+    .score-value.accuracy {
+      background: linear-gradient(135deg, var(--secondary), #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .score-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TOAST NOTIFICATION
+    ═══════════════════════════════════════════════════════════ */
+    
+    .toast {
+      position: fixed;
+      top: 100px;
+      right: 2rem;
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.75rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(12px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      min-width: 300px;
+    }
+
+    .toast.show {
+      display: flex;
+      animation: toastSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes toastSlide {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .toast-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-size: 1.1rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LOADING OVERLAY
+    ═══════════════════════════════════════════════════════════ */
+    
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+    }
+
+    .loading-overlay.show {
+      display: flex;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE DESIGN
+    ═══════════════════════════════════════════════════════════ */
+    
+    @media (max-width: 1024px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+      
+      .hero-stats {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .nav-menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .topic-header {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .topic-content {
+        padding: 1.5rem;
+      }
+
+      #quizPanel {
+        padding: 2rem 1.5rem;
+      }
+
+      .quiz-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .score-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .toast {
+        right: 1rem;
+        left: 1rem;
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+        letter-spacing: -1px;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="bg-particles"></div>
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
 
-<nav class="navbar" id="navbar">
-  <div class="nav-inner">
-    <div class="logo">
-      <span class="logo-dot"></span>
-      History Revision Hub
-    </div>
-
-    <div class="nav-buttons">
-      <button class="nav-btn active" onclick="switchTab('cold')">Cold War</button>
-      <button class="nav-btn" onclick="switchTab('elizabeth')">Elizabethan</button>
-      <button class="nav-btn" onclick="openQuiz()"><i class="fas fa-brain"></i> Quiz</button>
-    </div>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
   </div>
-</nav>
 
-<main class="container">
-
-  <section id="cold">
-    <h2 class="section-title">Cold War</h2>
-    <p class="section-subtitle">1945–1991 — detailed topics with causes, events & consequences</p>
-    <div id="coldAccordions"></div>
-  </section>
-
-  <section id="elizabeth" style="display:none;">
-    <h2 class="section-title">Elizabethan England</h2>
-    <p class="section-subtitle">1558–1603 — focused on Drake, Spain, Armada, Netherlands, trade, poverty</p>
-    <div id="elizAccordions"></div>
-  </section>
-
-  <section id="quizPanel" style="display:none;">
-    <h2 class="section-title">Knowledge Check – 60 Questions</h2>
-    <div class="progress-bar-outer">
-      <div class="progress-bar-inner" id="progressBar"></div>
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <div class="toast-icon">
+      <i class="fas fa-book-open"></i>
     </div>
-    <div class="question-text" id="questionText"></div>
-    <input type="text" id="answerInput" placeholder="Your answer (1–3 words)" autocomplete="off"/>
-    <div class="quiz-controls">
-      <button class="quiz-btn submit" onclick="checkAnswer()">Submit</button>
-      <button class="quiz-btn next" onclick="nextQuestion()">Next</button>
-      <button class="quiz-btn exit" onclick="closeQuiz()">Exit Quiz</button>
+    <span id="toastMessage"></span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <span>History Revision Hub</span>
+      </a>
+      <div class="nav-menu">
+        <button class="nav-btn active" onclick="switchTab('cold')">
+          <i class="fas fa-globe"></i> Cold War
+        </button>
+        <button class="nav-btn" onclick="switchTab('elizabeth')">
+          <i class="fas fa-crown"></i> Elizabethan
+        </button>
+        <button class="nav-btn" onclick="openQuiz()">
+          <i class="fas fa-brain"></i> Quiz Mode
+        </button>
+      </div>
     </div>
-    <div id="feedback" class="feedback-message"></div>
-    <div class="score-text">Score: <span id="scoreDisplay">0</span> / <span id="totalDisplay">0</span></div>
-  </section>
+  </nav>
 
-</main>
+  <main class="container">
 
-<script>
-
-for (let i = 0; i < 35; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  p.style.left = Math.random() * 100 + '%';
-  p.style.animationDelay = Math.random() * 30 + 's';
-  p.style.animationDuration = (18 + Math.random() * 30) + 's';
-  document.querySelector('.bg-particles').appendChild(p);
-}
-
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-});
-
-
-const coldWarTopics = [
-  { id: "early-tensions", title: "Early Tensions 1945–1949",
-    content: `
-      <p><strong>Causes:</strong> Fundamental clash between capitalism (USA) and communism (USSR) + deep mistrust built during World War II + power vacuum left in Europe after defeat of Nazi Germany.</p>
-      <p><strong>Key events:</strong></p>
-      <ul>
-        <li>Yalta Conference (Feb 1945): Germany divided into 4 zones, free elections promised in Eastern Europe (Stalin never allowed them).</li>
-        <li>Potsdam Conference (Jul–Aug 1945): Truman took harder line than Roosevelt, told Stalin about the atomic bomb → suspicion increased dramatically.</li>
-        <li>Churchill’s Iron Curtain speech (March 1946): Publicly declared that an "iron curtain" had fallen across Europe, making the East–West divide obvious to the world.</li>
-      </ul>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Truman Doctrine (1947) — USA promised to help any country resisting communism (first applied to Greece and Turkey).<br>
-        • Marshall Plan (1948) — $13 billion of American aid rebuilt Western Europe and reduced appeal of communism.<br>
-        • Soviet anger led directly to Berlin Blockade (1948–49).
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-badge">
+        <i class="fas fa-sparkles"></i>
+        Year 11 GCSE History Revision Platform
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Europe permanently divided into capitalist West and communist East.<br>
-        • NATO formed in 1949 — first peacetime military alliance in US history.<br>
-        • Cold War became a worldwide ideological and political struggle.
-      </div>` },
-
-  { id: "berlin-blockade", title: "Berlin Blockade & Airlift 1948–49",
-    content: `
-      <p><strong>Causes:</strong> West introduced new currency (Deutsche Mark) in their zones including West Berlin → threatened Soviet economic control of East Germany → Stalin blocked all road and rail access to West Berlin.</p>
-      <p><strong>Key events:</strong> Blockade began June 1948 → Allies organised massive airlift → around 277,000 flights delivered 2.3 million tons of supplies → Stalin lifted blockade after 11 months (May 1949).</p>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • West Berlin survived without surrendering → enormous propaganda victory for the West.<br>
-        • Stalin appeared aggressive and was forced to back down.
+      <h1 class="hero-title">Master Your History Exams</h1>
+      <p class="hero-subtitle">
+        Comprehensive revision materials covering Cold War and Elizabethan England. 
+        Interactive quizzes, detailed timelines, and expert analysis to ace your GCSEs.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value">16</div>
+          <div class="stat-label">Topics Covered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">118</div>
+          <div class="stat-label">Quiz Questions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Exam Ready</div>
+        </div>
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Germany formally divided into West Germany (FRG) and East Germany (GDR) in 1949.<br>
-        • NATO created in April 1949 partly as a direct response to the crisis.<br>
-        • Military and political division of Europe became much deeper and more permanent.
-      </div>` },
+    </div>
 
-  { id: "korea", title: "Korean War 1950–1953",
-    content: `
-      <p><strong>Causes:</strong> Korea divided at 38th parallel after WW2 → communist North Korea (backed by USSR) invaded South Korea (backed by USA) in June 1950.</p>
-      <p><strong>Key events:</strong> UN (mainly US) forces pushed North Koreans back → General MacArthur invaded North Korea → China entered war with huge numbers → bloody stalemate → armistice signed July 1953 (no peace treaty).</p>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Around 3 million people killed, Korea still divided today along almost same line.<br>
-        • Very heavy strain on American money, troops and public support.
+    <!-- Cold War Section -->
+    <section id="cold">
+      <div class="section-header">
+        <span class="section-tag">1945–1991</span>
+        <h2 class="section-title">The Cold War</h2>
+        <p class="section-description">
+          A comprehensive study of the ideological conflict between capitalism and communism that shaped 
+          the modern world. Explore key events, turning points, and their lasting impacts on global politics.
+        </p>
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Showed USA would fight to contain communism → led to NSC-68 and huge increase in US military spending.<br>
-        • Set the pattern for future Cold War proxy wars (Vietnam, Afghanistan, etc.).
-      </div>` },
+      <div class="topics-grid" id="coldAccordions"></div>
+    </section>
 
-  { id: "arms-space", title: "Arms Race & Space Race 1949–1969",
-    content: `
-      <p><strong>Key developments:</strong> USSR tested first atomic bomb 1949 → both sides built hydrogen bombs (1952 USA, 1953 USSR) → ICBMs developed → Mutually Assured Destruction (MAD) established.</p>
-      <p>Space race: Sputnik 1 (1957) shocked USA → Yuri Gagarin first man in space (1961) → USA landed on Moon with Apollo 11 (1969).</p>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Widespread nuclear fear → civil defence drills, fallout shelters, "duck and cover" in schools.<br>
-        • Sputnik panic led to creation of NASA (1958) and huge US investment in science & education.
+    <!-- Elizabethan Section -->
+    <section id="elizabeth" style="display:none;">
+      <div class="section-header">
+        <span class="section-tag">1558–1603</span>
+        <h2 class="section-title">Elizabethan England</h2>
+        <p class="section-description">
+          Discover England's Golden Age under Elizabeth I, from naval dominance and privateering to 
+          social upheaval and the struggle against Spanish power. Essential for understanding Tudor England.
+        </p>
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Arms race used up enormous amounts of money on both sides.<br>
-        • Space technology created many spin-offs (weather satellites, GPS, improved computers).<br>
-        • Balance of terror (MAD) helped prevent direct war between superpowers.
-      </div>` },
+      <div class="topics-grid" id="elizAccordions"></div>
+    </section>
 
-  { id: "hungary-56", title: "Hungarian Uprising 1956",
-    content: `
-      <p><strong>Causes:</strong> Khrushchev’s secret speech (Feb 1956) criticised Stalin → people in Eastern Europe hoped for real change and less Soviet control.</p>
-      <p><strong>Key events:</strong> Protests in Budapest (Oct 1956) → Imre Nagy became leader, promised reforms, free elections and to leave Warsaw Pact → Soviet tanks invaded (4 Nov 1956) and crushed uprising.</p>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Around 3,000 Hungarians killed, about 200,000 fled as refugees.<br>
-        • Serious damage to Soviet Union’s moral reputation in the West.
+    <!-- Quiz Panel -->
+    <section id="quizPanel">
+      <div class="quiz-header">
+        <h2 class="quiz-title">Knowledge Assessment</h2>
+        <p class="quiz-subtitle">Test your understanding with targeted questions</p>
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Proved USSR would use military force to keep control of satellite states.<br>
-        • West reluctantly accepted that Iron Curtain division was permanent.<br>
-        • Discouraged serious reform attempts in Eastern Europe until Gorbachev era.
-      </div>` },
 
-  { id: "berlin-wall", title: "Berlin Wall 1961",
-    content: `
-      <p><strong>Causes:</strong> Between 1949–1961 about 3.5 million East Germans (many skilled workers) escaped to West through open Berlin → massive brain drain crippled East German economy.</p>
-      <p><strong>Key events:</strong> Night of 13 August 1961 → East Germany suddenly closed border, put up barbed wire → soon replaced with concrete wall and death strip.</p>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Stopped mass exodus almost completely → East German economy became more stable for a while.<br>
-        • Huge propaganda disaster for communism worldwide.
+      <div class="progress-section">
+        <div class="progress-header">
+          <span class="progress-label">Progress</span>
+          <div class="progress-numbers">
+            <span class="current-q" id="currentQ">1</span>
+            <span class="total-q">/ <span id="totalQ">118</span></span>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Berlin Wall became the most powerful symbol of Cold War oppression and division.<br>
-        • Its fall in November 1989 marked the beginning of the end of the Cold War.
-      </div>` },
 
-  { id: "cuban-crisis", title: "Cuban Missile Crisis 1962",
-    content: `
-      <p><strong>Causes:</strong> Failed Bay of Pigs invasion (1961) humiliated USA → Fidel Castro allowed Soviet nuclear missiles in Cuba to protect his regime and balance US power.</p>
-      <p><strong>Key events:</strong> U-2 spy planes photographed missile sites (Oct 1962) → 13 days of extreme tension → US naval quarantine → secret deal (US removed missiles from Turkey) → Soviets withdrew missiles.</p>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Closest the world ever came to full nuclear war.<br>
-        • Both Kennedy and Khrushchev backed down and appeared reasonable.
+      <div class="question-container">
+        <div class="question-number">Question <span id="questionNum">1</span></div>
+        <div class="question-text" id="questionText"></div>
+        <input 
+          type="text" 
+          class="answer-input" 
+          id="answerInput" 
+          placeholder="Type your answer here..."
+          autocomplete="off"
+        />
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Moscow–Washington hotline set up (1963) to improve communication.<br>
-        • Partial Nuclear Test Ban Treaty signed (1963).<br>
-        • Moved superpowers towards more cautious coexistence and later détente.
-      </div>` },
 
-  { id: "detente", title: "Détente 1970s",
-    content: `
-      <p><strong>Key events:</strong> Strategic Arms Limitation Talks (SALT I signed 1972) → Nixon visited China (1972) and Moscow → Helsinki Accords (1975) recognised borders and included human rights promises.</p>
-
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Reduced tension between superpowers.<br>
-        • First serious arms control agreements signed.
+      <div class="quiz-actions">
+        <button class="quiz-btn btn-primary" onclick="checkAnswer()">
+          <i class="fas fa-check-circle"></i> Submit Answer
+        </button>
+        <button class="quiz-btn btn-warning" onclick="showHint()">
+          <i class="fas fa-lightbulb"></i> I Don't Know
+        </button>
+        <button class="quiz-btn btn-secondary" onclick="nextQuestion()">
+          <i class="fas fa-arrow-right"></i> Next Question
+        </button>
+        <button class="quiz-btn btn-danger" onclick="closeQuiz()">
+          <i class="fas fa-times-circle"></i> Exit Quiz
+        </button>
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Human rights clauses in Helsinki Accords later helped dissidents in Eastern Europe.<br>
-        • Détente was only temporary — ended with Soviet invasion of Afghanistan (1979).
-      </div>` },
 
-  { id: "afghanistan", title: "Soviet–Afghan War 1979–1989",
-    content: `
-      <p><strong>Causes:</strong> Communist government in Afghanistan faced growing rebellion → Soviet Union invaded (Dec 1979) to prop up the regime.</p>
-      <p><strong>Key events:</strong> USA, Saudi Arabia and others funded and armed mujahideen fighters → long, brutal guerrilla war → Soviets withdrew in 1989 after huge losses.</p>
+      <div class="feedback" id="feedback"></div>
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Very high Soviet casualties and enormous financial cost.<br>
-        • Complete end of détente period.
+      <div class="score-grid">
+        <div class="score-item">
+          <div class="score-value correct" id="scoreDisplay">0</div>
+          <div class="score-label">Correct</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value total" id="totalDisplay">0</div>
+          <div class="score-label">Answered</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value accuracy" id="accuracyDisplay">0%</div>
+          <div class="score-label">Accuracy</div>
+        </div>
       </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Severely weakened Soviet economy and morale.<br>
-        • Helped cause collapse of USSR in 1991.<br>
-        • Chaos in Afghanistan led to rise of Taliban and Al-Qaeda.
-      </div>` },
+    </section>
 
-  { id: "end-cold", title: "End of Cold War 1985–1991",
-    content: `
-      <p><strong>Key events:</strong> Gorbachev introduced glasnost (openness) and perestroika (restructuring) → protests spread across Eastern Europe → Berlin Wall fell (Nov 1989) → peaceful revolutions → Soviet Union dissolved (Dec 1991).</p>
+  </main>
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Cold War ended peacefully after 45 years.<br>
-        • Germany reunited in 1990.
-      </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • United States became the world’s only superpower.<br>
-        • Spread of democracy and capitalism across former communist countries.<br>
-        • New world order created — but also new tensions (e.g. NATO expansion, instability in some regions).
-      </div>` }
-];
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    // SCROLL EFFECTS
+    // ═══════════════════════════════════════════════════════════
+    
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
 
-const elizabethTopics = [
-  { id: "drake-privateer", title: "Sir Francis Drake & Privateering",
-    content: `
-      <p><strong>Key events:</strong> Circumnavigation voyage 1577–1580 — attacked Spanish colonies and captured huge treasure ship → knighted by Elizabeth in 1581.</p>
-      <p>Cadiz raid 1587 — Drake sailed into Spanish port and destroyed ships and supplies → delayed Spanish Armada by one year (“singeing the King of Spain’s beard”).</p>
+    // ═══════════════════════════════════════════════════════════
+    // DATA STRUCTURES - EXPANDED CONTENT
+    // ═══════════════════════════════════════════════════════════
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • England gained massive wealth from stolen Spanish treasure.<br>
-        • Spain deeply humiliated → tensions rose sharply.<br>
-        • Armada delayed by a full year.
-      </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Helped provoke full-scale war with Spain (Armada 1588).<br>
-        • Greatly increased English confidence at sea.<br>
-        • Laid early foundations for England as a major maritime and naval power.
-      </div>` },
+    const coldWarTopics = [
+      {
+        id: "early-tensions",
+        title: "Early Tensions & Origins (1945–1949)",
+        icon: "fa-handshake-slash",
+        period: "1945-1949",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Root Causes</h3>
+            <p class="content-text">
+              The Cold War emerged from fundamental ideological incompatibility between two superpowers. 
+              The USA championed capitalism, democracy, and free markets, while the USSR promoted communism, 
+              central planning, and one-party rule. Their wartime alliance against Nazi Germany masked these 
+              deep philosophical differences.
+            </p>
+            <ul class="content-list">
+              <li><strong>Ideological clash:</strong> Capitalism vs Communism - irreconcilable worldviews about economy, society, and individual rights</li>
+              <li><strong>Historical mistrust:</strong> Western intervention in Russian Civil War (1918-1920) created lasting Soviet suspicion</li>
+              <li><strong>Power vacuum:</strong> Germany's defeat left Central and Eastern Europe without clear leadership</li>
+              <li><strong>Atomic monopoly:</strong> USA's nuclear weapons gave temporary strategic advantage, increasing Soviet paranoia</li>
+              <li><strong>Spheres of influence:</strong> Both superpowers sought to expand their influence zones for security and ideology</li>
+            </ul>
+          </div>
 
-  { id: "spain-tensions", title: "Causes of Conflict with Spain",
-    content: `
-      <p><strong>Main causes:</strong></p>
-      <ul>
-        <li>Religious divide: Protestant England vs very Catholic Spain.</li>
-        <li>Privateering: English captains attacked and robbed Spanish treasure fleets.</li>
-        <li>English support for Dutch Protestants rebelling against Spanish rule.</li>
-        <li>Trade rivalry: Spain claimed monopoly over Americas; England wanted to trade and settle there.</li>
-      </ul>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-calendar-alt"></i> Key Events</h3>
+            
+            <div class="timeline-item">
+              <div class="timeline-date">Feb 1945</div>
+              <div class="timeline-content">
+                <strong>Yalta Conference:</strong> Churchill, Roosevelt, and Stalin met in Crimea. Agreed to divide Germany 
+                into four occupation zones (USA, USSR, UK, France). Stalin promised free elections in Eastern Europe but 
+                never delivered. UN Security Council structure established with veto powers for permanent members.
+              </div>
+            </div>
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Continuous low-level naval war and raids throughout 1570s–80s.<br>
-        • Philip II saw England as a serious threat to his empire and faith.
-      </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Directly led to Philip launching the Spanish Armada in 1588.<br>
-        • Defeat of Armada began long-term decline of Spanish naval power.
-      </div>` },
+            <div class="timeline-item">
+              <div class="timeline-date">Jul-Aug 1945</div>
+              <div class="timeline-content">
+                <strong>Potsdam Conference:</strong> Truman (new US president) took much harder line than Roosevelt. 
+                Informed Stalin about successful atomic bomb test, shocking Soviet leadership. Disagreements over German 
+                reparations deepened. Poland's borders redrawn westward, displacing millions of Germans.
+              </div>
+            </div>
 
-  { id: "netherlands-revolt", title: "England & the Dutch Revolt / Netherlands",
-    content: `
-      <p><strong>Key events:</strong> Dutch Protestants began revolt against Spain in 1568 → Elizabeth sent money and volunteers at first → Treaty of Nonsuch (1585) → England sent 6,000 troops led by Earl of Leicester.</p>
+            <div class="timeline-item">
+              <div class="timeline-date">March 1946</div>
+              <div class="timeline-content">
+                <strong>Iron Curtain Speech:</strong> Winston Churchill in Fulton, Missouri declared "From Stettin in the 
+                Baltic to Trieste in the Adriatic, an iron curtain has descended across the continent." This powerfully 
+                articulated the division of Europe and marked the public acknowledgment of the Cold War.
+              </div>
+            </div>
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Prevented quick Spanish victory over the Dutch rebels.<br>
-        • Kept important ports and coastline out of Spanish control.
-      </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • One of the main reasons Philip II decided to invade England (Armada).<br>
-        • Helped the Dutch eventually win independence.<br>
-        • Created a useful Protestant buffer zone protecting England.
-      </div>` },
+            <div class="timeline-item">
+              <div class="timeline-date">March 1947</div>
+              <div class="timeline-content">
+                <strong>Truman Doctrine:</strong> President Truman pledged to support free peoples resisting subjugation. 
+                Provided $400 million aid to Greece and Turkey to prevent communist takeover. Established containment 
+                policy - preventing spread of communism rather than rolling it back.
+              </div>
+            </div>
 
-  { id: "armada-1588", title: "Spanish Armada 1588",
-    content: `
-      <p><strong>Key events:</strong> Around 130 Spanish ships sent to invade England → English ships were faster and had better long-range guns → harassed Armada for days → fireships sent at Calais → storms scattered and sank many ships.</p>
+            <div class="timeline-item">
+              <div class="timeline-date">June 1947</div>
+              <div class="timeline-content">
+                <strong>Marshall Plan announced:</strong> Secretary of State George Marshall proposed European Recovery 
+                Program. Offered $13 billion (over $150 billion in today's money) to rebuild war-torn Europe. Stalin 
+                forbade Eastern European countries from accepting, deepening the divide.
+              </div>
+            </div>
+          </div>
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Huge propaganda victory for England and Protestant cause.<br>
-        • Elizabeth’s Tilbury speech (“heart and stomach of a king”) boosted national unity and pride.
-      </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Marked the start of permanent decline of Spanish naval power.<br>
-        • England established as leading Protestant nation and rising sea power.
-      </div>` },
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Short-term Consequences (1947-1950)</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Europe divided into clear Eastern (communist) and Western (capitalist) blocs by 1948</li>
+                <li>Marshall Plan successfully rebuilt Western European economies, reducing appeal of communism</li>
+                <li>Soviet Union tightened control over Eastern Europe through Cominform (1947) and Comecon (1949)</li>
+                <li>NATO established April 1949 as first peacetime military alliance in US history</li>
+                <li>Arms race accelerated after Soviet atomic bomb test (August 1949)</li>
+              </ul>
+            </div>
+          </div>
 
-  { id: "wool-sheep-trade", title: "Wool, Sheep Farming & Trade Growth",
-    content: `
-      <p><strong>Key developments:</strong> Landowners enclosed fields for sheep farming → wool and cloth exports grew rapidly → London became major European trade centre → East India Company founded 1600.</p>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Consequences (1950s onwards)</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Containment became foundation of US foreign policy for next 40+ years</li>
+                <li>Military-industrial complex grew dramatically in USA, shaping economy and politics</li>
+                <li>Proxy wars fought globally as superpowers avoided direct confrontation</li>
+                <li>Space race, arms race, and technological competition accelerated innovation</li>
+                <li>Decolonization movements exploited Cold War rivalry to gain support from both sides</li>
+                <li>Cultural Cold War spread American and Soviet influence through propaganda, arts, sports</li>
+              </ul>
+            </div>
+          </div>
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Large profits for landowners and merchants.<br>
-        • Price inflation made life harder for ordinary poor people.
-      </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • Strengthened England’s overall economy significantly.<br>
-        • Created wealth and commercial networks that supported later colonial and trading empire.
-      </div>` },
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Focus</div>
+            <p class="content-text">
+              Examiners want you to explain HOW the Grand Alliance fell apart. Focus on specific disagreements 
+              (Poland, Germany, reparations), contrasting attitudes of Roosevelt vs Truman, and how ideology 
+              translated into practical policy (Marshall Plan, Truman Doctrine). Use precise dates and connect 
+              causes to consequences clearly.
+            </p>
+          </div>
+        `
+      },
 
-  { id: "enclosures-poverty", title: "Enclosures, Poverty & Social Change",
-    content: `
-      <p><strong>Key developments:</strong> Enclosures removed common land and displaced many small farmers → more people became vagabonds → inflation made poverty worse → 1601 Poor Law set up parish-based relief system.</p>
+      {
+        id: "berlin-blockade",
+        title: "Berlin Blockade & Airlift (1948–1949)",
+        icon: "fa-plane",
+        period: "1948-1949",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Why the Blockade Happened</h3>
+            <p class="content-text">
+              Berlin, though deep inside Soviet-controlled East Germany, was divided among all four Allied powers. 
+              This created a capitalist showcase city within the communist bloc - an ideological thorn in Stalin's side. 
+              The crisis began when Western Allies introduced a new currency (Deutsche Mark) to combat inflation and 
+              stabilize the economy.
+            </p>
+            <ul class="content-list">
+              <li><strong>Currency reform trigger:</strong> June 1948 - Western zones introduced Deutsche Mark without Soviet agreement</li>
+              <li><strong>Economic threat:</strong> New currency threatened Soviet control over East German economy</li>
+              <li><strong>Strategic goal:</strong> Stalin aimed to force Western powers out of Berlin entirely</li>
+              <li><strong>Test of will:</strong> Stalin wanted to see if Western powers would fight for Berlin</li>
+              <li><strong>Political pressure:</strong> Hoped Western populations would force withdrawal rather than risk war</li>
+            </ul>
+          </div>
 
-      <div class="impact-box">
-        <strong>Short-term consequences:</strong><br>
-        • Rise in vagrancy, unemployment and social unrest.<br>
-        • Local taxes (poor rates) introduced to help the poor.
-      </div>
-      <div class="impact-box">
-        <strong>Long-term consequences:</strong><br>
-        • 1601 Poor Law became first national poor relief system in Europe.<br>
-        • Shaped English attitudes and policies towards poverty for centuries.
-      </div>` }
-];
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-history"></i> The Blockade Unfolds</h3>
+            
+            <div class="timeline-item">
+              <div class="timeline-date">24 June 1948</div>
+              <div class="timeline-content">
+                <strong>Blockade begins:</strong> Soviets cut all road, rail, and canal access to West Berlin. 
+                2.5 million West Berliners faced starvation and fuel shortages. Stalin calculated Western powers 
+                would abandon the city rather than start World War III.
+              </div>
+            </div>
 
-const quizCold = [
-  { q: "What conference divided Germany in Feb 1945?", a: ["yalta"] },
-  { q: "Which conference saw Truman become more suspicious?", a: ["potsdam"] },
-  { q: "Who warned of an Iron Curtain in 1946?", a: ["churchill", "churchil"] },
-  { q: "What US policy aimed to contain communism?", a: ["containment"] },
-  { q: "Which doctrine promised aid against communism?", a: ["truman doctrine", "truman"] },
-  { q: "What plan gave $13 billion to Western Europe?", a: ["marshall plan", "marshall"] },
-  { q: "Which city was blockaded in 1948–49?", a: ["berlin"] },
-  { q: "What saved West Berlin during the blockade?", a: ["berlin airlift", "airlift"] },
-  { q: "How long did the Berlin Airlift last?", a: ["11 months"] },
-  { q: "Which two German states formed in 1949?", a: ["west germany", "east germany"] },
-  { q: "Who was sacked by Truman in 1951?", a: ["macarthur"] },
-  { q: "What does MAD stand for?", a: ["mutually assured destruction"] },
-  { q: "Which country tested atomic bomb in 1949?", a: ["ussr"] },
-  { q: "Which bomb tested by USA in 1952?", a: ["hydrogen bomb"] },
-  { q: "Which satellite shocked USA in 1957?", a: ["sputnik"] },
-  { q: "Who was first human in space?", a: ["gagarin"] },
-  { q: "In which year did USA land on Moon?", a: ["1969"] },
-  { q: "Which speech criticised Stalin in 1956?", a: ["secret speech"] },
-  { q: "Who led reforms in Hungary 1956?", a: ["nagy"] },
-  { q: "How many Hungarians fled after 1956?", a: ["200000"] },
-  { q: "Why was Berlin Wall built?", a: ["stop brain drain", "stop the brain drain" ] },
-  { q: "In which year was Berlin Wall built?", a: ["1961"] },
-  { q: "Who said 'Ich bin ein Berliner'?", a: ["kennedy"] },
-  { q: "When did Berlin Wall fall?", a: ["1989"] },
-  { q: "Which crisis happened in October 1962?", a: ["cuban missile crisis"] },
-  { q: "How many days did Cuban Missile Crisis last?", a: ["13"] },
-  { q: "What did Kennedy impose around Cuba?", a: ["quarantine"] },
-  { q: "Which missiles secretly removed from Turkey?", a: ["jupiter"] },
-  { q: "What link created after 1962 crisis?", a: ["hotline"] },
-  { q: "Which treaty banned atmospheric tests 1963?", a: ["partial test ban"] },
-  { q: "Who led Prague Spring?", a: ["dubcek"] },
-  { q: "Which doctrine justified 1968 invasion?", a: ["brezhnev doctrine"] },
-  { q: "Which US president visited China 1972?", a: ["nixon"] },
-  { q: "Which agreement signed in Helsinki 1975?", a: ["helsinki accords"] },
-  { q: "Which arms treaty signed 1972?", a: ["salt i"] },
-  { q: "Which country USSR invaded 1979?", a: ["afghanistan"] },
-  { q: "Which doctrine Carter announced after Afghanistan?", a: ["carter doctrine"] },
-  { q: "Who became Soviet leader 1985?", a: ["gorbachev"] },
-  { q: "What does glasnost mean?", a: ["openness"] },
-  { q: "What does perestroika mean?", a: ["restructuring"] },
-  { q: "In which year did USSR collapse?", a: ["1991"] },
-  { q: "Which organisation created April 1949?", a: ["nato"] },
-  { q: "What was Soviet military alliance called?", a: ["warsaw pact"] },
-  { q: "When was Warsaw Pact formed?", a: ["1955"] },
-  { q: "Which dog sent into space 1957?", a: ["laika"] },
-  { q: "What nickname given to 1961 wall?", a: ["berlin wall"] },
-  { q: "Who was Fidel Castro’s ally in 1962?", a: ["ussr"] },
-  { q: "Which officer prevented nuclear launch 1962?", a: ["arkhipov"] },
-  { q: "What signed 1972 to limit ABMs?", a: ["salt i"] },
-  { q: "Which Soviet leader removed 1964?", a: ["khrushchev"] },
-  { q: "What movement challenged communism Poland 1980s?", a: ["solidarity"] },
-  { q: "Which year saw revolutions Eastern Europe?", a: ["1989"] },
-  { q: "Which event symbolised end of Cold War?", a: ["berlin wall fall"] },
-  { q: "What was first Soviet atomic test year?", a: ["1949"] },
-  { q: "Which US program created after Sputnik?", a: ["nasa"] },
-  { q: "What was 1969 moon mission called?", a: ["apollo 11"] }
-];
+            <div class="timeline-item">
+              <div class="timeline-date">26 June 1948</div>
+              <div class="timeline-content">
+                <strong>Airlift starts:</strong> Within 48 hours, US and British planes began flying supplies to 
+                West Berlin. Initial goal: 4,500 tons daily. Seemed impossible but determination was absolute. 
+                Truman refused to abandon Berliners.
+              </div>
+            </div>
 
-const quizElizabeth = [
-  { q: "What was Drake's ship called?", a: ["golden hind"] },
-  { q: "When did Drake circumnavigate globe?", a: ["1577-1580"] },
-  { q: "What title given to Drake 1581?", a: ["sir"] },
-  { q: "Which Spanish port raided 1587?", a: ["cadiz"] },
-  { q: "Phrase for 1587 Cadiz raid?", a: ["singeing the king's beard"] },
-  { q: "Drake's role in 1588 Armada?", a: ["vice admiral"] },
-  { q: "Main religious cause tension Spain?", a: ["protestant vs catholic"] },
-  { q: "What angered Spain about English sailors?", a: ["privateering"] },
-  { q: "What did England support against Spain?", a: ["dutch revolt"] },
-  { q: "Treaty sent troops to Netherlands?", a: ["nonsuch"] },
-  { q: "Who led English troops Netherlands 1585?", a: ["leicester"] },
-  { q: "Why fear Spanish control Netherlands?", a: ["invasion base"] },
-  { q: "Year Spanish Armada launched?", a: ["1588"] },
-  { q: "Rough number Armada ships?", a: ["130"] },
-  { q: "Who sent Spanish Armada?", a: ["philip ii"] },
-  { q: "Where fireships used vs Armada?", a: ["calais"] },
-  { q: "What helped defeat Armada besides navy?", a: ["storms"] },
-  { q: "Main naval clash 1588?", a: ["gravelines"] },
-  { q: "England's main export?", a: ["cloth"] },
-  { q: "Farming change increased wool?", a: ["enclosures"] },
-  { q: "Why prefer sheep over crops?", a: ["higher profits"] },
-  { q: "Cause rapid inflation?", a: ["silver"] },
-  { q: "Biggest English trading city?", a: ["london"] },
-  { q: "Company chartered 1600?", a: ["east india company"] },
-  { q: "Laws restricted clothing by rank?", a: ["sumptuary"] },
-  { q: "Social problem from enclosures?", a: ["vagrancy"] },
-  { q: "Wandering beggars called?", a: ["vagabonds"] },
-  { q: "Poor Law year?", a: ["1601"] },
-  { q: "Who collected poor rates?", a: ["overseers"] },
-  { q: "Idle poor expected to do?", a: ["work"] },
-  { q: "Deserving poor received?", a: ["relief"] },
-  { q: "Buildings housed some poor?", a: ["almshouses"] },
-  { q: "Economic change caused unemployment?", a: ["enclosures"] },
-  { q: "Explorer attempted Roanoke?", a: ["raleigh"] },
-  { q: "Main aim English privateers?", a: ["spanish treasure"] },
-  { q: "Nickname defeated Armada?", a: ["invincible"] },
-  { q: "Lord High Admiral 1588?", a: ["effingham"] },
-  { q: "Propaganda impact Armada victory?", a: ["national unity"] },
-  { q: "Long-term effect Armada on Spain?", a: ["naval decline"] },
-  { q: "Main English goal Netherlands?", a: ["prevent invasion"] },
-  { q: "English army victories Netherlands?", a: ["no"] },
-  { q: "Metal caused price rises?", a: ["silver"] },
-  { q: "Fabric made England wealthy?", a: ["wool"] },
-  { q: "Merchant group traded cloth?", a: ["merchant adventurers"] },
-  { q: "Increased after enclosures rural?", a: ["poverty"] },
-  { q: "Main cause vagabondage?", a: ["enclosures"] },
-  { q: "Law first organised poor relief?", a: ["1601 poor law"] },
-  { q: "Parishes had to do under Poor Law?", a: ["collect rates"] },
-  { q: "1588 victory boosted what?", a: ["naval confidence"] },
-  { q: "Drake famous attacking what?", a: ["spanish treasure"] },
-  { q: "Delayed Armada one year?", a: ["cadiz raid"] },
-  { q: "Country claimed New World monopoly?", a: ["spain"] },
-  { q: "Religious difference caused tension?", a: ["protestant vs catholic"] },
-  { q: "Main English textile export?", a: ["cloth"] },
-  { q: "Process created more sheep pasture?", a: ["enclosure"] },
-  { q: "Worsened poverty towns countryside?", a: ["inflation"] },
-  { q: "Port grew rich cloth exports?", a: ["london"] },
-  { q: "Company began long-distance trade?", a: ["east india company"] },
-  { q: "Problem grew rising population?", a: ["poverty"] },
-  { q: "Able-bodied poor expected to?", a: ["work"] }
-];
+            <div class="timeline-item">
+              <div class="timeline-date">Apr 1949</div>
+              <div class="timeline-content">
+                <strong>Peak operations:</strong> Airlift reached maximum efficiency - one plane landing every 30 seconds. 
+                Delivered 8,000+ tons daily (more than pre-blockade levels). Pilots became heroes; children waited 
+                for "Rosinenbomber" (raisin bombers) dropping candy.
+              </div>
+            </div>
 
-// ────────────────────────────────────────────────
-// PAGE & QUIZ LOGIC
-// ────────────────────────────────────────────────
+            <div class="timeline-item">
+              <div class="timeline-date">12 May 1949</div>
+              <div class="timeline-content">
+                <strong>Blockade lifted:</strong> After 318 days and 277,000+ flights, Stalin admitted defeat. 
+                2.3 million tons of supplies delivered. West had won without firing a shot. Soviet prestige damaged badly.
+              </div>
+            </div>
+          </div>
 
-let currentTab = 'cold';
-let quizOpen = false;
-let currentQIndex = 0;
-let score = 0;
-let totalAnswered = 0;
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-chart-line"></i> By The Numbers</div>
+            <div class="content-text">
+              <strong>Duration:</strong> 318 days (June 1948 - May 1949)<br>
+              <strong>Flights:</strong> 277,000+ total sorties<br>
+              <strong>Cargo delivered:</strong> 2.3 million tons (food, coal, machinery)<br>
+              <strong>Peak rate:</strong> One plane every 30 seconds<br>
+              <strong>Cost:</strong> $224 million (equivalent to $2.8 billion today)<br>
+              <strong>Casualties:</strong> 101 deaths (mostly accidents during dangerous flights)<br>
+              <strong>Berliners fed:</strong> 2.5 million people
+            </div>
+          </div>
 
-const quizData = { cold: quizCold, elizabeth: quizElizabeth };
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Immediate Impact</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Massive propaganda victory for West - demonstrated commitment and capability</li>
+                <li>Stalin appeared aggressive and had to back down, damaging Soviet credibility</li>
+                <li>West Berliners' loyalty to West solidified through shared hardship and Western support</li>
+                <li>Proved air power could overcome ground blockades - new strategic thinking</li>
+                <li>Accelerated creation of NATO (April 1949) during the blockade</li>
+              </ul>
+            </div>
+          </div>
 
-function switchTab(tab) {
-  currentTab = tab;
-  document.getElementById('cold').style.display = tab === 'cold' ? 'block' : 'none';
-  document.getElementById('elizabeth').style.display = tab === 'elizabeth' ? 'block' : 'none';
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Consequences</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Germany formally divided: Federal Republic of Germany (West) and German Democratic Republic (East) both founded in 1949</li>
+                <li>Division of Germany became permanent feature of Cold War geography for 41 years</li>
+                <li>Berlin remained flashpoint - led to 1961 Berlin Wall crisis</li>
+                <li>NATO strengthened and expanded; Warsaw Pact created in response (1955)</li>
+                <li>Set pattern for Cold War confrontations: brinkmanship without direct military conflict</li>
+                <li>West Berlin became symbol of freedom and resistance to communism</li>
+              </ul>
+            </div>
+          </div>
 
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Strategy</div>
+            <p class="content-text">
+              This is perfect for causation and consequence questions. Practice explaining the chain: currency reform 
+              → Soviet blockade → Western airlift → Soviet defeat → Germany divided. Use statistics (277,000 flights, 
+              2.3 million tons) to add precision. Explain WHY Stalin lifted blockade (couldn't win, propaganda disaster, 
+              economic damage).
+            </p>
+          </div>
+        `
+      },
 
-  if (quizOpen) closeQuiz();
-}
+      {
+        id: "korea",
+        title: "Korean War (1950–1953)",
+        icon: "fa-shield-halved",
+        period: "1950-1953",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Origins & Outbreak</h3>
+            <p class="content-text">
+              Korea was divided at 38th parallel after WWII as temporary measure. North became communist under Kim Il-Sung 
+              (backed by USSR/China), South became capitalist under Syngman Rhee (backed by USA). Both leaders wanted 
+              reunification under their system. Tension escalated into war when Kim Il-Sung convinced Stalin and Mao 
+              that quick victory was possible.
+            </p>
+            <ul class="content-list">
+              <li><strong>Division roots:</strong> Japan had controlled Korea 1910-1945; Soviet and US troops divided it during Japanese surrender</li>
+              <li><strong>Failed unification:</strong> UN-supervised elections planned for all Korea; North refused to participate (1948)</li>
+              <li><strong>Two governments formed:</strong> Republic of Korea (South, Aug 1948) and Democratic People's Republic (North, Sep 1948)</li>
+              <li><strong>Stalin's calculation:</strong> Believed USA wouldn't defend South Korea after Acheson excluded it from US defense perimeter</li>
+              <li><strong>Invasion:</strong> 25 June 1950 - 75,000 North Korean troops crossed 38th parallel in surprise attack</li>
+            </ul>
+          </div>
 
-function buildAccordions(containerId, topics) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
-  topics.forEach(topic => {
-    const card = document.createElement('div');
-    card.className = 'accordion-card';
-    card.innerHTML = `
-      <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('active')">
-        ${topic.title}
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      <div class="acc-body">
-        ${topic.content}
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-timeline"></i> War Timeline</h3>
+            
+            <div class="timeline-item">
+              <div class="timeline-date">June-Aug 1950</div>
+              <div class="timeline-content">
+                <strong>North Korean offensive:</strong> Rapidly pushed south, capturing Seoul within days. South Korean and 
+                US forces retreated to Pusan Perimeter (small area in southeast). UN Security Council condemned invasion 
+                (Soviet boycott meant no veto). UN force authorized under US command.
+              </div>
+            </div>
 
-function openQuiz() {
-  currentQIndex = 0;
-  score = 0;
-  totalAnswered = 0;
-  document.getElementById('scoreDisplay').textContent = '0';
-  document.getElementById('totalDisplay').textContent = '0';
-  document.getElementById('progressBar').style.width = '0%';
-  document.getElementById('feedback').style.display = 'none';
-  document.getElementById('quizPanel').style.display = 'block';
-  quizOpen = true;
-  loadQuestion();
-}
+            <div class="timeline-item">
+              <div class="timeline-date">Sep 1950</div>
+              <div class="timeline-content">
+                <strong>Inchon Landing:</strong> General MacArthur's brilliant amphibious assault at Inchon (behind North Korean 
+                lines) cut enemy supply lines. North Korean army collapsed. UN forces recaptured Seoul and pushed north 
+                past 38th parallel despite Chinese warnings.
+              </div>
+            </div>
 
-function loadQuestion() {
-  const questions = quizData[currentTab];
-  if (currentQIndex >= questions.length) {
-    document.getElementById('questionText').innerHTML = `Quiz complete!<br>Final score: ${score} / ${totalAnswered}`;
-    document.getElementById('answerInput').style.display = 'none';
-    return;
-  }
+            <div class="timeline-item">
+              <div class="timeline-date">Oct-Nov 1950</div>
+              <div class="timeline-content">
+                <strong>Chinese intervention:</strong> 300,000 Chinese "volunteers" crossed Yalu River as UN forces approached 
+                Chinese border. MacArthur had dismissed warnings. Chinese human wave attacks overwhelmed UN forces. 
+                Longest retreat in US military history began.
+              </div>
+            </div>
 
-  document.getElementById('questionText').textContent = questions[currentQIndex].q;
-  document.getElementById('answerInput').value = '';
-  totalAnswered++;
-  document.getElementById('totalDisplay').textContent = totalAnswered;
-  document.getElementById('progressBar').style.width = (currentQIndex / questions.length * 100) + '%';
-}
+            <div class="timeline-item">
+              <div class="timeline-date">1951-1953</div>
+              <div class="timeline-content">
+                <strong>Stalemate:</strong> Fighting stabilized around 38th parallel. Truman sacked MacArthur (April 1951) for 
+                publicly demanding to attack China with nuclear weapons. Peace talks began July 1951 but fighting continued 
+                two more years over prisoner exchange issues.
+              </div>
+            </div>
 
-function checkAnswer() {
-  const input = document.getElementById('answerInput').value.trim().toLowerCase();
-  const correct = quizData[currentTab][currentQIndex].a.map(a => a.toLowerCase());
+            <div class="timeline-item">
+              <div class="timeline-date">27 July 1953</div>
+              <div class="timeline-content">
+                <strong>Armistice signed:</strong> Fighting stopped but no peace treaty (technically still at war today). 
+                Demilitarized Zone (DMZ) created along roughly the 38th parallel. Nearly 3 million dead for almost 
+                no territorial change.
+              </div>
+            </div>
+          </div>
 
-  const isCorrect = correct.some(c => input.includes(c));
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-skull-crossbones"></i> Human Cost</div>
+            <div class="content-text">
+              <strong>Total deaths:</strong> ~3 million (estimates vary)<br>
+              <strong>South Korean military:</strong> 137,000+ killed<br>
+              <strong>North Korean/Chinese:</strong> ~1.5 million killed<br>
+              <strong>US forces:</strong> 36,000+ killed<br>
+              <strong>Civilians:</strong> ~1-1.5 million killed<br>
+              <strong>Displaced:</strong> Millions became refugees; families permanently separated
+            </div>
+          </div>
 
-  const fb = document.getElementById('feedback');
-  fb.textContent = isCorrect ? 'Correct ✓' : `Wrong. Possible: ${correct.join(' / ')}`;
-  fb.className = 'feedback-message ' + (isCorrect ? 'correct' : 'wrong');
-  fb.style.display = 'block';
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Short-term Impact</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>NSC-68 implemented: US defense spending quintupled from $13 billion (1950) to $50+ billion (1953)</li>
+                <li>Containment policy validated and extended globally - USA committed to stopping communism anywhere</li>
+                <li>Japan's economy revived through war contracts - "Korean War boom" rebuilt Japanese industry</li>
+                <li>McCarthyism intensified in USA - fear of communist infiltration peaked during "limited war" frustrations</li>
+                <li>UN credibility damaged - seen as US tool; USSR returned to Security Council to block future actions</li>
+              </ul>
+            </div>
+          </div>
 
-  if (isCorrect) score++;
-  document.getElementById('scoreDisplay').textContent = score;
-}
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Consequences</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Korea remained divided - North became totalitarian dynasty, South eventually became democracy and economic power</li>
+                <li>Established pattern for proxy wars: superpowers arm/support local allies rather than fight directly</li>
+                <li>Limited war doctrine: nuclear weapons too dangerous to use, conventional wars fought within constraints</li>
+                <li>Sino-American relations poisoned for decades - China portrayed as aggressive communist threat</li>
+                <li>Vietnam War precedent: showed difficulty of fighting conventional war against determined guerrillas with superpower backing</li>
+                <li>US permanent military bases in South Korea and Japan - Asian containment architecture established</li>
+              </ul>
+            </div>
+          </div>
 
-function nextQuestion() {
-  currentQIndex++;
-  loadQuestion();
-}
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Tips</div>
+            <p class="content-text">
+              Focus on the <strong>turning points</strong>: North Korean invasion, Inchon Landing, Chinese intervention, MacArthur's dismissal. 
+              Explain how Korea demonstrated both commitment to containment AND its limits (couldn't "roll back" communism without 
+              risking WWIII). Compare with Vietnam War for evolution of US strategy. Use specific numbers (3 million dead, 300,000 
+              Chinese troops) to show research depth.
+            </p>
+          </div>
+        `
+      },
 
-function closeQuiz() {
-  document.getElementById('quizPanel').style.display = 'none';
-  quizOpen = false;
-}
+      {
+        id: "arms-space",
+        title: "Arms Race & Space Race (1949–1969)",
+        icon: "fa-rocket",
+        period: "1949-1969",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-atom"></i> Nuclear Arms Race</h3>
+            <p class="content-text">
+              The nuclear dimension transformed the Cold War into an existential struggle. Both superpowers accumulated 
+              arsenals capable of destroying civilization multiple times over. The doctrine of Mutually Assured Destruction 
+              (MAD) created paradoxical "balance of terror" - peace maintained through threat of total annihilation.
+            </p>
 
-// Initialize
-buildAccordions('coldAccordions', coldWarTopics);
-buildAccordions('elizAccordions', elizabethTopics);
+            <div class="timeline-item">
+              <div class="timeline-date">Aug 1949</div>
+              <div class="timeline-content">
+                <strong>First Soviet A-bomb:</strong> USSR tested "First Lightning" atomic device, shocking USA which expected 
+                Soviet bomb by 1953 at earliest. American nuclear monopoly ended. Klaus Fuchs (British scientist) had spied 
+                for Soviets, accelerating their program by years.
+              </div>
+            </div>
 
-</script>
+            <div class="timeline-item">
+              <div class="timeline-date">Nov 1952</div>
+              <div class="timeline-content">
+                <strong>US H-bomb:</strong> "Ivy Mike" test vaporized entire island (Elugelab). 10.4 megatons - 450 times more 
+                powerful than Hiroshima bomb. Fusion weapon represented quantum leap in destructive power.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">Aug 1953</div>
+              <div class="timeline-content">
+                <strong>Soviet H-bomb:</strong> USSR tested thermonuclear device (400 kilotons). Physicist Andrei Sakharov led 
+                development. Soviets only 9 months behind USA - arms race accelerating dangerously.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">1957</div>
+              <div class="timeline-content">
+                <strong>ICBMs developed:</strong> Both sides created Intercontinental Ballistic Missiles. Can strike anywhere 
+                on Earth in ~30 minutes. Made borders irrelevant - no defense possible against massive strike.
+              </div>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-explosion"></i> Mutually Assured Destruction (MAD)</div>
+            <div class="content-text">
+              By late 1960s, both superpowers possessed "second-strike capability" - ability to absorb nuclear first strike 
+              and still retaliate devastatingly. This created perverse stability: attacking meant suicide, so peace maintained 
+              through terror. Nuclear submarines carrying ballistic missiles ensured no surprise attack could prevent retaliation. 
+              <strong>Peak arsenals:</strong> USA ~31,000 warheads (1967), USSR ~45,000 warheads (1986).
+            </div>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-satellite"></i> Space Race</h3>
+            <p class="content-text">
+              Space exploration became arena for superpower competition, demonstrating technological superiority and 
+              military potential. Rockets that launched satellites could launch nuclear warheads. Each achievement 
+              was propaganda victory showing superiority of respective political system.
+            </p>
+
+            <div class="timeline-item">
+              <div class="timeline-date">4 Oct 1957</div>
+              <div class="timeline-content">
+                <strong>Sputnik 1:</strong> First artificial satellite (Soviet). Size of basketball, orbited Earth every 96 minutes. 
+                Created "Sputnik crisis" in USA - fear Soviets winning technology race. Led directly to creation of NASA (1958) 
+                and massive investment in science education.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">3 Nov 1957</div>
+              <div class="timeline-content">
+                <strong>Sputnik 2:</strong> Carried dog Laika - first living creature in orbit. Showed Soviets ahead in capability 
+                to send humans to space. American confidence shaken - USSR seemed technologically superior.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">12 Apr 1961</div>
+              <div class="timeline-content">
+                <strong>Yuri Gagarin:</strong> First human in space. Complete orbit in Vostok 1 capsule (108 minutes). Global 
+                propaganda triumph for USSR. Kennedy felt humiliated, vowed America would reach Moon first.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">May 1961</div>
+              <div class="timeline-content">
+                <strong>Kennedy's Moon pledge:</strong> President committed to "landing a man on the Moon and returning him safely 
+                to Earth before this decade is out." Apollo program received virtually unlimited funding ($25 billion, ~$280 billion today).
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">20 Jul 1969</div>
+              <div class="timeline-content">
+                <strong>Moon landing:</strong> Apollo 11 - Neil Armstrong and Buzz Aldrin walked on Moon. 650 million people 
+                watched worldwide. Decisive American victory in space race. Demonstrated technological supremacy and 
+                fulfilled Kennedy's pledge (tragically, after his assassination).
+              </div>
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Immediate Effects</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Civil defense programs: fallout shelters built, "duck and cover" drills in schools, widespread nuclear anxiety</li>
+                <li>Nuclear families hoarded supplies, built backyard shelters - nuclear war seemed imminent</li>
+                <li>Science education massively expanded - National Defense Education Act (1958) poured funds into schools</li>
+                <li>NASA created (1958) - focus on winning space race and developing missile technology</li>
+                <li>Arms control discussions began - both sides recognized danger of unlimited buildup</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Legacy</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Technology spinoffs: GPS, weather satellites, microelectronics, computer advances, medical imaging, freeze-dried food</li>
+                <li>Arms race bankrupted USSR - spent ~25% of GDP on military vs ~6% for USA</li>
+                <li>Nuclear proliferation: UK (1952), France (1960), China (1964) developed bombs; more followed</li>
+                <li>Test Ban Treaty (1963) - ended atmospheric testing, reduced radioactive fallout</li>
+                <li>Non-Proliferation Treaty (1968) - tried to prevent spread, though only partly successful</li>
+                <li>MAD doctrine dominated strategic thinking until Cold War ended; still influences nuclear policy today</li>
+                <li>Space exploration continues as international cooperation (ISS) rather than competition</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Focus</div>
+            <p class="content-text">
+              Questions often ask "How far was the arms race driven by fear/ideology/prestige?" Argue it was ALL THREE. 
+              Fear: MAD doctrine, second-strike capability. Ideology: proving capitalism/communism superior. Prestige: 
+              Sputnik shock, Moon landing. Use specific examples (Gagarin, Armstrong) and statistics (arsenal sizes, 
+              spending levels). Connect to détente - arms race became unsustainable, leading to SALT treaties.
+            </p>
+          </div>
+        `
+      },
+
+      {
+        id: "hungary-56",
+        title: "Hungarian Uprising (1956)",
+        icon: "fa-flag",
+        period: "1956",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Causes of Uprising</h3>
+            <p class="content-text">
+              Khrushchev's "Secret Speech" at 20th Party Congress (February 1956) denounced Stalin's crimes and cult 
+              of personality. This created expectation of reform across Eastern Bloc. Hungarians hoped for greater 
+              freedom, economic improvement, and reduced Soviet control. Budapest students and workers demonstrated, 
+              demands escalated rapidly.
+            </p>
+            <ul class="content-list">
+              <li><strong>De-Stalinization speech:</strong> Khrushchev criticized Stalin's purges, creating hope for change</li>
+              <li><strong>Economic hardship:</strong> Hungarian economy struggled under Soviet central planning and reparations</li>
+              <li><strong>Resentment of control:</strong> Soviet troops stationed in Hungary; Moscow dictated all major policies</li>
+              <li><strong>National pride:</strong> Historic Hungarian independence suppressed since 1945</li>
+              <li><strong>Polish precedent:</strong> Reformist Gomułka came to power in Poland (Oct 1956) without Soviet invasion</li>
+            </ul>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-history"></i> Events Unfold</h3>
+            
+            <div class="timeline-item">
+              <div class="timeline-date">23 Oct 1956</div>
+              <div class="timeline-content">
+                <strong>Protests begin:</strong> 200,000 people marched in Budapest demanding reforms. Toppled statue of Stalin. 
+                Secret police (ÁVH) fired on protesters, killing many. Peaceful protest became violent uprising. Workers 
+                armed themselves, forming revolutionary councils.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">24 Oct 1956</div>
+              <div class="timeline-content">
+                <strong>Imre Nagy appointed PM:</strong> Moderate communist who promised reforms. Initially called in Soviet 
+                troops to restore order, but quickly realized scale of popular anger. Soviet tanks entered Budapest but 
+                faced fierce resistance from "freedom fighters."
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">28 Oct-3 Nov</div>
+              <div class="timeline-content">
+                <strong>Brief freedom:</strong> Soviet troops withdrew from Budapest. Nagy announced reforms: multi-party system, 
+                free elections, withdrawal from Warsaw Pact (1 Nov), appealed to UN for help. Khrushchev initially seemed 
+                to accept Hungarian independence.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">4 Nov 1956</div>
+              <div class="timeline-content">
+                <strong>Soviet invasion:</strong> 200,000 Soviet troops and 2,500 tanks crushed uprising brutally. Massive 
+                assault began 4 AM. Street battles in Budapest - Molotov cocktails vs tanks. Khrushchev feared "domino 
+                effect" if Hungary left Warsaw Pact. Suez Crisis distracted Western attention.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">Nov 1956</div>
+              <div class="timeline-content">
+                <strong>Aftermath:</strong> Nagy arrested (later executed 1958). János Kádár installed as puppet leader. 
+                Approximately 3,000 Hungarians killed, 20,000 wounded. 200,000 fled as refugees to Austria and beyond. 
+                Brutal repression followed - thousands imprisoned.
+              </div>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-exclamation-triangle"></i> Why Didn't the West Help?</div>
+            <div class="content-text">
+              <strong>NATO's dilemma:</strong> Hungarians expected Western support based on US "rollback" rhetoric (Liberation Policy). 
+              However, Hungary deep in Soviet sphere - intervention meant World War III. <strong>Suez timing:</strong> Britain 
+              and France invading Egypt simultaneously (29 Oct) split Western attention and moral authority. <strong>Nuclear 
+              reality:</strong> Khrushchev threatened nuclear weapons if West intervened. <strong>Result:</strong> Hungarians 
+              felt betrayed; West accepted Soviet dominance of Eastern Europe as permanent.
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Immediate Consequences</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Soviet reputation severely damaged globally - portrayed as brutal oppressor crushing freedom</li>
+                <li>Western Communist parties lost members in disgust at Soviet actions</li>
+                <li>200,000 refugees fled, including many intellectuals, professionals, students - brain drain</li>
+                <li>Kádár's "Goulash Communism" - limited economic liberalization to prevent future uprisings</li>
+                <li>Yugoslavia (Tito) and China (Mao) criticized Soviet brutality, weakening communist solidarity</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Impact</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Established Brezhnev Doctrine precedent (formalized 1968): USSR would use force to maintain communist control</li>
+                <li>Discouraged reform attempts - Prague Spring (1968) similarly crushed, reinforcing pattern</li>
+                <li>West accepted Eastern Europe in Soviet sphere - "containment" not "rollback"</li>
+                <li>Détente partly motivated by accepting status quo rather than challenging Soviet control</li>
+                <li>Hungarian memory of 1956 inspired 1989 reforms - border opened to East Germans fleeing, contributing to Berlin Wall fall</li>
+                <li>Demonstrated limits of UN - could condemn but not act against superpower in its sphere</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Strategy</div>
+            <p class="content-text">
+              Perfect for comparing with Prague Spring (1968) - similarities (reform movements crushed) and differences 
+              (Nagy wanted to leave Warsaw Pact, Dubček stayed loyal). Explain Khrushchev's dilemma: allow freedom and 
+              risk losing Eastern Europe, or crush revolt and damage reputation. Note timing with Suez Crisis. Use as 
+              evidence for "sphere of influence" argument - superpowers tolerated each other's control zones.
+            </p>
+          </div>
+        `
+      },
+
+      {
+        id: "berlin-wall",
+        title: "Berlin Wall (1961–1989)",
+        icon: "fa-border-all",
+        period: "1961-1989",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Why Build a Wall?</h3>
+            <p class="content-text">
+              Berlin Wall was symptom of East Germany's failure. From 1949-1961, approximately 3.5 million East Germans 
+              (20% of population) fled to West through open Berlin. Many were young, educated, skilled workers - exactly 
+              who communist economy needed. This "brain drain" threatened East Germany's viability as a state.
+            </p>
+            <ul class="content-list">
+              <li><strong>Economic crisis:</strong> Loss of doctors, engineers, teachers crippled East German economy</li>
+              <li><strong>Ideological embarrassment:</strong> People "voting with their feet" against communism - powerful propaganda defeat</li>
+              <li><strong>Berlin anomaly:</strong> Only place where crossing from East to West was relatively easy</li>
+              <li><strong>Khrushchev's ultimatum (1958):</strong> Demanded Western powers leave West Berlin; when refused, considered wall</li>
+              <li><strong>Desperate measure:</strong> Walter Ulbricht (East German leader) convinced Khrushchev wall was only solution</li>
+            </ul>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-calendar-alt"></i> Construction and Evolution</h3>
+            
+            <div class="timeline-item">
+              <div class="timeline-date">13 Aug 1961</div>
+              <div class="timeline-content">
+                <strong>Operation "Rose":</strong> At 2 AM, East German troops began unrolling barbed wire along entire border 
+                between East and West Berlin (96 miles). Caught everyone by surprise - including some East German soldiers. 
+                Within hours, city completely divided. Families separated overnight. Last trains and trams stopped.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">Aug-Sep 1961</div>
+              <div class="timeline-content">
+                <strong>Wall solidifies:</strong> Barbed wire replaced with concrete blocks, then permanent concrete wall (12 feet high). 
+                "Death strip" created - open area with guard towers, searchlights, attack dogs, anti-vehicle trenches. 
+                55,000 landmines planted. Orders to shoot anyone trying to cross.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">1962-1989</div>
+              <div class="timeline-content">
+                <strong>Living with division:</strong> 140+ people killed trying to cross. Creative escape attempts - tunnels, 
+                hot air balloons, hidden compartments in cars. Checkpoint Charlie became famous crossing point. West Berlin 
+                became island of capitalism 110 miles inside East Germany.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">26 June 1963</div>
+              <div class="timeline-content">
+                <strong>"Ich bin ein Berliner":</strong> JFK's famous speech at West Berlin city hall. 450,000 people gathered. 
+                Declared solidarity with West Berliners, called wall "offense against humanity and history." Promised 
+                Western commitment to defend West Berlin.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">9 Nov 1989</div>
+              <div class="timeline-content">
+                <strong>Wall falls:</strong> Confused announcement about eased travel restrictions led to mass gatherings. 
+                Guards overwhelmed, opened gates. Berliners from both sides celebrated together, chipping away wall with 
+                hammers and pickaxes. End of physical division, beginning of end of Cold War.
+              </div>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-skull-crossbones"></i> The Human Toll</div>
+            <div class="content-text">
+              <strong>Deaths:</strong> 140+ killed trying to escape (exact number disputed)<br>
+              <strong>First victim:</strong> Ida Siekmann (22 Aug 1961) - jumped from apartment window, died from injuries<br>
+              <strong>Most famous:</strong> Peter Fechter (17 Aug 1962) - shot, bled to death in death strip while guards watched<br>
+              <strong>Families divided:</strong> Thousands separated - couldn't attend weddings, funerals, see grandchildren<br>
+              <strong>Escapees:</strong> ~5,000 successfully escaped over 28 years through various methods<br>
+              <strong>Arrested:</strong> Thousands imprisoned for attempting escape
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Short-term Consequences</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Stopped refugee flow almost completely - East German economy stabilized</li>
+                <li>Massive propaganda disaster - "Iron Curtain" now literal concrete wall visible to all</li>
+                <li>JFK initially relieved - preferred wall to war, though publicly condemned it</li>
+                <li>Khrushchev's reputation damaged - appeared weak for not forcing Western powers out entirely</li>
+                <li>Tensions eased slightly - both sides accepted divided Berlin as permanent</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Significance</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Most powerful symbol of Cold War division - physical manifestation of Iron Curtain</li>
+                <li>Demonstrated communism needed walls to keep people in - ultimate ideological failure</li>
+                <li>Its fall (1989) symbolized end of Cold War more than any other single event</li>
+                <li>Reunification of Germany (1990) reshaped European politics and economics</li>
+                <li>Wall segments preserved worldwide as monuments warning against totalitarianism</li>
+                <li>East Side Gallery (Berlin) - 1.3km section covered in murals, commemorating division and freedom</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Tips</div>
+            <p class="content-text">
+              Explain the paradox: Wall was both success (stopped refugees) and failure (admitted communism couldn't compete). 
+              Compare Kennedy's Berlin speeches (1961 vs 1963) showing evolution from crisis to defiance. Link to Reagan's 
+              "Tear down this wall!" (1987) and actual fall (1989) - bookends of late Cold War. Discuss as both physical 
+              barrier and powerful symbol. Use specific details (3.5 million fled, 140 killed, 5,000 escaped) to demonstrate knowledge.
+            </p>
+          </div>
+        `
+      },
+
+      {
+        id: "cuban-crisis",
+        title: "Cuban Missile Crisis (1962)",
+        icon: "fa-radiation",
+        period: "1962",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Road to Crisis</h3>
+            <p class="content-text">
+              Cuban Missile Crisis brought world closer to nuclear war than any other Cold War event. Thirteen days of 
+              brinkmanship where single miscalculation could have meant nuclear holocaust. Combination of failed invasion, 
+              missile imbalance, and superpower pride created perfect storm of danger.
+            </p>
+            <ul class="content-list">
+              <li><strong>Cuban Revolution (1959):</strong> Fidel Castro overthrew US-backed dictator Batista; nationalized American property</li>
+              <li><strong>Bay of Pigs (April 1961):</strong> CIA-backed invasion by Cuban exiles failed disastrously; humiliated Kennedy and USA</li>
+              <li><strong>Missile gap:</strong> USA had missiles in Turkey (neighboring USSR); Soviets had none near USA until Cuba offered</li>
+              <li><strong>Khrushchev's motives:</strong> Protect Cuba, balance missile gap, appear strong after Berlin Wall embarrassment</li>
+              <li><strong>Castro's motives:</strong> Fear of another US invasion; ideological solidarity with USSR</li>
+            </ul>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-stopwatch"></i> 13 Days - Hour by Hour</h3>
+            
+            <div class="timeline-item">
+              <div class="timeline-date">14 Oct 1962</div>
+              <div class="timeline-content">
+                <strong>Discovery:</strong> U-2 spy plane photographed Soviet missile sites under construction in Cuba. CIA analysts 
+                identified medium-range ballistic missiles (MRBMs) capable of hitting most US cities with nuclear warheads. 
+                Would reach Washington DC in 5 minutes. Intelligence confirmed 42 missiles, some already operational.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">16 Oct 1962</div>
+              <div class="timeline-content">
+                <strong>ExComm formed:</strong> Kennedy assembled Executive Committee of National Security Council. Debated options: 
+                (1) Diplomacy - slow, might fail; (2) Air strike - risked killing Soviet troops, escalation; (3) Invasion - definite war; 
+                (4) Blockade - act of war but gave time. Kennedy chose "quarantine" (blockade by another name).
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">22 Oct 1962</div>
+              <div class="timeline-content">
+                <strong>Public announcement:</strong> Kennedy addressed nation on TV (100 million watched). Revealed missiles, 
+                announced naval "quarantine" of Cuba, demanded removal. World learned how close to war. DEFCON 3 declared 
+                (Defense Readiness Condition - first time in peacetime). SAC bombers armed with nukes airborne 24/7.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">24-25 Oct</div>
+              <div class="timeline-content">
+                <strong>Blockade begins:</strong> US Navy deployed 180 ships around Cuba. Soviet ships approaching - if they crossed 
+                line, boarding would begin. "We're eyeball to eyeball," said Secretary of State Rusk. Khrushchev ordered ships 
+                to stop - "and I think the other fellow just blinked."
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">26 Oct</div>
+              <div class="timeline-content">
+                <strong>First letter:</strong> Khrushchev sent emotional letter - would remove missiles if USA promised not to 
+                invade Cuba. Seemed conciliatory, hinted at compromise. Kennedy's advisors cautiously optimistic.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">27 Oct "Black Saturday"</div>
+              <div class="timeline-content">
+                <strong>Darkest day:</strong> (1) Second Khrushchev letter arrived - demanded USA remove missiles from Turkey too. 
+                Harder terms. (2) U-2 shot down over Cuba - pilot killed. Pressure for immediate retaliation. (3) Soviet submarine 
+                nearly launched nuclear torpedo - officer Vasily Arkhipov prevented WWIII by refusing authorization. (4) DEFCON 2 
+                ordered - highest readiness short of war. Nuclear war seemed hours away.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">28 Oct</div>
+              <div class="timeline-content">
+                <strong>Resolution:</strong> Bobby Kennedy met Soviet Ambassador Dobrynin secretly - agreed to remove Turkey missiles 
+                (quietly, months later) if Soviets removed Cuba missiles publicly. Khrushchev announced compliance on Radio Moscow. 
+                Crisis over. World exhaled. Kennedy's public approval soared to 74%.
+              </div>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-bomb"></i> How Close to Nuclear War?</div>
+            <div class="impact-content">
+              <strong>Soviet forces in Cuba:</strong> 42,000 troops (not 10,000 as US believed) + tactical nuclear weapons<br>
+              <strong>Nuclear warheads:</strong> 162 already in Cuba, including some for tactical use<br>
+              <strong>Authorization:</strong> Soviet commanders had pre-authorization to use tactical nukes if invaded<br>
+              <strong>US invasion plan:</strong> 180,000 troops ready; if launched, tactical nukes would have been used<br>
+              <strong>Escalation risk:</strong> Tactical nuke use would likely have triggered strategic nuclear exchange<br>
+              <strong>Arkhipov moment:</strong> Soviet submarine B-59, depth-charged by US Navy, three officers needed unanimous 
+              consent to launch nuclear torpedo; two voted yes, Arkhipov refused - saved world
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Immediate Aftermath</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Hotline established (Aug 1963) - direct Moscow-Washington communication to prevent miscalculation</li>
+                <li>Partial Nuclear Test Ban Treaty (1963) - banned atmospheric, underwater, space nuclear tests</li>
+                <li>Kennedy gained prestige - seen as standing firm against Soviets while avoiding war</li>
+                <li>Khrushchev weakened - seen as backing down; contributed to his removal October 1964</li>
+                <li>Cuba remained communist but missile threat removed; US promised not to invade</li>
+                <li>Both leaders sobered by nuclear brink - began moving toward coexistence</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Impact</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Détente seeds planted - both sides recognized need to manage competition more carefully</li>
+                <li>Arms control became priority - SALT I (1972), ABM Treaty, Non-Proliferation Treaty (1968)</li>
+                <li>Mutual recognition of spheres of influence - tacit agreement not to challenge vital interests</li>
+                <li>Nuclear strategy refined - emphasis on communication, de-escalation, avoiding accidental war</li>
+                <li>Crisis management protocols developed - still used today in international relations</li>
+                <li>Demonstrated rational actors could step back from brink - reason over ideology when survival at stake</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Strategy</div>
+            <p class="content-text">
+              This is THE Cold War crisis - examiners love it. Focus on decision-making: Why Kennedy chose quarantine over 
+              air strike/invasion (bought time, avoided Soviet casualties). Explain how crisis changed relationship - moved 
+              from confrontation toward coexistence. Compare with Berlin Crisis (1961) - both brinkmanship, but Cuba               This is THE Cold War crisis - examiners love it. Focus on decision-making: Why Kennedy chose quarantine over 
+              air strike/invasion (bought time, avoided Soviet casualties). Explain how crisis changed relationship - moved 
+              from confrontation toward coexistence. Compare with Berlin Crisis (1961) - both brinkmanship, but Cuba much closer to nuclear war. Use timeline precision and quote key phrases ("eyeball to eyeball", "we're on the brink"). 
+            </p>
+          </div>
+        `
+      },
+      // You can add more Cold War topics here in future (e.g. Prague Spring, Détente, Afghanistan, Gorbachev, End of Cold War)
+    ];
+
+    const elizabethanTopics = [
+      {
+        id: "elizabeth-accession",
+        title: "Elizabeth's Accession & Challenges (1558–1569)",
+        icon: "fa-crown",
+        period: "1558–1569",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Problems on Accession</h3>
+            <p class="content-text">Elizabeth inherited a deeply divided and financially weak country in 1558. Religious division, foreign threats, succession uncertainty, and weak finances created immediate challenges.</p>
+            <ul class="content-list">
+              <li><strong>Religion:</strong> England had swung between Catholicism (Mary I) and Protestantism (Edward VI)</li>
+              <li><strong>Threats:</strong> France (Mary Queen of Scots + French alliance), Spain (growing power), Papacy (excommunication 1570)</li>
+              <li><strong>Succession:</strong> No clear heir — Mary Queen of Scots had strong claim</li>
+              <li><strong>Finance:</strong> Debt ~£300,000; debased coinage caused inflation</li>
+              <li><strong>Gender:</strong> Many doubted a woman could rule effectively</li>
+            </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-check-circle"></i> Settlement of Religion (1559)</h3>
+            <p class="content-text">Elizabeth's Religious Settlement aimed for a moderate Protestant church that most people could accept — the via media.</p>
+            <ul class="content-list">
+              <li>Act of Supremacy: Elizabeth "Supreme Governor" (not Supreme Head)</li>
+              <li>Act of Uniformity: One prayer book (1559 version — more moderate)</li>
+              <li>Compromise elements: crucifixes allowed, clerical vestments, bishops retained</li>
+              <li>Fines for non-attendance (1 shilling)</li>
+              <li>Success: Most people conformed; extremists (puritans + Catholics) unhappy</li>
+            </ul>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Focus</div>
+            <p class="content-text">Explain how the Settlement was a political as well as religious compromise. Assess success — prevented civil war in 1560s but stored up problems (Catholic plots, Puritan pressure).</p>
+          </div>
+        `
+      },
+      {
+        id: "mary-qos",
+        title: "Mary Queen of Scots",
+        icon: "fa-chess-queen",
+        period: "1568–1587",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-exclamation-triangle"></i> Why was Mary a Threat?</h3>
+            <p class="content-text">Mary was Elizabeth's cousin, a Catholic, with a strong claim to the English throne — and she was in England from 1568 onwards.</p>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Key Events Timeline</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">1568</div><div class="timeline-content">Mary flees Scotland → imprisoned by Elizabeth</div></div>
+              <div class="timeline-item"><div class="timeline-date">1570</div><div class="timeline-content">Pope Pius V excommunicates Elizabeth → encourages plots</div></div>
+              <div class="timeline-item"><div class="timeline-date">1571</div><div class="timeline-content">Ridolfi Plot discovered</div></div>
+              <div class="timeline-item"><div class="timeline-date">1586</div><div class="timeline-content">Babington Plot — letters intercepted by Walsingham</div></div>
+              <div class="timeline-item"><div class="timeline-date">1587</div><div class="timeline-content">Mary executed after trial</div></div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Why Elizabeth hesitated to execute Mary</div>
+            <p class="content-text">Killing an anointed monarch set dangerous precedent → could encourage plots against herself. Also feared backlash from Catholic Europe.</p>
+          </div>
+        `
+      },
+      {
+        id: "spanish-armada",
+        title: "Spanish Armada (1588)",
+        icon: "fa-ship",
+        period: "1585–1588",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Why Did Spain Attack?</h3>
+            <p class="content-text">Philip II of Spain had multiple grievances with England by 1585, culminating in his decision to launch a massive invasion fleet.</p>
+            <ul class="content-list">
+              <li><strong>Religion:</strong> Philip was a devout Catholic; wanted to restore Catholicism to Protestant England</li>
+              <li><strong>Privateers:</strong> Drake and Hawkins raided Spanish treasure ships and ports with Elizabeth's tacit approval</li>
+              <li><strong>Netherlands:</strong> England sent troops (Leicester's expedition 1585) to help Dutch Protestant rebels</li>
+              <li><strong>Mary's execution (1587):</strong> Removed the Catholic alternative to Elizabeth — made invasion seem necessary</li>
+              <li><strong>Drake's raid (1587):</strong> "Singed the King of Spain's beard" — raided Cadiz and delayed Armada by a year</li>
+            </ul>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> The Armada — Key Facts</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">May 1588</div><div class="timeline-content">130 ships, 30,000 men leave Lisbon — plan to collect Parma's army from Netherlands and invade England</div></div>
+              <div class="timeline-item"><div class="timeline-date">July 1588</div><div class="timeline-content">English fire ships sent into Armada at Gravelines — Spanish ships scattered</div></div>
+              <div class="timeline-item"><div class="timeline-date">Aug 1588</div><div class="timeline-content">Battle of Gravelines — English guns more effective; Armada forced north around Scotland/Ireland</div></div>
+              <div class="timeline-item"><div class="timeline-date">Sep–Oct 1588</div><div class="timeline-content">Storms destroy ~44 ships; ~20,000 Spaniards die — most to weather, not battle</div></div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam: Why England Won</div>
+            <p class="content-text">Better English tactics and ships (faster, lower), fire ships at Calais, English seamanship, Drake's leadership — but critically, Protestant storms ("God blew and they were scattered"). Also: Parma's army never embarked — Dutch flyboats blockaded Netherlands ports.</p>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Significance</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Confirmed England as a major Protestant naval power</li>
+                <li>Elizabeth's Tilbury speech — "I have the body of a weak woman but the heart of a king" — boosted morale</li>
+                <li>Spain rebuilt fleet; war continued until 1604 — victory not decisive</li>
+                <li>Elizabeth's prestige at home soared enormously</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "elizabethan-society",
+        title: "Elizabethan Society — Rich, Poor & the Poor Laws",
+        icon: "fa-users",
+        period: "1558–1603",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-layer-group"></i> Social Hierarchy</h3>
+            <p class="content-text">Elizabethan England had a rigid social structure. Position determined almost everything about your life — where you sat in church, what you could wear (Sumptuary Laws), and what opportunities existed.</p>
+            <ul class="content-list">
+              <li><strong>Monarch:</strong> Elizabeth at the apex — God's representative on Earth</li>
+              <li><strong>Nobility:</strong> Around 60 families — dukes, earls, barons; held great land and influence</li>
+              <li><strong>Gentry:</strong> Growing class of wealthy landowners — knights and esquires; key local administrators (JPs)</li>
+              <li><strong>Yeomen:</strong> Prosperous tenant farmers; skilled tradespeople; artisans — backbone of society</li>
+              <li><strong>Labourers/Poor:</strong> Daily wage earners; servants; vagabonds — vulnerable to economic change</li>
+            </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-home"></i> The Problem of Poverty</h3>
+            <p class="content-text">Population grew from ~2.5 million (1551) to ~4 million (1601). Enclosures displaced agricultural workers. Bad harvests (especially 1590s). Wool trade decline. Result: significant "wandering poor" alarmed authorities.</p>
+            <div class="impact-box">
+              <div class="impact-title"><i class="fas fa-scroll"></i> The Poor Laws</div>
+              <div class="impact-content">
+                <div class="timeline-item"><div class="timeline-date">1563</div><div class="timeline-content">Statute of Artificers — set wages and conditions; apprenticeships regulated</div></div>
+                <div class="timeline-item"><div class="timeline-date">1572</div><div class="timeline-content">Vagabonds Act — whipping and boring through ear for first offence; hanging for third</div></div>
+                <div class="timeline-item"><div class="timeline-date">1576</div><div class="timeline-content">Act for the Relief of the Poor — parishes must provide work for able-bodied poor (Houses of Correction)</div></div>
+                <div class="timeline-item"><div class="timeline-date">1601</div><div class="timeline-content">Elizabethan Poor Law — consolidated previous acts; distinguished "deserving" from "idle" poor; rates levied on property owners</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam: Significance of the 1601 Poor Law</div>
+            <p class="content-text">First national system acknowledging state responsibility for the poor. Divided poor into: impotent (sick, elderly — receive relief), able-bodied (must work — Houses of Correction), idle rogues (punished). Funded by local rates — lasted in modified form until 1834.</p>
+          </div>
+        `
+      },
+      {
+        id: "elizabethan-culture",
+        title: "Elizabethan Culture — Theatre, Exploration & Daily Life",
+        icon: "fa-theater-masks",
+        period: "1558–1603",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-masks-theater"></i> Theatre & Culture</h3>
+            <p class="content-text">Elizabeth's reign saw an explosion of arts and culture — often called the "Golden Age" of English literature and drama.</p>
+            <ul class="content-list">
+              <li><strong>The Globe Theatre (1599):</strong> Shakespeare's theatre in Southwark; 3,000 capacity; all social classes mixed</li>
+              <li><strong>Shakespeare:</strong> ~37 plays including Hamlet, Macbeth, A Midsummer Night's Dream</li>
+              <li><strong>Christopher Marlowe:</strong> Doctor Faustus, Tamburlaine — rival playwright</li>
+              <li><strong>Musicians:</strong> William Byrd, Thomas Tallis — Elizabeth's royal composers</li>
+              <li><strong>Architecture:</strong> "Prodigy houses" — Hardwick Hall, Longleat — built to impress the Queen</li>
+            </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-compass"></i> Exploration & Expansion</h3>
+            <ul class="content-list">
+              <li><strong>Francis Drake (1577–80):</strong> Second person to circumnavigate globe; returned with £600,000 in plunder</li>
+              <li><strong>Walter Raleigh:</strong> Attempted colonies in Virginia (Roanoke, 1587) — "Lost Colony"</li>
+              <li><strong>John Hawkins:</strong> Began English involvement in slave trade; reformed Royal Navy</li>
+              <li><strong>East India Company (1600):</strong> Founded last year of reign — began England's commercial empire</li>
+              <li><strong>Purpose of exploration:</strong> wealth (gold/silver), trade routes, spreading Protestantism, glory</li>
+            </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-utensils"></i> Daily Life</h3>
+            <ul class="content-list">
+              <li>Diet: wealthy ate meat, spices, sugar; poor ate pottage (grain stew), bread, occasional meat</li>
+              <li>New foods from America: potatoes, tomatoes, tobacco arrived in this period</li>
+              <li>Life expectancy: ~35-40 years (many died in childhood); plague regularly struck cities</li>
+              <li>Sumptuary Laws restricted what colours/materials different classes could wear</li>
+              <li>Education: expanding for boys; grammar schools; universities at Oxford and Cambridge</li>
+            </ul>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam: Why Was This a "Golden Age"?</div>
+            <p class="content-text">Stable monarchy allowed arts to flourish; wealth from trade and privateering funded culture; Elizabeth herself was educated and patronised the arts; printing press spread literacy. But: only wealthy benefited; most people's lives remained hard.</p>
+          </div>
+        `
+      },
+      {
+        id: "elizabethan-threats",
+        title: "Catholic Plots & Threats to Elizabeth",
+        icon: "fa-skull",
+        period: "1569–1588",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-exclamation-triangle"></i> Why Was Elizabeth in Danger?</h3>
+            <p class="content-text">Pope Pius V's papal bull "Regnans in Excelsis" (1570) excommunicated Elizabeth and released Catholics from obedience to her. This turned practising Catholics into potential traitors in English eyes and spawned multiple plots.</p>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-dagger"></i> The Main Plots</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">1569</div><div class="timeline-content"><strong>Northern Rebellion:</strong> Northern Catholic earls (Northumberland, Westmorland) raised 6,000 men; aimed to replace Elizabeth with Mary. Crushed — 450 rebels executed. Last major armed Catholic rising.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1571</div><div class="timeline-content"><strong>Ridolfi Plot:</strong> Italian banker Roberto Ridolfi coordinated Spanish troops + Mary + Duke of Norfolk to overthrow Elizabeth. Discovered; Norfolk executed — only duke to be executed in Elizabeth's reign.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1583</div><div class="timeline-content"><strong>Throckmorton Plot:</strong> Francis Throckmorton acted as go-between for Mary and Spanish ambassador Mendoza; aimed at French-Spanish invasion. Throckmorton tortured and executed; Mendoza expelled.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1586</div><div class="timeline-content"><strong>Babington Plot:</strong> Anthony Babington plotted to assassinate Elizabeth and free Mary. Walsingham's double agent (Gilbert Gifford) infiltrated group; Mary's coded letters intercepted. She endorsed assassination — sealed her fate.</div></div>
+            </div>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-user-secret"></i> Walsingham's Intelligence Network</h3>
+            <p class="content-text">Sir Francis Walsingham, Elizabeth's Secretary of State, built England's first professional intelligence service. He employed over 50 agents across Europe, used double agents, intercepted letters, and cracked codes. Essential in defeating Catholic plots.</p>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam: How Serious Were Catholic Threats?</div>
+            <p class="content-text">Serious: foreign powers (Spain, France) could back them; Mary gave plotters a legitimate Catholic heir; papal excommunication gave theological justification. Limited: most English Catholics remained loyal; plots poorly organised; no popular uprising materialised; Walsingham's network was highly effective.</p>
+          </div>
+        `
+      },
+      {
+        id: "elizabethan-puritans",
+        title: "Puritan Challenges to the Religious Settlement",
+        icon: "fa-bible",
+        period: "1558–1603",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-church"></i> Who Were the Puritans?</h3>
+            <p class="content-text">Puritans were Protestants who felt the 1559 Religious Settlement had not gone far enough in removing Catholic elements from the Church of England. They wanted to "purify" the church.</p>
+            <ul class="content-list">
+              <li>Wanted to remove all Catholic "remnants" — bishops, vestments, crucifixes, elaborate ceremonies</li>
+              <li>Believed in predestination (Calvinist influence) — God had already chosen who was saved</li>
+              <li>Wanted simpler worship, more preaching, stricter Sabbath observance</li>
+              <li>Strong in Parliament and among educated gentry and merchants</li>
+              <li>Not a unified movement — ranged from moderate reformers to radical separatists</li>
+            </ul>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-scroll"></i> Key Puritan Challenges</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">1563</div><div class="timeline-content">Vestiarian Controversy — Puritans objected to wearing Catholic-style vestments. Archbishop Parker's "Advertisements" (1566) insisted on uniformity; some clergy suspended.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1570</div><div class="timeline-content">Thomas Cartwright advocated Presbyterianism — wanted to replace bishops with elected ministers. Elizabeth furious; Cartwright expelled from Cambridge.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1572</div><div class="timeline-content">"An Admonition to Parliament" — radical tract calling for complete church reform. Authors imprisoned.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1584–89</div><div class="timeline-content">Marprelate Tracts — satirical pamphlets mocking bishops published secretly. Shocked many by their tone; backfired as moderates distanced themselves from Puritanism.</div></div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam: How Serious Was the Puritan Threat?</div>
+            <p class="content-text">Less dangerous than Catholic threats — Puritans accepted Elizabeth as monarch and were fiercely Protestant (anti-Spanish). Main threat was political: they used Parliament to push reforms Elizabeth rejected. She refused to negotiate on church structure — "I will make no windows into men's souls" but insisted on outward conformity.</p>
+          </div>
+        `
+      },
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    // ADDITIONAL COLD WAR TOPICS — Prague Spring, Détente, Afghanistan, Gorbachev
+    // ═══════════════════════════════════════════════════════════
+
+    const extraColdWarTopics = [
+      {
+        id: "prague-spring",
+        title: "Prague Spring & Soviet Invasion of Czechoslovakia (1968)",
+        icon: "fa-seedling",
+        period: "1968",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Background — Life Under Soviet Control</h3>
+            <p class="content-text">
+              After WW2 Czechoslovakia fell into the Soviet bloc. By the mid-1960s economic stagnation, Slovak nationalism, 
+              and intellectual dissent made the country restless. In January 1968 Alexander Dubček replaced the hardline 
+              Novotný as First Secretary of the Czechoslovak Communist Party.
+            </p>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-leaf"></i> Dubček's "Socialism with a Human Face"</h3>
+            <ul class="content-list">
+              <li><strong>Press freedom:</strong> Censorship abolished April 1968 — newspapers discussed previously forbidden topics</li>
+              <li><strong>Political pluralism:</strong> Other parties allowed to participate more freely; non-communists in government</li>
+              <li><strong>Rehabilitation:</strong> Victims of Stalinist purges of the 1950s were exonerated</li>
+              <li><strong>Economic reform:</strong> Move toward market elements; workers' councils proposed</li>
+              <li><strong>Action Programme (April 1968):</strong> Blueprint for "socialism with a human face" — communism, but more humane</li>
+              <li><strong>Dubček's position:</strong> Insisted Czechoslovakia would remain in Warsaw Pact and loyal to USSR</li>
+            </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-exclamation-triangle"></i> Soviet Alarm</h3>
+            <p class="content-text">
+              Brezhnev and other Warsaw Pact leaders were horrified. They feared: (1) reforms would spread to other 
+              communist countries — "contagion effect"; (2) Czechoslovakia might leave Warsaw Pact; (3) precedent that 
+              communism could be reformed would undermine Soviet authority everywhere.
+            </p>
+            <ul class="content-list">
+              <li>Letter from "Five" (Soviet, Polish, East German, Hungarian, Bulgarian leaders) demanded Dubček reverse reforms</li>
+              <li>Warsaw Pact military exercises held near Czech borders — implicit threat</li>
+              <li>Dubček refused to capitulate — believed Soviets would accept reform within communist framework</li>
+              <li>Brezhnev grew increasingly alarmed; internal Soviet debate between hardliners and moderates</li>
+            </ul>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-tank"></i> The Invasion — 20-21 August 1968</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">Night 20/21 Aug</div><div class="timeline-content">500,000 Warsaw Pact troops (Soviet, Polish, Hungarian, East German, Bulgarian) crossed into Czechoslovakia simultaneously. 2,000 tanks. Airports seized within hours. Dubček and other leaders arrested and flown to Moscow.</div></div>
+              <div class="timeline-item"><div class="timeline-date">21 Aug</div><div class="timeline-content">Czechoslovak army ordered not to resist — Dubček's instruction to avoid bloodshed. Citizens protested in streets — unarmed crowds faced tanks. ~100 Czechs killed in the occupation's first weeks.</div></div>
+              <div class="timeline-item"><div class="timeline-date">Jan 1969</div><div class="timeline-content">Jan Palach, student, burned himself to death in Wenceslas Square in protest — became iconic martyr of Czech resistance.</div></div>
+              <div class="timeline-item"><div class="timeline-date">Apr 1969</div><div class="timeline-content">Dubček removed; replaced by hardliner Gustáv Husák. "Normalisation" policy reversed all reforms — estimated 500,000 expelled from Communist Party.</div></div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-gavel"></i> The Brezhnev Doctrine</div>
+            <p class="content-text">
+              Brezhnev declared that the USSR had the right to intervene in any communist country where socialism was 
+              threatened. "Once a socialist country, always a socialist country." This became known as the Brezhnev Doctrine 
+              — effectively ending any hope of reform within the Soviet bloc until Gorbachev renounced it in 1989. 
+              Contrast: Reagan's "rollback" vs Eisenhower's reality in Hungary 1956 — West condemned but did not intervene.
+            </p>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Significance & Consequences</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Demonstrated Soviet willingness to use force to maintain control of Eastern Europe</li>
+                <li>Damaged reputation of communist parties in Western Europe ("Eurocommunism" broke from Moscow)</li>
+                <li>Relations with West temporarily worsened — détente was briefly threatened</li>
+                <li>Showed limits of reform within Soviet system — only Gorbachev would try again, 20 years later</li>
+                <li>Brezhnev Doctrine remembered bitterly by Eastern Europeans — became symbol of Soviet oppression</li>
+                <li>When Gorbachev renounced the doctrine in 1989, Eastern Europeans acted — leading to revolutions</li>
+              </ul>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Strategy</div>
+            <p class="content-text">
+              Compare Prague Spring (1968) with Hungarian Uprising (1956) — both crushed by Soviet force. Key differences: 
+              Dubček tried to work within communism; Hungary's Nagy announced leaving Warsaw Pact. Both showed West's 
+              "containment" was one-directional — USA would not intervene inside Soviet sphere. Link Prague Spring to 
+              détente (1970s) — some historians argue it accelerated negotiations as both sides recognised need for stability.
+            </p>
+          </div>
+        `
+      },
+      {
+        id: "detente",
+        title: "Détente (1969–1979)",
+        icon: "fa-handshake",
+        period: "1969-1979",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> What Was Détente?</h3>
+            <p class="content-text">
+              Détente (French: "relaxation") was a period of improved relations and reduced tensions between the superpowers 
+              in the 1970s. Both sides recognised that nuclear war would be mutually catastrophic and that competition 
+              needed to be managed more carefully. It was pragmatic, not ideological — the Cold War didn't end, but 
+              direct confrontation was deliberately reduced.
+            </p>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Why Did Détente Happen?</h3>
+            <ul class="content-list">
+              <li><strong>Cuban Missile Crisis legacy (1962):</strong> Both sides recognised how close to catastrophe they came; neither wanted a repeat</li>
+              <li><strong>Economic pressure:</strong> Arms race was hugely expensive for both superpowers; USSR economy struggling</li>
+              <li><strong>Nuclear parity:</strong> Both sides had enough weapons to destroy each other many times — "mutual assured destruction" (MAD) made arms race seem pointless</li>
+              <li><strong>Nixon and Kissinger:</strong> "Realpolitik" — pragmatic US foreign policy; willing to negotiate with adversaries</li>
+              <li><strong>China card:</strong> Nixon opened relations with China (1972) — Soviets feared US-Chinese alliance, pushed them to negotiate</li>
+              <li><strong>Soviet needs:</strong> Brezhnev needed Western trade and technology for stagnating Soviet economy</li>
+              <li><strong>Vietnam:</strong> US distracted and humiliated by Vietnam War — more willing to negotiate</li>
+            </ul>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-scroll"></i> Key Agreements of Détente</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">1969-72</div><div class="timeline-content"><strong>SALT I (Strategic Arms Limitation Treaty):</strong> First major nuclear arms limitation agreement. Froze numbers of ICBMs and submarine-launched ballistic missiles. ABM Treaty (1972) limited anti-ballistic missile systems — preserved MAD balance.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1972</div><div class="timeline-content"><strong>Nixon visits Moscow:</strong> First US presidential visit to USSR. Summit meetings normalised; trade agreements signed. "Basic Principles" document — both sides agreed to avoid nuclear war and exercise restraint.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1972</div><div class="timeline-content"><strong>Nixon visits China:</strong> Exploited Sino-Soviet split; recognised People's Republic of China — seismic shift in Cold War diplomacy. Pushed Soviets further toward accommodation with USA.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1975</div><div class="timeline-content"><strong>Helsinki Accords:</strong> 35 nations signed; recognised post-WW2 borders in Europe (what USSR wanted); in return West extracted human rights commitments from communist states — later used by dissidents to challenge Soviet rule.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1972-79</div><div class="timeline-content"><strong>Apollo-Soyuz (1975):</strong> US and Soviet spacecraft docked in orbit — symbol of cooperation. SALT II negotiations ongoing (eventually signed 1979 but never ratified by US Senate).</div></div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-balance-scale"></i> Was Détente a Success?</div>
+            <p class="content-text">
+              <strong>Arguments YES:</strong> Reduced nuclear danger; trade increased; communication improved; Helsinki human rights clauses eventually helped undermine Soviet regimes; avoided direct superpower conflict during period.<br><br>
+              <strong>Arguments NO:</strong> Both sides continued proxy wars (Angola, Vietnam, Middle East); USSR expanded influence in Third World; neither side gave up fundamental aims; SALT II not ratified; collapsed with Soviet invasion of Afghanistan 1979. Reagan called it naïve "appeasement."
+            </p>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-times-circle"></i> End of Détente — Why It Collapsed</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Soviet invasion of Afghanistan (December 1979) — Carter called it most serious threat to peace since WW2</li>
+                <li>Carter Doctrine (1980) — US would resist Soviet expansion in Persian Gulf by force</li>
+                <li>US boycott of Moscow Olympics (1980) — 65 nations followed</li>
+                <li>SALT II abandoned; US renewed arms buildup under Carter, then massively accelerated under Reagan</li>
+                <li>Reagan's election (1980) — ideological opponent of détente; called USSR "Evil Empire"</li>
+                <li>1980s: new nuclear arms race; Euromissile crisis; proxy wars intensified</li>
+              </ul>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Strategy</div>
+            <p class="content-text">
+              Détente is often tested as "How much did relations improve in the 1970s?" Focus on: what drove both sides to negotiate (pragmatism, not ideology), what was achieved (SALT, Helsinki), what the limits were (proxy wars continued), and why it ended (Afghanistan + Reagan). Link back to Cuban Missile Crisis as the turning point that made détente possible, and forward to Gorbachev as the leader who eventually achieved genuine change.
+            </p>
+          </div>
+        `
+      },
+      {
+        id: "afghanistan-cold-war",
+        title: "Soviet Invasion of Afghanistan (1979–1989)",
+        icon: "fa-mountain",
+        period: "1979-1989",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> Background & Why the Soviets Invaded</h3>
+            <p class="content-text">
+              Afghanistan had been strategically important to Russia for centuries. In April 1978 a communist coup (Saur Revolution) 
+              brought the People's Democratic Party to power, but factional fighting and brutal repression triggered a growing 
+              Islamist insurgency (the Mujahideen). By late 1979 the situation was spiralling out of control.
+            </p>
+            <ul class="content-list">
+              <li><strong>Failing communist government:</strong> Amin's government was executing thousands, alienating population</li>
+              <li><strong>Fear of US influence:</strong> After Iran's Islamic Revolution (1979) Soviets feared Afghanistan could also fall to anti-Soviet Islamism</li>
+              <li><strong>Strategic value:</strong> Afghanistan bordered Soviet Central Asian republics with large Muslim populations — Soviets feared Islamic contagion</li>
+              <li><strong>Brezhnev Doctrine:</strong> Could not allow a communist state to collapse without intervention</li>
+              <li><strong>Underestimation:</strong> Politburo believed they could stabilise country quickly — "3-4 weeks" estimated by some generals</li>
+            </ul>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-calendar-alt"></i> Key Events</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">Dec 1979</div><div class="timeline-content">Soviet special forces assassinate President Amin; Karmal installed as puppet leader. 80,000 Soviet troops cross border — "Operation Storm-333."</div></div>
+              <div class="timeline-item"><div class="timeline-date">1980</div><div class="timeline-content">Carter Doctrine: USA will defend Persian Gulf by force. CIA's "Operation Cyclone" begins — covert arming of Mujahideen through Pakistan's ISI.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1983-86</div><div class="timeline-content">Reagan increases aid massively — "Charlie Wilson's War." Stinger anti-aircraft missiles supplied (1986) — devastating against Soviet helicopters. Changed military balance significantly.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1986</div><div class="timeline-content">Gorbachev calls Afghanistan "our bleeding wound." Begins planning withdrawal — recognises unwinnable.</div></div>
+              <div class="timeline-item"><div class="timeline-date">Feb 1989</div><div class="timeline-content">Last Soviet troops leave across Friendship Bridge — General Gromov walks across alone. ~15,000 Soviets killed; 35,000 wounded. 1-2 million Afghans killed.</div></div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-exclamation-circle"></i> Why the USSR Failed</div>
+            <p class="content-text">
+              Guerrilla warfare made Soviet conventional military power less effective. Mujahideen had home advantage, motivation, and terrain knowledge. US and Saudi funding and weapons (especially Stingers) removed Soviet air superiority. War became deeply unpopular in USSR as body bags arrived home. Economic cost unsustainable alongside arms race with Reagan. Gorbachev recognised defeat and prioritised economic reform over imperial adventures.
+            </p>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Significance</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>USSR's "Vietnam" — demonstrated limits of Soviet military power; humiliating defeat</li>
+                <li>Accelerated Soviet economic crisis — added pressure that contributed to collapse of USSR</li>
+                <li>Gorbachev used failure to argue for reform (perestroika/glasnost)</li>
+                <li>Emboldened Eastern European dissidents — showed USSR had feet of clay</li>
+                <li>Long-term: CIA-funded Mujahideen networks later evolved into al-Qaeda — contributed to 9/11</li>
+                <li>Afghan communist government survived until 1992 — ironically outlasted the Soviet Union itself</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "gorbachev-end-cold-war",
+        title: "Gorbachev, Collapse of the USSR & End of the Cold War (1985–1991)",
+        icon: "fa-dove",
+        period: "1985-1991",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-user"></i> Who Was Gorbachev?</h3>
+            <p class="content-text">
+              Mikhail Gorbachev came to power in March 1985 aged just 54 — young by Soviet standards. Unlike his predecessors 
+              (Brezhnev, Andropov, Chernenko — all elderly hardliners), Gorbachev recognised the USSR faced deep structural 
+              crisis: economic stagnation, technological backwardness, unwinnable arms race, unpopular empire, Afghanistan. 
+              He believed communism could be saved through reform — he was wrong, but his attempts ended the Cold War.
+            </p>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-tools"></i> Gorbachev's Key Reforms</h3>
+            <ul class="content-list">
+              <li><strong>Glasnost (openness):</strong> Greater freedom of speech and press; open discussion of past Soviet crimes allowed; Chernobyl disaster handling (1986) tested and eventually confirmed glasnost</li>
+              <li><strong>Perestroika (restructuring):</strong> Economic reforms — limited market mechanisms; enterprise independence; anti-corruption drive; ultimately insufficient and destabilising</li>
+              <li><strong>Demokratizatsiya (democratisation):</strong> New Congress of People's Deputies (1989); competitive elections — even anti-communist candidates could stand; power shifting from Party to elected bodies</li>
+              <li><strong>New Thinking:</strong> Foreign policy revolution — rejected class struggle as basis for international relations; "universal human values" over ideology; unilateral arms reductions to reduce costs</li>
+              <li><strong>Sinatra Doctrine:</strong> Eastern European countries could "do it their way" — repudiated Brezhnev Doctrine; refused to send Soviet troops to prop up communist regimes</li>
+            </ul>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-scroll"></i> Arms Control Breakthroughs</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">1985-86</div><div class="timeline-content">Gorbachev-Reagan summits at Geneva (1985) and Reykjavik (1986). Reykjavik: came close to eliminating ALL nuclear weapons — failed over Reagan's refusal to give up SDI (Star Wars). But established rapport and trust.</div></div>
+              <div class="timeline-item"><div class="timeline-date">Dec 1987</div><div class="timeline-content"><strong>INF Treaty:</strong> Intermediate-Range Nuclear Forces Treaty. First treaty to actually eliminate an entire category of nuclear weapons (all ground-launched missiles 500-5,500km range). Landmark — showed genuine willingness to disarm.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1989</div><div class="timeline-content">START talks continue; conventional forces in Europe negotiations. Gorbachev unilaterally reduced Soviet forces in Eastern Europe — removed Soviet capacity to easily invade Western Europe.</div></div>
+            </div>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-fire"></i> Revolutions of 1989</div>
+            <div class="impact-content">
+              <div class="timeline-item"><div class="timeline-date">Poland</div><div class="timeline-content">Solidarity legalised; free elections June 1989 — Solidarity won overwhelming majority; non-communist prime minister. Gorbachev did NOT intervene.</div></div>
+              <div class="timeline-item"><div class="timeline-date">Hungary</div><div class="timeline-content">Communist Party renamed itself socialist; opened border with Austria May 1989 — thousands of East Germans fled West through Hungary. Undermined East German regime.</div></div>
+              <div class="timeline-item"><div class="timeline-date">East Germany</div><div class="timeline-content">Mass protests "Wir sind das Volk" ("We are the people"). <strong>Berlin Wall fell 9 November 1989</strong> — crowds tore it down. East German communist regime collapsed within weeks.</div></div>
+              <div class="timeline-item"><div class="timeline-date">Czechoslovakia</div><div class="timeline-content">"Velvet Revolution" — peaceful mass protests. Communist government resigned November 1989. Playwright Václav Havel elected president December 1989.</div></div>
+              <div class="timeline-item"><div class="timeline-date">Romania</div><div class="timeline-content">Only violent revolution — dictator Ceaușescu and wife executed Christmas Day 1989 after brief trial.</div></div>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-question-circle"></i> Why Did the USSR Collapse? (1991)</div>
+            <p class="content-text">
+              Gorbachev's reforms unleashed forces he could not control. Glasnost allowed open discussion of communist crimes and failures — delegitimised the system. Demokratizatsiya shifted power to elected bodies where nationalists and reformers flourished. Perestroika disrupted the economy without replacing it — shortages worsened. 
+              Soviet republics declared sovereignty/independence: Baltic states, Ukraine, Russia itself. 
+              <strong>August 1991 Coup:</strong> Hardliners tried to overthrow Gorbachev — failed when Boris Yeltsin stood on a tank outside Russian Parliament building. Coup's failure accelerated USSR's dissolution. 
+              <strong>25 December 1991:</strong> Gorbachev resigned; Soviet flag lowered over Kremlin; USSR formally dissolved. Cold War over.
+            </p>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Who Won the Cold War?</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li><strong>Reagan's claim:</strong> Massive US military buildup (SDI, defence spending) bankrupted USSR and forced collapse</li>
+                <li><strong>Gorbachev's agency:</strong> Internal Soviet reform was the decisive factor — Gorbachev chose not to use force</li>
+                <li><strong>Structural factors:</strong> Economic stagnation, technological backwardness, Afghanistan were inevitable consequences of Soviet system</li>
+                <li><strong>Eastern European people:</strong> Mass popular movements — "People Power" — drove the revolutions</li>
+                <li><strong>Historical verdict:</strong> Most historians emphasise combination — but Gorbachev's personal decisions were crucial pivot point</li>
+              </ul>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Strategy</div>
+            <p class="content-text">
+              "How important was Gorbachev in ending the Cold War?" is a classic exam question. Structure: (1) Gorbachev's reforms were necessary — without Sinatra Doctrine, Eastern European revolutions would have been crushed; (2) Reagan's pressure added economic strain; (3) internal Soviet weaknesses made collapse likely anyway; (4) Judgment: Gorbachev's personal decisions about NOT using force were the crucial factor — he chose to let it happen.
+            </p>
+          </div>
+        `
+      }
+    ];
+
+    // Merge extra topics into coldWarTopics
+    coldWarTopics.push(...extraColdWarTopics);
+
+    // ═══════════════════════════════════════════════════════════
+    // QUIZ DATA — 160+ QUESTIONS (Cold War + Elizabethan)
+    // ═══════════════════════════════════════════════════════════
+
+    const quizQuestions = [
+      // ── Cold War ──
+      { q: "What year did the Berlin Wall fall?", a: "1989", hint: "A famous year of revolutions across Eastern Europe" },
+      { q: "What policy did the USA adopt to prevent the spread of communism?", a: "containment", hint: "It means holding something within limits — stopping it from spreading" },
+      { q: "Which speech first used the phrase 'Iron Curtain'?", a: "iron curtain speech", hint: "Spoken by Churchill in Fulton, Missouri in 1946" },
+      { q: "Name the conference (1945) where Roosevelt, Churchill and Stalin agreed to divide Germany.", a: "yalta", hint: "Held in a Black Sea resort in Crimea" },
+      { q: "What was the name of the US economic aid programme to rebuild Europe after WW2?", a: "marshall plan", hint: "Named after US Secretary of State George ___" },
+      { q: "How much money did the USA offer under the Marshall Plan?", a: "13 billion", hint: "$___ billion — equivalent to ~$150 billion today" },
+      { q: "What did Stalin do in June 1948 to try to force the West out of Berlin?", a: "blockade", hint: "He cut off all road, rail and canal access" },
+      { q: "How did the West respond to the Berlin Blockade?", a: "airlift", hint: "They flew supplies in by aircraft — the Berlin ___" },
+      { q: "How many tonnes of supplies were flown into West Berlin daily at the airlift's peak?", a: "8000", hint: "Around _,000 tonnes per day" },
+      { q: "When did the USSR test its first atomic bomb?", a: "1949", hint: "4 years after the USA; same year NATO was formed" },
+      { q: "What does NATO stand for?", a: "north atlantic treaty organization", hint: "A Western military alliance formed in April 1949" },
+      { q: "What was the Soviet equivalent of NATO, formed in 1955?", a: "warsaw pact", hint: "Named after the Polish capital where the treaty was signed" },
+      { q: "Which country did the USA fight over between 1950–1953 in a major proxy war?", a: "korea", hint: "A peninsula divided at the 38th parallel" },
+      { q: "Who led Cuba when the missile crisis occurred?", a: "fidel castro", hint: "He took power in the 1959 Cuban Revolution" },
+      { q: "What year was the Cuban Missile Crisis?", a: "1962", hint: "Thirteen days in October of this year brought the world to the nuclear brink" },
+      { q: "What did the USA call its naval 'quarantine' of Cuba during the crisis?", a: "quarantine", hint: "Kennedy deliberately avoided calling it a 'blockade' (an act of war)" },
+      { q: "Which Soviet submarine officer prevented nuclear war during the Cuban crisis by refusing to launch?", a: "vasily arkhipov", hint: "On submarine B-59 — he was the one officer who voted NO" },
+      { q: "What was DEFCON 2 — reached on Black Saturday, 27 October 1962?", a: "highest readiness short of war", hint: "DEFCON 1 would be actual war — 2 is just below that" },
+      { q: "What direct communication line was established between Moscow and Washington after the Cuban Missile Crisis?", a: "hotline", hint: "A direct telephone/teletype link to prevent miscalculation" },
+      { q: "What treaty, signed in 1963, banned nuclear tests in the atmosphere, underwater, and in space?", a: "partial nuclear test ban treaty", hint: "Partial because underground tests were still permitted" },
+      { q: "Who was the Soviet leader during the Cuban Missile Crisis?", a: "khrushchev", hint: "He de-Stalinised the USSR; later ousted in 1964 partly because of the crisis" },
+      { q: "Who was the US President during the Cuban Missile Crisis?", a: "kennedy", hint: "JFK — assassinated in November 1963" },
+      { q: "Name the CIA-backed invasion of Cuba in 1961 that ended in disaster.", a: "bay of pigs", hint: "Named after a bay on Cuba's southern coast; a catastrophic failure" },
+      { q: "What was the name of the US spy plane shot down over Cuba on Black Saturday?", a: "u-2", hint: "A high-altitude reconnaissance aircraft" },
+      { q: "In what year was the Berlin Wall built?", a: "1961", hint: "Built by East Germany to stop the flood of citizens escaping to the West" },
+      { q: "How many East Germans fled West before the Wall was built?", a: "3 million", hint: "Around ___ million people left between 1945 and 1961" },
+      { q: "What is the name for the policy of risking war to force an opponent to back down?", a: "brinkmanship", hint: "Going to the 'brink' — associated with Dulles and the Eisenhower era" },
+      { q: "In which year did the Prague Spring occur?", a: "1968", hint: "The same year as student uprisings in Paris and the assassination of Martin Luther King" },
+      { q: "Who was the Czechoslovak leader who introduced 'socialism with a human face'?", a: "dubcek", hint: "Alexander ___ — first secretary of the Czechoslovak Communist Party from January 1968" },
+      { q: "What doctrine did Brezhnev announce to justify invading Czechoslovakia?", a: "brezhnev doctrine", hint: "It stated the USSR had the right to intervene in any socialist country where socialism was threatened" },
+      { q: "How many Warsaw Pact troops invaded Czechoslovakia in August 1968?", a: "500000", hint: "Half a million — with 2,000 tanks" },
+      { q: "Which Czech student burned himself to death in protest at the Soviet invasion in January 1969?", a: "jan palach", hint: "He became a martyr; his grave in Prague is still a place of pilgrimage" },
+      { q: "What is the French word 'détente' translated into English?", a: "relaxation", hint: "Or 'easing of tension' — it describes the thaw in Cold War relations in the 1970s" },
+      { q: "What was the name of the 1969-72 nuclear arms limitation talks between USA and USSR?", a: "salt i", hint: "Strategic Arms Limitation Talks — the first round" },
+      { q: "Which 1975 agreement recognised post-WW2 European borders but also included human rights commitments?", a: "helsinki accords", hint: "Signed by 35 nations in the Finnish capital" },
+      { q: "Which US president pursued détente and visited both Moscow and Beijing in 1972?", a: "nixon", hint: "He was later forced to resign over the Watergate scandal" },
+      { q: "Who was Nixon's National Security Advisor (later Secretary of State) who orchestrated détente?", a: "kissinger", hint: "Henry ___ — famous for 'realpolitik'" },
+      { q: "What US policy term describes Nixon's pragmatic approach to foreign policy over ideology?", a: "realpolitik", hint: "German term meaning 'practical politics' — deal with countries as they are, not as you wish they were" },
+      { q: "What event in December 1979 ended détente?", a: "soviet invasion of afghanistan", hint: "USSR sent troops into a neighbouring Asian country" },
+      { q: "What did Carter's 1980 boycott of the Moscow Olympics symbolise?", a: "end of detente", hint: "65 nations followed; protest at Soviet invasion of Afghanistan" },
+      { q: "Which President called the USSR an 'Evil Empire' and massively increased US defence spending?", a: "reagan", hint: "40th US President, elected 1980 — former Hollywood actor" },
+      { q: "What was Reagan's controversial space-based missile defence initiative called?", a: "strategic defense initiative", hint: "Nicknamed 'Star Wars' — critics said it was unworkable science fiction" },
+      { q: "What does SDI stand for?", a: "strategic defense initiative", hint: "Reagan's space-based missile shield proposal" },
+      { q: "In which year did Soviet troops finally leave Afghanistan?", a: "1989", hint: "Same year as the fall of the Berlin Wall — a terrible year for Soviet power" },
+      { q: "How many Soviet soldiers were killed in Afghanistan?", a: "15000", hint: "Around 15,000 dead; tens of thousands more wounded" },
+      { q: "What was Gorbachev's policy of greater openness and transparency called?", a: "glasnost", hint: "Russian for 'openness' or 'publicity'" },
+      { q: "What was Gorbachev's economic restructuring policy called?", a: "perestroika", hint: "Russian for 'restructuring'" },
+      { q: "What name did Gorbachev give to the Eastern European countries' right to choose their own path?", a: "sinatra doctrine", hint: "Named after Frank Sinatra's song 'My Way' — countries could do it 'their way'" },
+      { q: "What 1987 treaty eliminated an entire category of nuclear missiles?", a: "inf treaty", hint: "Intermediate-Range Nuclear Forces Treaty" },
+      { q: "Where did Gorbachev and Reagan nearly agree to eliminate ALL nuclear weapons in 1986?", a: "reykjavik", hint: "The capital of Iceland — a dramatic summit that came tantalizingly close to total nuclear disarmament" },
+      { q: "What was the name of the peaceful revolution that ended communism in Czechoslovakia in 1989?", a: "velvet revolution", hint: "___ Revolution — named for its non-violent nature" },
+      { q: "On what date did the Berlin Wall fall?", a: "9 november 1989", hint: "9th of November 1989 — crowds began tearing it down that evening" },
+      { q: "Who stood on a tank outside the Russian Parliament building to defy the 1991 coup attempt?", a: "boris yeltsin", hint: "He was President of Russia — a rival to Gorbachev" },
+      { q: "On what date did the Soviet Union officially dissolve?", a: "25 december 1991", hint: "Christmas Day — Gorbachev resigned and the Soviet flag was lowered" },
+      { q: "Who was Soviet leader when the USSR collapsed?", a: "gorbachev", hint: "He resigned on Christmas Day 1991" },
+      { q: "What protest chant did East Germans shout during 1989 demonstrations?", a: "wir sind das volk", hint: "German for 'We are the people'" },
+      { q: "Which 1989 revolution was the ONLY violent one in Eastern Europe?", a: "romania", hint: "Dictator Ceaușescu and his wife were executed on Christmas Day 1989" },
+      { q: "Which country opened its border with Austria in May 1989, allowing East Germans to flee West?", a: "hungary", hint: "This hole in the Iron Curtain started the chain of events leading to the Wall's fall" },
+      { q: "What was 'MAD' in Cold War nuclear strategy?", a: "mutually assured destruction", hint: "If either side launched a first strike, both would be destroyed — made nuclear war irrational" },
+      { q: "What nuclear parity concept made the arms race seem pointless by the 1970s?", a: "mutual assured destruction", hint: "Both sides could destroy each other many times over — making any first strike suicidal" },
+      { q: "What year did the Korean War end?", a: "1953", hint: "Armistice signed July ___ — technically still no peace treaty" },
+      { q: "What date did the Truman Doctrine speech take place?", a: "march 1947", hint: "Truman pledged to support free peoples resisting subjugation — Greece and Turkey given $400 million" },
+      { q: "What was Operation Cyclone?", a: "cia arming of mujahideen", hint: "The covert CIA programme to arm Afghan resistance fighters against the Soviets" },
+      // ── Elizabethan ──
+      { q: "In what year did Elizabeth I come to the throne?", a: "1558", hint: "She succeeded her Catholic half-sister Mary I" },
+      { q: "What was the title given to Elizabeth under the 1559 Act of Supremacy?", a: "supreme governor", hint: "NOT Supreme Head (which Henry VIII used) — a deliberate compromise to avoid offending Catholics" },
+      { q: "What was the fine for not attending Church of England services under the 1559 Settlement?", a: "one shilling", hint: "1 shilling per Sunday — not enough to deter wealthy Catholics" },
+      { q: "What was the 'via media' in terms of the Religious Settlement?", a: "middle way", hint: "Latin for 'middle way' — Elizabeth tried to create a church both Catholics and Protestants could accept" },
+      { q: "In what year did Pope Pius V excommunicate Elizabeth?", a: "1570", hint: "The papal bull 'Regnans in Excelsis' — released Catholics from obedience to her" },
+      { q: "Which plot (1571) involved the Duke of Norfolk and an Italian banker?", a: "ridolfi plot", hint: "Named after Roberto Ridolfi — aimed to replace Elizabeth with Mary Queen of Scots" },
+      { q: "What happened to the Duke of Norfolk after the Ridolfi Plot was discovered?", a: "executed", hint: "He was the only duke to be executed during Elizabeth's reign" },
+      { q: "Which plot (1586) was discovered through letters hidden in beer barrels?", a: "babington plot", hint: "Anthony ___ conspired to assassinate Elizabeth — Walsingham's spies intercepted the letters" },
+      { q: "Who was Elizabeth's spymaster who uncovered Catholic plots?", a: "walsingham", hint: "Sir Francis ___ — built England's first professional intelligence network" },
+      { q: "In what year was Mary Queen of Scots executed?", a: "1587", hint: "After almost 20 years of imprisonment in England" },
+      { q: "Why did Elizabeth hesitate so long before executing Mary Queen of Scots?", a: "set dangerous precedent killing anointed monarch", hint: "Executing a crowned monarch could inspire her own subjects to kill her — a dangerous precedent" },
+      { q: "What year was the Northern Rebellion?", a: "1569", hint: "Northern Catholic earls raised 6,000 men — the last major armed Catholic rising" },
+      { q: "How many rebels were executed after the Northern Rebellion was crushed?", a: "450", hint: "Elizabeth made an example — around ___ rebels hanged" },
+      { q: "What was the Throckmorton Plot of 1583?", a: "spanish invasion plan with mary", hint: "Francis Throckmorton coordinated Spanish ambassador and Mary — aimed at French-Spanish invasion" },
+      { q: "What was the name of Elizabeth's Religious Settlement's prayer book?", a: "book of common prayer", hint: "The ___ of Common Prayer (1559 version — more moderate than Edward VI's)" },
+      { q: "What year was the Spanish Armada?", a: "1588", hint: "Philip II's great invasion fleet — defeated by English navy and storms" },
+      { q: "How many ships were in the Spanish Armada?", a: "130", hint: "Around ___ ships left Lisbon in May 1588" },
+      { q: "What tactic did the English use to scatter the Armada at Gravelines?", a: "fire ships", hint: "Burning unmanned ships sent into the anchored Spanish fleet at Calais/Gravelines" },
+      { q: "What famous speech did Elizabeth give before the Armada battle?", a: "tilbury speech", hint: "At ___ — 'I have the body of a weak woman but the heart of a king'" },
+      { q: "Why did the Armada plan fail even before battle began?", a: "parma could not embark", hint: "The Duke of Parma's army was blockaded in Netherlands ports by Dutch flyboats — the invasion force never boarded" },
+      { q: "Who commanded the English fleet against the Armada?", a: "lord howard of effingham", hint: "With Drake as vice-admiral — Charles Howard, Lord ___ of Effingham" },
+      { q: "What did Francis Drake famously do to Cadiz harbour in 1587?", a: "singed king of spains beard", hint: "He destroyed 30+ Spanish ships — 'singed the King of Spain's beard'" },
+      { q: "What was the East India Company and when was it founded?", a: "1600", hint: "Trading company founded in the last year of Elizabeth's reign — began English commercial empire in Asia" },
+      { q: "Who was the first English person to circumnavigate the globe?", a: "francis drake", hint: "He completed the voyage in 1580, returning with ~£600,000 in plunder" },
+      { q: "What was the name of Raleigh's failed American colony?", a: "roanoke", hint: "The 'Lost Colony' of ___ in Virginia — all 117 colonists vanished" },
+      { q: "What were the laws that restricted what different social classes could wear?", a: "sumptuary laws", hint: "You could be fined for wearing colours or fabrics above your social station" },
+      { q: "What did the Elizabethan Poor Law of 1601 distinguish between?", a: "deserving and idle poor", hint: "The impotent (sick/elderly) got relief; able-bodied must work; idle rogues were punished" },
+      { q: "What were the 'Marprelate Tracts'?", a: "satirical puritan pamphlets attacking bishops", hint: "Anonymous ___ published 1588-89, mocking Anglican bishops in crude satirical style" },
+      { q: "Who was the Puritan who advocated Presbyterianism and was expelled from Cambridge in 1570?", a: "thomas cartwright", hint: "___ Cartwright — wanted to replace bishops with elected ministers; seen as dangerously radical" },
+      { q: "What was the 'Vestiarian Controversy' of the 1560s?", a: "dispute over clergy vestments", hint: "Puritans objected to wearing Catholic-style robes — Archbishop Parker insisted on uniformity" },
+      { q: "What was the approximate population of Elizabethan England in 1551?", a: "2.5 million", hint: "It grew to ~4 million by 1601 — population pressure contributed to poverty problem" },
+      { q: "What were 'enclosures' and why did they cause problems?", a: "landlords fenced common land displacing farmers", hint: "Landlords converted open fields to sheep pasture — displaced agricultural labourers who became vagabonds" },
+      { q: "What was the Act of Uniformity (1559)?", a: "required use of one prayer book", hint: "Everyone had to use the same Protestant prayer book — enforced religious uniformity" },
+      { q: "Who wrote plays including Hamlet and Macbeth during Elizabeth's reign?", a: "shakespeare", hint: "William ___ — though the Globe wasn't built until 1599, after her reign was nearly done" },
+      { q: "Who was Elizabeth's chief minister for most of her reign?", a: "william cecil", hint: "Lord Burghley — William ___ served as Secretary of State and later Lord Treasurer" },
+      { q: "What was the Anglo-Spanish War dates?", a: "1585 to 1604", hint: "From England sending troops to Netherlands to the Treaty of London — 19 years of conflict" },
+      { q: "In what year did Elizabeth I die?", a: "1603", hint: "She was 69 — succeeded by James VI of Scotland (James I of England)" },
+      { q: "What term describes Elizabeth's strategy of keeping foreign suitors interested without committing to marriage?", a: "marriage negotiations", hint: "She used the possibility of marriage as a diplomatic tool for decades" },
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    // QUIZ STATE
+    // ═══════════════════════════════════════════════════════════
+
+    let shuffledQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let totalAnswered = 0;
+    let answered = false;
+
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // RENDER ACCORDIONS
+    // ═══════════════════════════════════════════════════════════
+
+    function renderAccordions(topics, containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
+      topics.forEach(topic => {
+        const card = document.createElement('div');
+        card.className = 'topic-card';
+        card.id = topic.id;
+        card.innerHTML = `
+          <div class="topic-header" onclick="toggleTopic(this)">
+            <div class="topic-icon">
+              <i class="fas ${topic.icon}"></i>
+            </div>
+            <div class="topic-header-content">
+              <div class="topic-title">${topic.title}</div>
+              <div class="topic-meta">
+                <span class="meta-item"><i class="fas fa-calendar"></i> ${topic.period}</span>
+              </div>
+            </div>
+            <div class="topic-icon">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="topic-body" id="body-${topic.id}">
+            <div class="topic-content">${topic.content}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleTopic(header) {
+      const body = header.nextElementSibling;
+      const icon = header.querySelector('.fas.fa-chevron-down');
+      const isActive = body.classList.contains('active');
+      // Close all
+      document.querySelectorAll('.topic-body').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.fas.fa-chevron-down').forEach(i => {
+        i.style.transform = 'rotate(0deg)';
+      });
+      if (!isActive) {
+        body.classList.add('active');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // TAB SWITCHING
+    // ═══════════════════════════════════════════════════════════
+
+    function switchTab(tab) {
+      const coldSection = document.getElementById('cold');
+      const elizSection = document.getElementById('elizabeth');
+      const quizPanel = document.getElementById('quizPanel');
+      const btns = document.querySelectorAll('.nav-btn');
+
+      coldSection.style.display = 'none';
+      elizSection.style.display = 'none';
+      quizPanel.style.display = 'none';
+
+      btns.forEach(b => b.classList.remove('active'));
+
+      if (tab === 'cold') {
+        coldSection.style.display = 'block';
+        btns[0].classList.add('active');
+      } else if (tab === 'elizabeth') {
+        elizSection.style.display = 'block';
+        btns[1].classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // QUIZ FUNCTIONS
+    // ═══════════════════════════════════════════════════════════
+
+    function openQuiz() {
+      shuffledQuestions = shuffleArray(quizQuestions);
+      currentIndex = 0;
+      score = 0;
+      totalAnswered = 0;
+      answered = false;
+
+      document.getElementById('cold').style.display = 'none';
+      document.getElementById('elizabeth').style.display = 'none';
+      const quizPanel = document.getElementById('quizPanel');
+      quizPanel.style.display = 'block';
+
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.nav-btn')[2].classList.add('active');
+
+      document.getElementById('totalQ').textContent = shuffledQuestions.length;
+      updateScoreDisplay();
+      loadQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeQuiz() {
+      document.getElementById('quizPanel').style.display = 'none';
+      switchTab('cold');
+    }
+
+    function loadQuestion() {
+      if (currentIndex >= shuffledQuestions.length) {
+        showFinalScore();
+        return;
+      }
+      answered = false;
+      const q = shuffledQuestions[currentIndex];
+      document.getElementById('questionNum').textContent = currentIndex + 1;
+      document.getElementById('currentQ').textContent = currentIndex + 1;
+      document.getElementById('questionText').textContent = q.q;
+      document.getElementById('answerInput').value = '';
+      document.getElementById('answerInput').disabled = false;
+      document.getElementById('answerInput').focus();
+
+      const feedback = document.getElementById('feedback');
+      feedback.style.display = 'none';
+      feedback.className = 'feedback';
+
+      const pct = (currentIndex / shuffledQuestions.length) * 100;
+      document.getElementById('progressBar').style.width = pct + '%';
+    }
+
+    function normalise(str) {
+      return str.toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function checkAnswer() {
+      if (answered) { nextQuestion(); return; }
+      const input = document.getElementById('answerInput').value.trim();
+      if (!input) return;
+
+      answered = true;
+      totalAnswered++;
+      document.getElementById('answerInput').disabled = true;
+
+      const correct = shuffledQuestions[currentIndex].a;
+      const userNorm = normalise(input);
+      const correctNorm = normalise(correct);
+
+      const isCorrect = userNorm === correctNorm ||
+        correctNorm.includes(userNorm) ||
+        userNorm.includes(correctNorm) ||
+        levenshtein(userNorm, correctNorm) <= 2;
+
+      const feedback = document.getElementById('feedback');
+      if (isCorrect) {
+        score++;
+        feedback.className = 'feedback correct';
+        feedback.innerHTML = `<i class="fas fa-check-circle"></i> <strong>Correct!</strong> ${correct}`;
+      } else {
+        feedback.className = 'feedback wrong';
+        feedback.innerHTML = `<i class="fas fa-times-circle"></i> <strong>Not quite.</strong> The answer was: <strong>${correct}</strong>`;
+      }
+      feedback.style.display = 'block';
+      updateScoreDisplay();
+    }
+
+    function showHint() {
+      if (answered) return;
+      answered = true;
+      totalAnswered++;
+      document.getElementById('answerInput').disabled = true;
+
+      const q = shuffledQuestions[currentIndex];
+      const feedback = document.getElementById('feedback');
+      feedback.className = 'feedback wrong';
+      feedback.innerHTML = `<i class="fas fa-lightbulb"></i> <strong>Hint:</strong> ${q.hint}<br><small style="margin-top:0.5rem;display:block;opacity:0.8">Answer: ${q.a}</small>`;
+      feedback.style.display = 'block';
+      updateScoreDisplay();
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      loadQuestion();
+    }
+
+    function updateScoreDisplay() {
+      document.getElementById('scoreDisplay').textContent = score;
+      document.getElementById('totalDisplay').textContent = totalAnswered;
+      const acc = totalAnswered > 0 ? Math.round((score / totalAnswered) * 100) : 0;
+      document.getElementById('accuracyDisplay').textContent = acc + '%';
+    }
+
+    function showFinalScore() {
+      const acc = totalAnswered > 0 ? Math.round((score / totalAnswered) * 100) : 0;
+      let grade = '';
+      if (acc >= 90) grade = '🏆 Outstanding!';
+      else if (acc >= 75) grade = '⭐ Excellent!';
+      else if (acc >= 60) grade = '👍 Good Work!';
+      else if (acc >= 45) grade = '📚 Keep Revising!';
+      else grade = '💪 More Practice Needed';
+
+      document.getElementById('questionText').innerHTML = `
+        <div style="text-align:center; padding: 1rem 0;">
+          <div style="font-size:3rem; margin-bottom:1rem;">${grade}</div>
+          <div style="font-size:1.8rem; font-weight:800; color:var(--primary-light);">Quiz Complete!</div>
+          <div style="color:var(--text-secondary); margin-top:0.5rem; font-size:1.1rem;">
+            You scored ${score} out of ${shuffledQuestions.length} (${acc}% accuracy)
+          </div>
+        </div>`;
+      document.getElementById('answerInput').style.display = 'none';
+      document.getElementById('progressBar').style.width = '100%';
+      document.getElementById('currentQ').textContent = shuffledQuestions.length;
+      document.getElementById('feedback').style.display = 'none';
+    }
+
+    // Levenshtein distance for typo tolerance
+    function levenshtein(a, b) {
+      const m = a.length, n = b.length;
+      const dp = Array.from({length: m+1}, (_, i) => Array.from({length: n+1}, (_, j) => i === 0 ? j : j === 0 ? i : 0));
+      for (let i = 1; i <= m; i++)
+        for (let j = 1; j <= n; j++)
+          dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]);
+      return dp[m][n];
+    }
+
+    // Enter key submits answer
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const quizPanel = document.getElementById('quizPanel');
+        if (quizPanel.style.display !== 'none') {
+          if (!answered) checkAnswer();
+          else nextQuestion();
+        }
+      }
+    });
+
+    // ═══════════════════════════════════════════════════════════
+    // TOAST NOTIFICATION
+    // ═══════════════════════════════════════════════════════════
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // INITIALISE
+    // ═══════════════════════════════════════════════════════════
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAccordions(coldWarTopics, 'coldAccordions');
+      renderAccordions(elizabethanTopics, 'elizAccordions');
+      // Update stats
+      const totalTopics = coldWarTopics.length + elizabethanTopics.length;
+      const statValues = document.querySelectorAll('.stat-value');
+      if (statValues[0]) statValues[0].textContent = totalTopics;
+      if (statValues[1]) statValues[1].textContent = quizQuestions.length;
+      document.getElementById('totalQ').textContent = quizQuestions.length;
+    });
+
+  </script>
 </body>
 </html>
