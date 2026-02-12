@@ -1308,6 +1308,641 @@ main {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   LIGHT MODE
+═══════════════════════════════════════════════════════════ */
+
+body.light-mode {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ebebeb;
+  --bg-tertiary: #e0e0e0;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --border: rgba(0, 0, 0, 0.1);
+  --text-primary: #111111;
+  --text-secondary: #444444;
+  --text-muted: #777777;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body.light-mode .navbar {
+  background: rgba(245, 245, 245, 0.9);
+  border-bottom: 1px solid var(--border);
+}
+body.light-mode .navbar.scrolled { background: rgba(245,245,245,0.98); }
+body.light-mode .bg-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16,185,129,0.12), transparent),
+    radial-gradient(circle at 80% 80%, rgba(99,102,241,0.07), transparent),
+    radial-gradient(circle at 20% 50%, rgba(245,158,11,0.06), transparent);
+}
+body.light-mode .bg-grid {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+}
+body.light-mode .topic-content { background: rgba(0,0,0,0.03); }
+body.light-mode .answer-input {
+  background: rgba(255,255,255,0.8);
+  color: #111;
+  border-color: rgba(0,0,0,0.15);
+}
+body.light-mode .answer-input:focus { background: #fff; }
+body.light-mode footer {
+  background: rgba(245,245,245,0.8);
+  border-top: 1px solid var(--border);
+}
+body.light-mode .question-container { background: rgba(0,0,0,0.03); }
+body.light-mode .score-grid { background: rgba(0,0,0,0.03); }
+body.light-mode #quizPanel { background: rgba(255,255,255,0.9); }
+body.light-mode .toast { background: rgba(255,255,255,0.97); }
+
+/* theme toggle button */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.2); }
+
+/* ═══════════════════════════════════════════════════════════
+   SEARCH BAR
+═══════════════════════════════════════════════════════════ */
+
+.search-wrapper {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  padding: 0.9rem 1.2rem 0.9rem 3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(16,185,129,0.1);
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.search-count {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.topic-card.hidden { display: none; }
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RANDOM TOPIC BUTTON
+═══════════════════════════════════════════════════════════ */
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.random-btn {
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #818cf8;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+.random-btn:hover {
+  background: rgba(99,102,241,0.2);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TIMELINE VIEW
+═══════════════════════════════════════════════════════════ */
+
+#timelineView {
+  display: none;
+  margin-top: 2rem;
+}
+.timeline-toggle {
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.3);
+  color: #fbbf24;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+.timeline-toggle:hover { background: rgba(245,158,11,0.2); transform: translateY(-2px); }
+.timeline-toggle.active { background: rgba(245,158,11,0.25); border-color: rgba(245,158,11,0.5); }
+
+.visual-timeline {
+  position: relative;
+  padding: 1rem 0 2rem;
+}
+.visual-timeline::before {
+  content: '';
+  position: absolute;
+  left: 120px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--accent));
+  border-radius: 2px;
+}
+.vt-item {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  position: relative;
+  align-items: flex-start;
+}
+.vt-date {
+  width: 110px;
+  min-width: 110px;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.85rem;
+  text-align: right;
+  padding-right: 1.5rem;
+  padding-top: 0.15rem;
+  line-height: 1.4;
+}
+.vt-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 50%;
+  border: 3px solid var(--bg-primary);
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(16,185,129,0.5);
+  position: relative;
+  z-index: 1;
+}
+body.light-mode .vt-dot { border-color: var(--bg-primary); }
+.vt-content {
+  flex: 1;
+  padding-left: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-left: 1rem;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+.vt-content:hover {
+  border-color: rgba(16,185,129,0.3);
+  transform: translateX(4px);
+}
+.vt-title { font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; font-size: 0.95rem; }
+.vt-desc { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; }
+
+@media (max-width: 600px) {
+  .visual-timeline::before { left: 0; }
+  .vt-date { display: none; }
+  .vt-dot { margin-left: -7px; }
+  .vt-content { margin-left: 1rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FLASHCARD MODE
+═══════════════════════════════════════════════════════════ */
+
+#flashcardPanel {
+  display: none;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.flashcard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.flashcard-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.4rem; }
+.flashcard-sub { color: var(--text-muted); font-size: 0.95rem; }
+
+.flashcard-scene {
+  perspective: 1000px;
+  height: 240px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard-scene.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.flashcard-front {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+}
+.flashcard-back {
+  background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(99,102,241,0.08));
+  transform: rotateY(180deg);
+  border-color: rgba(16,185,129,0.3);
+}
+.flashcard-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.flashcard-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.flashcard-back .flashcard-text { color: var(--primary-light); }
+.flashcard-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+.flashcard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.fc-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+.fc-btn:hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+.fc-counter {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-light);
+  min-width: 60px;
+  text-align: center;
+}
+.flashcard-progress {
+  height: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+.flashcard-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transition: width 0.4s ease;
+  border-radius: 50px;
+}
+.flashcard-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCORE HISTORY CHART + STREAK
+═══════════════════════════════════════════════════════════ */
+
+.stats-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  margin-top: 2rem;
+  backdrop-filter: blur(10px);
+}
+.stats-panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-primary);
+}
+.streak-display {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.streak-num {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #fbbf24;
+  line-height: 1;
+}
+.streak-label { color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; }
+
+#historyChart {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 0.5rem 0;
+}
+.chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.chart-bar {
+  width: 100%;
+  max-width: 32px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to top, var(--primary), var(--primary-light));
+  transition: all 0.4s ease;
+  min-height: 4px;
+  cursor: pointer;
+  position: relative;
+}
+.chart-bar:hover { filter: brightness(1.2); }
+.chart-bar-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 32px;
+}
+.chart-empty {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   QUIZ ENHANCEMENTS — multiple choice, topic filter, review
+═══════════════════════════════════════════════════════════ */
+
+.quiz-mode-toggle {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.mode-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.mode-btn:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.15); }
+.mode-btn.active {
+  background: rgba(16,185,129,0.15);
+  color: var(--primary-light);
+  border-color: rgba(16,185,129,0.4);
+}
+
+/* topic filter chips */
+.topic-filter-wrap {
+  margin-bottom: 1.5rem;
+  display: none;
+}
+.topic-filter-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.filter-chip {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+.filter-chip:hover { border-color: var(--primary); color: var(--primary-light); }
+.filter-chip.active {
+  background: rgba(16,185,129,0.15);
+  border-color: rgba(16,185,129,0.4);
+  color: var(--primary-light);
+}
+
+/* multiple choice options */
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.mc-option {
+  background: rgba(255,255,255,0.04);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.2rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  line-height: 1.4;
+}
+.mc-option:hover:not(:disabled) {
+  border-color: rgba(99,102,241,0.5);
+  background: rgba(99,102,241,0.08);
+  transform: translateY(-2px);
+}
+.mc-option.correct { border-color: var(--primary); background: rgba(16,185,129,0.15); color: var(--primary-light); }
+.mc-option.wrong { border-color: #ef4444; background: rgba(239,68,68,0.12); color: #f87171; }
+.mc-option:disabled { cursor: default; transform: none !important; }
+
+@media (max-width: 520px) {
+  .mc-options { grid-template-columns: 1fr; }
+}
+
+/* quiz review panel */
+.review-panel {
+  display: none;
+  margin-top: 2rem;
+}
+.review-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.review-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  backdrop-filter: blur(8px);
+}
+.review-item.correct-review { border-left: 4px solid var(--primary); }
+.review-item.wrong-review { border-left: 4px solid #ef4444; }
+.review-icon { font-size: 1.1rem; margin-top: 0.1rem; flex-shrink: 0; }
+.review-q { font-weight: 600; color: var(--text-primary); font-size: 0.9rem; margin-bottom: 0.3rem; }
+.review-a { font-size: 0.85rem; color: var(--text-secondary); }
+.review-your { color: #f87171; }
+
+/* ═══════════════════════════════════════════════════════════
+   PRINT STYLES
+═══════════════════════════════════════════════════════════ */
+
+.print-btn {
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.25);
+  color: var(--primary-light);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+.print-btn:hover { background: rgba(16,185,129,0.18); transform: translateY(-2px); }
+
+@media print {
+  .navbar, .bg-gradient, .bg-grid, .loading-overlay, .toast,
+  .section-actions, .search-wrapper, #timelineView,
+  .hero-badge, footer, .quiz-mode-toggle, .quiz-actions,
+  .flashcard-nav, .flashcard-actions, #flashcardPanel,
+  #quizPanel, #timelineView { display: none !important; }
+
+  body { background: #fff !important; color: #000 !important; }
+  main { padding-top: 1rem !important; padding-bottom: 2rem !important; }
+  .topic-card { border: 1px solid #ccc !important; break-inside: avoid; box-shadow: none !important; background: #fff !important; }
+  .topic-body { max-height: none !important; display: block !important; }
+  .topic-body.active { max-height: none !important; }
+  .topic-content { background: #fff !important; padding: 1rem !important; }
+  .topic-header { background: #f0f0f0 !important; }
+  .content-text, .content-heading, .topic-title { color: #000 !important; }
+  .impact-box { border-left: 3px solid #10b981 !important; background: #f9f9f9 !important; }
+  .key-point { background: #f0f0ff !important; }
+  section { display: block !important; }
+  #cold, #elizabeth, #structures { display: block !important; }
+}
+
   </style>
 </head>
 <body>
@@ -1353,6 +1988,15 @@ main {
         <button class="nav-btn" onclick="openQuiz()">
           <i class="fas fa-brain"></i> Quiz Mode
         </button>
+        <button class="nav-btn" onclick="openFlashcards()">
+          <i class="fas fa-layer-group"></i> Flashcards
+        </button>
+        <button class="nav-btn" onclick="switchTab('stats')">
+          <i class="fas fa-chart-line"></i> Stats
+        </button>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" title="Toggle light/dark mode">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -1396,7 +2040,19 @@ main {
       the modern world. Explore key events, turning points, and their lasting impacts on global politics.
     </p>
   </div>
+  <div class="search-wrapper">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="coldSearch" placeholder="Search topics…" oninput="filterTopics('cold')" autocomplete="off" />
+    <span class="search-count" id="coldCount"></span>
+  </div>
+  <div class="section-actions">
+    <button class="random-btn" onclick="randomTopic('cold')"><i class="fas fa-shuffle"></i> Random Topic</button>
+    <button class="timeline-toggle" id="coldTimelineBtn" onclick="toggleTimeline('cold')"><i class="fas fa-stream"></i> Timeline View</button>
+    <button class="print-btn" onclick="printSection('cold')"><i class="fas fa-print"></i> Print / Export</button>
+  </div>
+  <div id="timelineView" class="visual-timeline"></div>
   <div class="topics-grid" id="coldAccordions"></div>
+  <p class="no-results" id="coldNoResults">No topics match your search.</p>
 </section>
 
 <!-- Elizabethan Section -->
@@ -1409,7 +2065,19 @@ main {
       social upheaval and the struggle against Spanish power. Essential for understanding Tudor England.
     </p>
   </div>
+  <div class="search-wrapper">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="elizSearch" placeholder="Search topics…" oninput="filterTopics('eliz')" autocomplete="off" />
+    <span class="search-count" id="elizCount"></span>
+  </div>
+  <div class="section-actions">
+    <button class="random-btn" onclick="randomTopic('elizabeth')"><i class="fas fa-shuffle"></i> Random Topic</button>
+    <button class="timeline-toggle" id="elizTimelineBtn" onclick="toggleTimeline('eliz')"><i class="fas fa-stream"></i> Timeline View</button>
+    <button class="print-btn" onclick="printSection('elizabeth')"><i class="fas fa-print"></i> Print / Export</button>
+  </div>
+  <div id="elizTimelineView" class="visual-timeline"></div>
   <div class="topics-grid" id="elizAccordions"></div>
+  <p class="no-results" id="elizNoResults">No topics match your search.</p>
 </section>
 
 <!-- Quiz Panel -->
@@ -1417,6 +2085,16 @@ main {
   <div class="quiz-header">
     <h2 class="quiz-title">Knowledge Assessment</h2>
     <p class="quiz-subtitle">Testing: <strong id="quizTopicLabel"><i class="fas fa-globe" style="margin-right:0.4rem;"></i>Cold War</strong></p>
+  </div>
+
+  <div class="quiz-mode-toggle">
+    <button class="mode-btn active" id="modeTyped" onclick="setQuizMode('typed')"><i class="fas fa-keyboard"></i> Typed</button>
+    <button class="mode-btn" id="modeMC" onclick="setQuizMode('mc')"><i class="fas fa-list-ul"></i> Multiple Choice</button>
+  </div>
+
+  <div class="topic-filter-wrap" id="topicFilterWrap">
+    <div class="topic-filter-label"><i class="fas fa-filter" style="margin-right:0.4rem;"></i>Filter by topic</div>
+    <div class="filter-chips" id="filterChips"></div>
   </div>
 
   <div class="progress-section">
@@ -1442,6 +2120,7 @@ main {
       placeholder="Type your answer here..."
       autocomplete="off"
     />
+    <div class="mc-options" id="mcOptions" style="display:none;"></div>
   </div>
 
   <div class="quiz-actions">
@@ -1474,6 +2153,73 @@ main {
       <div class="score-value accuracy" id="accuracyDisplay">0%</div>
       <div class="score-label">Accuracy</div>
     </div>
+  </div>
+
+  <!-- Wrong answers review -->
+  <div class="review-panel" id="reviewPanel">
+    <div class="review-title"><i class="fas fa-times-circle" style="color:#f87171;"></i> Questions to Revisit</div>
+    <div id="reviewList"></div>
+  </div>
+
+</section>
+
+<!-- Flashcard Panel -->
+<section id="flashcardPanel">
+  <div id="flashcardPanelInner">
+    <div class="flashcard-header">
+      <h2 class="flashcard-title">Flashcard Mode</h2>
+      <p class="flashcard-sub" id="fcTopicLabel">Cold War</p>
+    </div>
+    <div class="flashcard-progress">
+      <div class="flashcard-progress-fill" id="fcProgressFill" style="width:0%"></div>
+    </div>
+    <div class="flashcard-scene" id="flashcardScene" onclick="flipCard()">
+      <div class="flashcard-inner" id="flashcardInner">
+        <div class="flashcard-front">
+          <div class="flashcard-label">Question</div>
+          <div class="flashcard-text" id="fcFront"></div>
+          <div class="flashcard-hint">Click to reveal answer</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="flashcard-label">Answer</div>
+          <div class="flashcard-text" id="fcBack"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flashcard-nav">
+      <button class="fc-btn" onclick="fcPrev()"><i class="fas fa-arrow-left"></i> Prev</button>
+      <span class="fc-counter" id="fcCounter">1 / ?</span>
+      <button class="fc-btn" onclick="fcNext()">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+    <div class="flashcard-actions">
+      <button class="fc-btn" onclick="shuffleFlashcards()"><i class="fas fa-shuffle"></i> Shuffle</button>
+      <button class="fc-btn" onclick="closeFlashcards()"><i class="fas fa-times"></i> Close</button>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Panel -->
+<section id="statsPanel" style="display:none; max-width:700px; margin:0 auto;">
+  <div class="section-header">
+    <span class="section-tag">Your Progress</span>
+    <h2 class="section-title">Study Stats</h2>
+    <p class="section-description">Track your quiz history, accuracy trends, and revision streak.</p>
+  </div>
+  <div class="stats-panel">
+    <div class="streak-display">
+      <div class="streak-num" id="streakNum">0</div>
+      <div>
+        <div class="streak-label">🔥 Day Streak</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;" id="lastStudied">No sessions yet</div>
+      </div>
+    </div>
+    <div class="stats-panel-title"><i class="fas fa-chart-bar" style="color:var(--primary);"></i> Quiz Score History (last 10)</div>
+    <div id="historyChart"><p class="chart-empty">Complete a quiz to see your history here.</p></div>
+  </div>
+  <div style="margin-top:1.5rem; text-align:center;">
+    <button class="fc-btn" onclick="clearHistory()" style="background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);color:#f87171;margin:0 auto;">
+      <i class="fas fa-trash"></i> Clear History
+    </button>
   </div>
 </section>
 
@@ -3854,12 +4600,16 @@ main {
       const elizSection = document.getElementById('elizabeth');
       const quizPanel = document.getElementById('quizPanel');
       const structuresSection = document.getElementById('structures');
+      const flashcardPanel = document.getElementById('flashcardPanel');
+      const statsPanel = document.getElementById('statsPanel');
       const btns = document.querySelectorAll('.nav-btn');
 
       coldSection.style.display = 'none';
       elizSection.style.display = 'none';
       quizPanel.style.display = 'none';
       structuresSection.style.display = 'none';
+      flashcardPanel.style.display = 'none';
+      statsPanel.style.display = 'none';
 
       btns.forEach(b => b.classList.remove('active'));
 
@@ -3874,6 +4624,10 @@ main {
       } else if (tab === 'structures') {
         structuresSection.style.display = 'block';
         btns[2].classList.add('active');
+      } else if (tab === 'stats') {
+        statsPanel.style.display = 'block';
+        btns[4].classList.add('active');
+        renderStatsPanel();
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -3887,15 +4641,25 @@ main {
       const topicLabel = activeTab === 'elizabeth' ? 'Elizabethan England' : 'Cold War';
       const topicIcon = activeTab === 'elizabeth' ? 'fa-crown' : 'fa-globe';
 
+      // Build topic filter chips
+      const allTopicTitles = (activeTab === 'elizabeth' ? elizabethanTopics : coldWarTopics).map(t => t.title);
+      buildFilterChips(allTopicTitles);
+      selectedTopics = null; // reset filter
+
       shuffledQuestions = shuffleArray(questionPool);
       currentIndex = 0;
       score = 0;
       totalAnswered = 0;
       answered = false;
+      wrongAnswers = [];
+      reviewShown = false;
 
       document.getElementById('cold').style.display = 'none';
       document.getElementById('elizabeth').style.display = 'none';
       document.getElementById('structures').style.display = 'none';
+      document.getElementById('flashcardPanel').style.display = 'none';
+      document.getElementById('statsPanel').style.display = 'none';
+      document.getElementById('reviewPanel').style.display = 'none';
       const quizPanel = document.getElementById('quizPanel');
       quizPanel.style.display = 'block';
 
@@ -3925,10 +4689,6 @@ main {
       document.getElementById('questionNum').textContent = currentIndex + 1;
       document.getElementById('currentQ').textContent = currentIndex + 1;
       document.getElementById('questionText').textContent = q.q;
-      document.getElementById('answerInput').value = '';
-      document.getElementById('answerInput').disabled = false;
-      document.getElementById('answerInput').style.display = '';
-      document.getElementById('answerInput').focus();
 
       const feedback = document.getElementById('feedback');
       feedback.style.display = 'none';
@@ -3936,6 +4696,18 @@ main {
 
       const pct = (currentIndex / shuffledQuestions.length) * 100;
       document.getElementById('progressBar').style.width = pct + '%';
+
+      if (quizMode === 'mc') {
+        document.getElementById('answerInput').style.display = 'none';
+        document.getElementById('mcOptions').style.display = 'grid';
+        buildMCOptions(q);
+      } else {
+        document.getElementById('answerInput').value = '';
+        document.getElementById('answerInput').disabled = false;
+        document.getElementById('answerInput').style.display = '';
+        document.getElementById('answerInput').focus();
+        document.getElementById('mcOptions').style.display = 'none';
+      }
     }
 
     function normalise(str) {
@@ -3954,7 +4726,8 @@ main {
       totalAnswered++;
       document.getElementById('answerInput').disabled = true;
 
-      const correct = shuffledQuestions[currentIndex].a;
+      const q = shuffledQuestions[currentIndex];
+      const correct = q.a;
       const userNorm = normalise(input);
       const correctNorm = normalise(correct);
 
@@ -3968,9 +4741,12 @@ main {
         score++;
         feedback.className = 'feedback correct';
         feedback.innerHTML = `<i class="fas fa-check-circle"></i> <strong>Correct!</strong> ${correct}`;
+        markSpacedRepetition(q, true);
       } else {
         feedback.className = 'feedback wrong';
         feedback.innerHTML = `<i class="fas fa-times-circle"></i> <strong>Not quite.</strong> The answer was: <strong>${correct}</strong>`;
+        wrongAnswers.push({ q: q.q, correct: q.a, yours: input });
+        markSpacedRepetition(q, false);
       }
       feedback.style.display = 'block';
       updateScoreDisplay();
@@ -3987,6 +4763,8 @@ main {
       feedback.className = 'feedback wrong';
       feedback.innerHTML = `<i class="fas fa-lightbulb"></i> <strong>Hint:</strong> ${q.hint}<br><small style="margin-top:0.5rem;display:block;opacity:0.8">Answer: ${q.a}</small>`;
       feedback.style.display = 'block';
+      wrongAnswers.push({ q: q.q, correct: q.a, yours: '(skipped)' });
+      markSpacedRepetition(q, false);
       updateScoreDisplay();
     }
 
@@ -4020,9 +4798,34 @@ main {
           </div>
         </div>`;
       document.getElementById('answerInput').style.display = 'none';
+      document.getElementById('mcOptions').style.display = 'none';
       document.getElementById('progressBar').style.width = '100%';
       document.getElementById('currentQ').textContent = shuffledQuestions.length;
       document.getElementById('feedback').style.display = 'none';
+
+      // Save score to history
+      saveScoreHistory(acc, activeTab);
+      updateStreak();
+
+      // Show review of wrong answers
+      if (wrongAnswers.length > 0) {
+        const reviewPanel = document.getElementById('reviewPanel');
+        const reviewList = document.getElementById('reviewList');
+        reviewList.innerHTML = '';
+        wrongAnswers.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'review-item wrong-review';
+          div.innerHTML = `
+            <div class="review-icon">❌</div>
+            <div>
+              <div class="review-q">${item.q}</div>
+              <div class="review-a">Correct: <strong style="color:var(--primary-light)">${item.correct}</strong>
+              ${item.yours !== '(skipped)' ? ` &nbsp;|&nbsp; You said: <span class="review-your">${item.yours}</span>` : ''}</div>
+            </div>`;
+          reviewList.appendChild(div);
+        });
+        reviewPanel.style.display = 'block';
+      }
     }
 
     function levenshtein(a, b) {
@@ -4051,6 +4854,412 @@ main {
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
+    // ═══════════════════════════════════════════════════════════
+    // NEW FEATURE VARIABLES
+    // ═══════════════════════════════════════════════════════════
+
+    let quizMode = 'typed'; // 'typed' or 'mc'
+    let wrongAnswers = [];
+    let reviewShown = false;
+    let selectedTopics = null;
+    let fcCards = [];
+    let fcIndex = 0;
+    let coldTimelineOpen = false;
+    let elizTimelineOpen = false;
+
+    // ═══════════════════════════════════════════════════════════
+    // THEME TOGGLE (light / dark)
+    // ═══════════════════════════════════════════════════════════
+
+    function toggleTheme() {
+      const body = document.body;
+      const icon = document.getElementById('themeIcon');
+      body.classList.toggle('light-mode');
+      if (body.classList.contains('light-mode')) {
+        icon.className = 'fas fa-moon';
+        localStorage.setItem('hrh_theme', 'light');
+      } else {
+        icon.className = 'fas fa-sun';
+        localStorage.setItem('hrh_theme', 'dark');
+      }
+    }
+
+    function loadTheme() {
+      const saved = localStorage.getItem('hrh_theme');
+      if (saved === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('themeIcon').className = 'fas fa-moon';
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // SEARCH / FILTER TOPICS
+    // ═══════════════════════════════════════════════════════════
+
+    function filterTopics(prefix) {
+      const input = document.getElementById(prefix + 'Search').value.toLowerCase().trim();
+      const container = document.getElementById(prefix === 'cold' ? 'coldAccordions' : 'elizAccordions');
+      const cards = container.querySelectorAll('.topic-card');
+      const noResults = document.getElementById(prefix + 'NoResults');
+      let visible = 0;
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(input)) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      const countEl = document.getElementById(prefix + 'Count');
+      countEl.textContent = input ? visible + ' result' + (visible !== 1 ? 's' : '') : '';
+      noResults.style.display = (visible === 0 && input) ? 'block' : 'none';
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // RANDOM TOPIC
+    // ═══════════════════════════════════════════════════════════
+
+    function randomTopic(section) {
+      const topics = section === 'cold' ? coldWarTopics : elizabethanTopics;
+      const idx = Math.floor(Math.random() * topics.length);
+      const topic = topics[idx];
+      const card = document.getElementById(topic.id);
+      if (!card) return;
+      // Close all, open this one
+      document.querySelectorAll('.topic-body').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.fas.fa-chevron-down').forEach(i => { i.style.transform = 'rotate(0deg)'; });
+      const body = document.getElementById('body-' + topic.id);
+      if (body) {
+        body.classList.add('active');
+        const icon = card.querySelector('.fas.fa-chevron-down');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      card.classList.add('highlight');
+      setTimeout(() => card.classList.remove('highlight'), 2000);
+      showToast('Random topic: ' + topic.title);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // TIMELINE VIEW
+    // ═══════════════════════════════════════════════════════════
+
+    const coldWarTimeline = [
+      { date: 'Feb 1945', title: 'Yalta Conference', desc: 'Big Three meet; Europe divided into zones' },
+      { date: 'Jul 1945', title: 'Potsdam Conference', desc: 'Truman takes hard line; atomic bomb revealed' },
+      { date: 'Mar 1946', title: 'Iron Curtain Speech', desc: 'Churchill publicly names the Cold War divide' },
+      { date: 'Mar 1947', title: 'Truman Doctrine', desc: '$400m to Greece & Turkey; containment begins' },
+      { date: 'Jun 1947', title: 'Marshall Plan', desc: '$13bn to rebuild Western Europe' },
+      { date: 'Jun 1948', title: 'Berlin Blockade', desc: 'Stalin cuts all land routes into West Berlin' },
+      { date: 'Apr 1949', title: 'NATO Founded', desc: 'First peacetime military alliance for USA' },
+      { date: 'Aug 1949', title: 'Soviet A-Bomb', desc: "USSR ends USA's nuclear monopoly" },
+      { date: 'Jun 1950', title: 'Korean War', desc: 'North Korea invades South; UN intervenes' },
+      { date: 'Oct 1957', title: 'Sputnik Launched', desc: 'First satellite; Space Race begins' },
+      { date: 'Aug 1961', title: 'Berlin Wall Built', desc: 'East Germany seals the border overnight' },
+      { date: 'Oct 1962', title: 'Cuban Missile Crisis', desc: '13 days; closest to nuclear war' },
+      { date: 'Aug 1963', title: 'Partial Test Ban', desc: 'First arms control treaty signed' },
+      { date: 'Dec 1979', title: 'USSR Invades Afghanistan', desc: 'New Cold War tensions spike' },
+      { date: 'Nov 1989', title: 'Berlin Wall Falls', desc: 'Symbol of Cold War collapses' },
+      { date: 'Dec 1991', title: 'USSR Dissolves', desc: 'Cold War ends; Russia emerges' },
+    ];
+
+    const elizabethanTimeline = [
+      { date: '1558', title: 'Elizabeth I Crowned', desc: 'Accession after Mary I; religious uncertainty' },
+      { date: '1559', title: 'Religious Settlement', desc: 'Act of Supremacy & Uniformity; middle way' },
+      { date: '1568', title: 'Mary QoS Flees', desc: 'Mary arrives in England; becomes focus of plots' },
+      { date: '1569', title: 'Northern Rebellion', desc: 'Catholic earls revolt; crushed by Elizabeth' },
+      { date: '1570', title: 'Papal Bull', desc: 'Pope excommunicates Elizabeth; Catholics in danger' },
+      { date: '1577', title: "Drake's Circumnavigation", desc: 'First Englishman to sail around the globe' },
+      { date: '1580s', title: 'Puritan Threats Grow', desc: 'Martin Marprelate pamphlets attack bishops' },
+      { date: '1586', title: 'Babington Plot', desc: 'Plot to kill Elizabeth; Mary implicated' },
+      { date: '1587', title: 'Mary Executed', desc: 'Mary Queen of Scots beheaded at Fotheringhay' },
+      { date: '1588', title: 'Spanish Armada Defeated', desc: 'England repels 130-ship invasion fleet' },
+      { date: '1590s', title: 'Social Problems Grow', desc: 'Harvests fail; vagrancy and poverty surge' },
+      { date: '1601', title: 'Essex Rebellion', desc: "Elizabeth's favourite rebels; executed" },
+      { date: '1601', title: 'Poor Law Passed', desc: 'Government system for relief of the poor' },
+      { date: '1603', title: 'Elizabeth I Dies', desc: 'End of Tudor era; James I succeeds' },
+    ];
+
+    function toggleTimeline(prefix) {
+      const isCold = prefix === 'cold';
+      const viewId = isCold ? 'timelineView' : 'elizTimelineView';
+      const btnId = isCold ? 'coldTimelineBtn' : 'elizTimelineBtn';
+      const view = document.getElementById(viewId);
+      const btn = document.getElementById(btnId);
+      const data = isCold ? coldWarTimeline : elizabethanTimeline;
+
+      if (isCold) { coldTimelineOpen = !coldTimelineOpen; }
+      else { elizTimelineOpen = !elizTimelineOpen; }
+
+      const isOpen = isCold ? coldTimelineOpen : elizTimelineOpen;
+      if (isOpen) {
+        view.style.display = 'block';
+        btn.classList.add('active');
+        renderTimeline(viewId, data);
+      } else {
+        view.style.display = 'none';
+        btn.classList.remove('active');
+      }
+    }
+
+    function renderTimeline(containerId, data) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = data.map(item => `
+        <div class="vt-item">
+          <div class="vt-date">${item.date}</div>
+          <div class="vt-dot"></div>
+          <div class="vt-content">
+            <div class="vt-title">${item.title}</div>
+            <div class="vt-desc">${item.desc}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // MULTIPLE CHOICE MODE
+    // ═══════════════════════════════════════════════════════════
+
+    function setQuizMode(mode) {
+      quizMode = mode;
+      document.getElementById('modeTyped').classList.toggle('active', mode === 'typed');
+      document.getElementById('modeMC').classList.toggle('active', mode === 'mc');
+      // Reload current question in new mode
+      if (currentIndex < shuffledQuestions.length) loadQuestion();
+    }
+
+    function buildMCOptions(q) {
+      const pool = (activeTab === 'elizabeth' ? elizabethanQuestions : coldWarQuestions);
+      // Pick 3 wrong answers + 1 correct
+      let wrongs = shuffleArray(pool.filter(x => x.a !== q.a)).slice(0, 3).map(x => x.a);
+      let options = shuffleArray([q.a, ...wrongs]);
+      const container = document.getElementById('mcOptions');
+      container.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'mc-option';
+        btn.textContent = opt;
+        btn.onclick = () => selectMCOption(btn, opt, q.a, q);
+        container.appendChild(btn);
+      });
+    }
+
+    function selectMCOption(btn, chosen, correct, q) {
+      if (answered) return;
+      answered = true;
+      totalAnswered++;
+      const allBtns = document.querySelectorAll('.mc-option');
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correct) b.classList.add('correct');
+      });
+      const isCorrect = chosen === correct;
+      if (isCorrect) {
+        score++;
+        btn.classList.add('correct');
+        markSpacedRepetition(q, true);
+      } else {
+        btn.classList.add('wrong');
+        wrongAnswers.push({ q: q.q, correct: q.a, yours: chosen });
+        markSpacedRepetition(q, false);
+      }
+      const feedback = document.getElementById('feedback');
+      feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'wrong');
+      feedback.innerHTML = isCorrect
+        ? `<i class="fas fa-check-circle"></i> <strong>Correct!</strong>`
+        : `<i class="fas fa-times-circle"></i> <strong>Not quite.</strong> The answer was: <strong>${correct}</strong>`;
+      feedback.style.display = 'block';
+      updateScoreDisplay();
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // TOPIC FILTER CHIPS
+    // ═══════════════════════════════════════════════════════════
+
+    function buildFilterChips(topics) {
+      const wrap = document.getElementById('topicFilterWrap');
+      const chips = document.getElementById('filterChips');
+      wrap.style.display = 'block';
+      chips.innerHTML = '<button class="filter-chip active" onclick="setTopicFilter(null, this)">All</button>';
+      topics.forEach(title => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-chip';
+        btn.textContent = title.length > 30 ? title.substring(0, 28) + '…' : title;
+        btn.title = title;
+        btn.onclick = () => setTopicFilter(title, btn);
+        chips.appendChild(btn);
+      });
+    }
+
+    function setTopicFilter(topicTitle, btn) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      selectedTopics = topicTitle;
+      const pool = activeTab === 'elizabeth' ? elizabethanQuestions : coldWarQuestions;
+      let filtered = topicTitle ? pool.filter(q => q.topic === topicTitle || !q.topic) : pool;
+      if (filtered.length === 0) filtered = pool;
+      shuffledQuestions = shuffleArray(filtered);
+      currentIndex = 0;
+      score = 0;
+      totalAnswered = 0;
+      answered = false;
+      wrongAnswers = [];
+      document.getElementById('reviewPanel').style.display = 'none';
+      document.getElementById('totalQ').textContent = shuffledQuestions.length;
+      updateScoreDisplay();
+      loadQuestion();
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // SPACED REPETITION
+    // ═══════════════════════════════════════════════════════════
+
+    function markSpacedRepetition(q, correct) {
+      let sr = JSON.parse(localStorage.getItem('hrh_sr') || '{}');
+      const key = btoa(q.q.substring(0, 30));
+      if (!sr[key]) sr[key] = { wrong: 0, correct: 0 };
+      if (correct) sr[key].correct++;
+      else sr[key].wrong++;
+      localStorage.setItem('hrh_sr', JSON.stringify(sr));
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // SCORE HISTORY + STREAK
+    // ═══════════════════════════════════════════════════════════
+
+    function saveScoreHistory(acc, tab) {
+      let history = JSON.parse(localStorage.getItem('hrh_history') || '[]');
+      history.push({ acc, tab, date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) });
+      if (history.length > 10) history = history.slice(-10);
+      localStorage.setItem('hrh_history', JSON.stringify(history));
+    }
+
+    function updateStreak() {
+      const today = new Date().toDateString();
+      let streakData = JSON.parse(localStorage.getItem('hrh_streak') || '{"count":0,"lastDate":""}');
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      if (streakData.lastDate === today) {
+        // Already studied today, no change
+      } else if (streakData.lastDate === yesterday) {
+        streakData.count++;
+        streakData.lastDate = today;
+      } else {
+        streakData.count = 1;
+        streakData.lastDate = today;
+      }
+      localStorage.setItem('hrh_streak', JSON.stringify(streakData));
+    }
+
+    function renderStatsPanel() {
+      const streakData = JSON.parse(localStorage.getItem('hrh_streak') || '{"count":0,"lastDate":""}');
+      document.getElementById('streakNum').textContent = streakData.count;
+      document.getElementById('lastStudied').textContent = streakData.lastDate
+        ? 'Last studied: ' + streakData.lastDate
+        : 'No sessions yet';
+
+      const history = JSON.parse(localStorage.getItem('hrh_history') || '[]');
+      const chart = document.getElementById('historyChart');
+      if (history.length === 0) {
+        chart.innerHTML = '<p class="chart-empty">Complete a quiz to see your history here.</p>';
+        return;
+      }
+      const maxH = 100;
+      chart.innerHTML = history.map(item => {
+        const barH = Math.max(4, Math.round((item.acc / 100) * maxH));
+        const color = item.acc >= 75 ? 'var(--primary)' : item.acc >= 50 ? 'var(--accent)' : '#ef4444';
+        return `<div class="chart-bar-wrap">
+          <div style="height:${maxH}px;display:flex;align-items:flex-end;">
+            <div class="chart-bar" style="height:${barH}px;background:${color};" title="${item.acc}% on ${item.date} (${item.tab})"></div>
+          </div>
+          <div class="chart-bar-label">${item.acc}%</div>
+          <div class="chart-bar-label">${item.date}</div>
+        </div>`;
+      }).join('');
+    }
+
+    function clearHistory() {
+      localStorage.removeItem('hrh_history');
+      localStorage.removeItem('hrh_streak');
+      localStorage.removeItem('hrh_sr');
+      renderStatsPanel();
+      showToast('History cleared.');
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // FLASHCARD MODE
+    // ═══════════════════════════════════════════════════════════
+
+    function openFlashcards() {
+      const pool = activeTab === 'elizabeth' ? elizabethanQuestions : coldWarQuestions;
+      const label = activeTab === 'elizabeth' ? 'Elizabethan England' : 'Cold War';
+      fcCards = shuffleArray(pool);
+      fcIndex = 0;
+
+      document.getElementById('cold').style.display = 'none';
+      document.getElementById('elizabeth').style.display = 'none';
+      document.getElementById('structures').style.display = 'none';
+      document.getElementById('quizPanel').style.display = 'none';
+      document.getElementById('statsPanel').style.display = 'none';
+      document.getElementById('flashcardPanel').style.display = 'block';
+
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+      document.getElementById('fcTopicLabel').textContent = label + ' — ' + fcCards.length + ' cards';
+      loadFlashcard();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function loadFlashcard() {
+      if (fcCards.length === 0) return;
+      const scene = document.getElementById('flashcardScene');
+      scene.classList.remove('flipped');
+      const card = fcCards[fcIndex];
+      document.getElementById('fcFront').textContent = card.q;
+      document.getElementById('fcBack').textContent = card.a;
+      document.getElementById('fcCounter').textContent = (fcIndex + 1) + ' / ' + fcCards.length;
+      const pct = ((fcIndex + 1) / fcCards.length) * 100;
+      document.getElementById('fcProgressFill').style.width = pct + '%';
+    }
+
+    function flipCard() {
+      document.getElementById('flashcardScene').classList.toggle('flipped');
+    }
+
+    function fcNext() {
+      if (fcIndex < fcCards.length - 1) { fcIndex++; loadFlashcard(); }
+      else { showToast('End of deck! Shuffle to restart.'); }
+    }
+
+    function fcPrev() {
+      if (fcIndex > 0) { fcIndex--; loadFlashcard(); }
+    }
+
+    function shuffleFlashcards() {
+      fcCards = shuffleArray(fcCards);
+      fcIndex = 0;
+      loadFlashcard();
+      showToast('Cards shuffled!');
+    }
+
+    function closeFlashcards() {
+      document.getElementById('flashcardPanel').style.display = 'none';
+      switchTab(activeTab);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // PRINT / EXPORT
+    // ═══════════════════════════════════════════════════════════
+
+    function printSection(sectionId) {
+      // Open all accordions in the section so they print
+      const section = document.getElementById(sectionId);
+      section.querySelectorAll('.topic-body').forEach(b => b.classList.add('active'));
+      section.querySelectorAll('.fas.fa-chevron-down').forEach(i => { i.style.transform = 'rotate(180deg)'; });
+      showToast('Opening print view…');
+      setTimeout(() => window.print(), 300);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       renderAccordions(coldWarTopics, 'coldAccordions');
       renderAccordions(elizabethanTopics, 'elizAccordions');
@@ -4059,6 +5268,7 @@ main {
       if (statValues[0]) statValues[0].textContent = totalTopics;
       if (statValues[1]) statValues[1].textContent = allQuestions.length;
       document.getElementById('totalQ').textContent = coldWarQuestions.length;
+      loadTheme();
     });
 
   </script>
