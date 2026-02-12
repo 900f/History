@@ -214,7 +214,7 @@ body {
 ═══════════════════════════════════════════════════════════ */
 
 main {
-  padding-top: 100px;
+  padding-top: 100px; /* fallback — overridden by JS */
   padding-bottom: 8rem;
   min-height: 100vh;
 }
@@ -231,13 +231,15 @@ main {
 
 .hero {
   text-align: center;
-  padding: 3rem 0 4rem;
+  padding: 2rem 0 4rem;
   position: relative;
+  overflow: visible;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.3);
@@ -247,9 +249,12 @@ main {
   font-weight: 600;
   color: var(--primary-light);
   margin-bottom: 1.5rem;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
   animation: fadeInDown 0.6s ease;
-  
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  word-break: break-word;
 }
 
 @keyframes fadeInDown {
@@ -1018,11 +1023,7 @@ main {
 }
 
 @media (max-width: 768px) {
-  /* Nav stacks — reduce main top padding to match smaller nav height */
-  main {
-    padding-top: 150px;
-    padding-bottom: 5rem;
-  }
+  /* Nav stacks — padding-top set dynamically by JS */
 
   .nav-container {
     flex-direction: column;
@@ -1231,11 +1232,7 @@ main {
 }
 
 @media (max-width: 480px) {
-  /* Very small phones — nav is tallest here */
-  main {
-    padding-top: 170px;
-    padding-bottom: 4rem;
-  }
+  /* padding-top set dynamically by JS */
 
   .container {
     padding: 0 0.85rem;
@@ -1349,6 +1346,9 @@ main {
         </button>
         <button class="nav-btn" onclick="switchTab('elizabeth')">
           <i class="fas fa-crown"></i> Elizabethan
+        </button>
+        <button class="nav-btn" onclick="switchTab('structures')">
+          <i class="fas fa-pencil-ruler"></i> Structures
         </button>
         <button class="nav-btn" onclick="openQuiz()">
           <i class="fas fa-brain"></i> Quiz Mode
@@ -1477,6 +1477,453 @@ main {
   </div>
 </section>
 
+<!-- Structures Section -->
+<section id="structures" style="display:none;">
+  <div class="section-header">
+    <span class="section-tag">Exam Technique</span>
+    <h2 class="section-title">Answer Structures</h2>
+    <p class="section-description">
+      Step-by-step sentence frameworks for every question type on your GCSE History paper. 
+      Learn exactly what to include, how many points to make, and how to hit every mark.
+    </p>
+  </div>
+
+  <div class="topics-grid" id="structuresGrid">
+
+    <!-- 2 MARK -->
+    <div class="topic-card" style="border-left: 4px solid #10b981;">
+      <div class="topic-header" onclick="toggleTopic(this)" style="cursor:pointer;">
+        <div class="topic-header-content">
+          <div class="topic-title">2-Mark Question</div>
+          <div class="topic-meta">
+            <span class="meta-item"><i class="fas fa-clock"></i> ~3–4 minutes</span>
+            <span class="meta-item"><i class="fas fa-pen"></i> 2–3 sentences</span>
+            <span class="meta-item"><i class="fas fa-tag"></i> Knowledge recall</span>
+          </div>
+        </div>
+        <div class="topic-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="topic-body" id="body-struct-2">
+        <div class="topic-content">
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> What Is This Question?</h3>
+            <p class="content-text">
+              Usually asks you to identify, describe, or briefly explain one thing. 
+              Often phrased as <em>"Give one reason…"</em>, <em>"Describe one feature of…"</em>, 
+              or <em>"What does Source A suggest about…"</em>. No analysis needed — this is pure recall.
+            </p>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-list-ol"></i> What You Need</h3>
+            <ul class="content-list">
+              <li><strong>1 clear, accurate point</strong> — state the fact or feature directly</li>
+              <li><strong>1 brief supporting detail</strong> — add a date, name, or example to secure both marks</li>
+              <li>No introduction needed. No conclusion needed. Just the point and its evidence.</li>
+            </ul>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-pen-fancy"></i> Sentence Framework</div>
+            <div class="impact-content">
+              <p class="content-text" style="margin-bottom:0.75rem;"><strong>Formula:</strong> <em>Point → Supporting detail</em></p>
+              <p class="content-text" style="background:rgba(16,185,129,0.08);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+                <strong>One reason was [POINT].</strong><br>
+                <strong>For example, [SUPPORTING DETAIL / DATE / NAME].</strong>
+              </p>
+              <p class="content-text"><strong>Example (Cold War):</strong><br>
+                One reason tensions increased was the Soviet blockade of Berlin. In June 1948, Stalin cut off all road, rail and canal routes into West Berlin, forcing the Western Allies to supply the city entirely by air.
+              </p>
+              <p class="content-text" style="margin-top:0.75rem;"><strong>Example (Elizabethan):</strong><br>
+                One feature of the Religious Settlement was the Act of Supremacy. This made Elizabeth "Supreme Governor" of the Church of England, a deliberately moderate title designed to appeal to Catholics as well as Protestants.
+              </p>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-lightbulb"></i> Examiner Tips</div>
+            <p class="content-text">
+              Don't waffle — examiners award marks quickly on short questions. 
+              If you write more than 3 sentences you're wasting time that should go on your 8, 16, or 24-mark answers. 
+              Always include a specific detail (date, person, place) to guarantee both marks rather than just one.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 MARK -->
+    <div class="topic-card" style="border-left: 4px solid #6366f1;">
+      <div class="topic-header" onclick="toggleTopic(this)" style="cursor:pointer;">
+        <div class="topic-header-content">
+          <div class="topic-title">4-Mark Question</div>
+          <div class="topic-meta">
+            <span class="meta-item"><i class="fas fa-clock"></i> ~5–7 minutes</span>
+            <span class="meta-item"><i class="fas fa-pen"></i> 4–6 sentences</span>
+            <span class="meta-item"><i class="fas fa-tag"></i> Describe / Explain briefly</span>
+          </div>
+        </div>
+        <div class="topic-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="topic-body" id="body-struct-4">
+        <div class="topic-content">
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> What Is This Question?</h3>
+            <p class="content-text">
+              Usually asks you to <em>"Describe two…"</em> or <em>"Explain two reasons why…"</em>. 
+              You need two separate, developed points. Each point earns up to 2 marks: 
+              1 for the point itself, 1 for the supporting detail or explanation.
+            </p>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-list-ol"></i> What You Need</h3>
+            <ul class="content-list">
+              <li><strong>2 separate points</strong> — clearly distinct, not the same idea repeated differently</li>
+              <li><strong>Development for each</strong> — a date, statistic, name, consequence, or example for each point</li>
+              <li>No introduction or conclusion — launch straight into Point 1, then Point 2</li>
+              <li>Linking words like "Furthermore" or "Another reason" help the examiner see your two points are separate</li>
+            </ul>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-pen-fancy"></i> Sentence Framework</div>
+            <div class="impact-content">
+              <p class="content-text" style="margin-bottom:0.75rem;"><strong>Formula:</strong> <em>Point 1 → Development 1 → Point 2 → Development 2</em></p>
+              <p class="content-text" style="background:rgba(16,185,129,0.08);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+                <strong>One reason was [POINT 1].</strong><br>
+                <strong>[DEVELOPMENT — date / name / statistic / example].</strong><br><br>
+                <strong>Another reason was [POINT 2].</strong><br>
+                <strong>[DEVELOPMENT — date / name / statistic / example].</strong>
+              </p>
+              <p class="content-text"><strong>Example (Cold War — "Describe two features of the Berlin Blockade"):</strong><br>
+                One feature was that Stalin cut off all land routes into West Berlin. In June 1948 he blocked all road, rail and canal access, intending to starve out the Western Allies.<br><br>
+                Another feature was the Western response — the Berlin Airlift. Rather than abandon the city, Britain and the USA flew in supplies for over a year, eventually delivering up to 8,000 tonnes per day.
+              </p>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-lightbulb"></i> Examiner Tips</div>
+            <p class="content-text">
+              The most common mistake is making two points that are really the same point. 
+              Check: could your second point have been a development of your first? If yes, make them genuinely different. 
+              Each point must stand alone and earn its own 2 marks.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 MARK -->
+    <div class="topic-card" style="border-left: 4px solid #f59e0b;">
+      <div class="topic-header" onclick="toggleTopic(this)" style="cursor:pointer;">
+        <div class="topic-header-content">
+          <div class="topic-title">8-Mark Question</div>
+          <div class="topic-meta">
+            <span class="meta-item"><i class="fas fa-clock"></i> ~10–12 minutes</span>
+            <span class="meta-item"><i class="fas fa-pen"></i> 3–4 paragraphs</span>
+            <span class="meta-item"><i class="fas fa-tag"></i> Explain / Analyse causes or consequences</span>
+          </div>
+        </div>
+        <div class="topic-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="topic-body" id="body-struct-8">
+        <div class="topic-content">
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> What Is This Question?</h3>
+            <p class="content-text">
+              Usually <em>"Explain why…"</em> — asking for multiple reasons or causes. 
+              You need at least <strong>three developed points</strong>, each in its own paragraph. 
+              Marks are awarded for knowledge, accurate detail, and explanation of <em>how</em> each point links to the question. 
+              No need for a balanced argument — just explain, explain, explain.
+            </p>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-list-ol"></i> What You Need</h3>
+            <ul class="content-list">
+              <li><strong>Brief intro (1 sentence, optional)</strong> — signals to the examiner what your points will be</li>
+              <li><strong>3 paragraphs</strong> — each with a clear reason, specific evidence, and explanation of why this answers the question</li>
+              <li><strong>PEEL structure per paragraph</strong> — Point, Evidence, Explanation, Link (back to the question)</li>
+              <li>Specific dates, names, statistics — these are the difference between Level 2 and Level 3 marks</li>
+            </ul>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-pen-fancy"></i> Sentence Framework (PEEEEEEL)</div>
+            <div class="impact-content">
+              <p class="content-text" style="margin-bottom:0.75rem;"><strong>Formula:</strong> <em>Point → Evidence → Explanation → Explanation → Explanation → Explanation → Link</em></p>
+              <p class="content-text" style="background:rgba(16,185,129,0.08);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+                <strong>[INTRO — optional] There were several reasons why…</strong><br><br>
+                <strong>Paragraph 1</strong><br>
+                <strong>P:</strong> One reason [TOPIC] was [POINT].<br>
+                <strong>E:</strong> For example, [SPECIFIC EVIDENCE — date, name, statistic].<br>
+                <strong>E:</strong> This caused [EXPLANATION 1].<br>
+                <strong>E:</strong> Furthermore, this meant that [EXPLANATION 2].<br>
+                <strong>E:</strong> As a result, [EXPLANATION 3].<br>
+                <strong>L:</strong> This links to the question because [DIRECT LINK BACK TO THE QUESTION WORDING].<br><br>
+                <strong>Paragraph 2</strong><br>
+                <strong>P:</strong> Furthermore / Another reason was [POINT].<br>
+                <strong>E:</strong> [SPECIFIC EVIDENCE].<br>
+                <strong>E / E / E:</strong> [Chain of explanation building on each other].<br>
+                <strong>L:</strong> This therefore links to [question] because [LINK].<br><br>
+                <strong>Paragraph 3</strong><br>
+                <strong>P:</strong> Finally, [POINT].<br>
+                <strong>E:</strong> [SPECIFIC EVIDENCE].<br>
+                <strong>E / E / E:</strong> [Chain of explanation].<br>
+                <strong>L:</strong> [Link back to question].
+              </p>
+              <p class="content-text"><strong>Example full PEEEEEEL paragraph (Cold War — "Explain why the Berlin Wall was built"):</strong><br><br>
+                <strong>P:</strong> One reason the Berlin Wall was built was the mass emigration of East Germans to the West.<br>
+                <strong>E:</strong> Between 1945 and 1961, approximately 3.5 million people — nearly 20% of East Germany's population — fled through the open border in Berlin.<br>
+                <strong>E:</strong> Many of those leaving were skilled workers, doctors, and engineers, causing a severe economic crisis in East Germany.<br>
+                <strong>E:</strong> This meant East Germany could not function properly as a state, as it was losing the very people needed to run its economy and public services.<br>
+                <strong>E:</strong> Ulbricht therefore pressured Khrushchev, arguing the wall was the only solution to prevent total collapse.<br>
+                <strong>L:</strong> This directly links to why the wall was built — without stopping emigration, the communist state of East Germany faced economic and political collapse, making construction unavoidable.
+              </p>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-lightbulb"></i> Examiner Tips</div>
+            <p class="content-text">
+              The key to Level 3 (7–8 marks) is <strong>specific evidence</strong> and a strong <strong>Link sentence</strong> that explicitly ties your paragraph back to the question wording. 
+              Don't just describe — always explain <em>why</em> that point answers the question. 
+              The chain of explanations (E → E → E) is what separates a top-band answer from a mid-band one — each E should build on the last, not repeat it. 
+              Three solid PEEEEEEL paragraphs will comfortably hit 7–8 marks.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 16 MARK -->
+    <div class="topic-card" style="border-left: 4px solid #ec4899;">
+      <div class="topic-header" onclick="toggleTopic(this)" style="cursor:pointer;">
+        <div class="topic-header-content">
+          <div class="topic-title">16-Mark Question</div>
+          <div class="topic-meta">
+            <span class="meta-item"><i class="fas fa-clock"></i> ~20–25 minutes</span>
+            <span class="meta-item"><i class="fas fa-pen"></i> 5–6 paragraphs</span>
+            <span class="meta-item"><i class="fas fa-tag"></i> "How far do you agree…" / Evaluation</span>
+          </div>
+        </div>
+        <div class="topic-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="topic-body" id="body-struct-16">
+        <div class="topic-content">
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> What Is This Question?</h3>
+            <p class="content-text">
+              Usually phrased as <em>"How far do you agree that [statement]?"</em> 
+              This is a <strong>balanced argument</strong> question — you must argue on both sides and reach 
+              a supported judgement. You're being assessed on: knowledge and understanding, explanation, 
+              analysis, and the quality of your overall judgement. A one-sided answer is capped at the lower levels.
+            </p>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-list-ol"></i> What You Need</h3>
+            <ul class="content-list">
+              <li><strong>Introduction</strong> — briefly signal your overall argument (agree / partially agree / disagree)</li>
+              <li><strong>2–3 paragraphs AGREEING</strong> with the statement — each using PEEL: Point, Evidence, Explanation, Link</li>
+              <li><strong>2 paragraphs DISAGREEING</strong> (counter-argument) — the alternative factors, also using PEEL</li>
+              <li><strong>Conclusion</strong> — a clear overall judgement explaining which side is more convincing and why</li>
+              <li>Throughout: specific dates, names, statistics, and your <strong>L</strong> sentence explicitly tying each paragraph back to the question</li>
+            </ul>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-pen-fancy"></i> Sentence Framework (PEEL throughout)</div>
+            <div class="impact-content">
+              <p class="content-text" style="background:rgba(16,185,129,0.08);padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+                <strong>INTRO:</strong> I [agree / largely agree / partially agree] that [restate statement]. This is because [brief reason 1] and [brief reason 2], although [counter-argument].<br><br>
+                <strong>AGREE Para 1</strong><br>
+                <strong>P:</strong> One reason to agree is [POINT].<br>
+                <strong>E:</strong> [SPECIFIC EVIDENCE — date, name, statistic].<br>
+                <strong>E:</strong> This shows that [EXPLANATION LINKED TO STATEMENT].<br>
+                <strong>L:</strong> This therefore supports the view that [LINK BACK TO THE EXACT QUESTION WORDING].<br><br>
+                <strong>AGREE Para 2</strong><br>
+                <strong>P:</strong> Furthermore, [POINT].<br>
+                <strong>E:</strong> [SPECIFIC EVIDENCE].<br>
+                <strong>E:</strong> This [EXPLANATION].<br>
+                <strong>L:</strong> This links to [question] because [LINK].<br><br>
+                <strong>AGREE Para 3 (optional)</strong><br>
+                <strong>P:</strong> In addition, [POINT]. <strong>E / E / L…</strong><br><br>
+                <strong>COUNTER Para 1</strong><br>
+                <strong>P:</strong> However, there are reasons to disagree. [ALTERNATIVE POINT].<br>
+                <strong>E:</strong> [SPECIFIC EVIDENCE].<br>
+                <strong>E:</strong> This suggests that [EXPLANATION].<br>
+                <strong>L:</strong> This challenges the statement because [LINK — how this factor undermines the original claim].<br><br>
+                <strong>COUNTER Para 2</strong><br>
+                <strong>P:</strong> Furthermore, [ALTERNATIVE POINT]. <strong>E / E / L…</strong><br><br>
+                <strong>CONCLUSION:</strong> Overall, I [agree / disagree / partially agree] because [MAIN REASON — your strongest point]. While [ACKNOWLEDGE COUNTER], [YOUR JUDGMENT — why your side outweighs the other]. The most important factor was [MOST SIGNIFICANT POINT] because [WHY IT MATTERS MOST].
+              </p>
+              <p class="content-text"><strong>Example PEEL paragraph ("How far do you agree that the Soviet Union was responsible for the Cold War?"):</strong><br><br>
+                <strong>P:</strong> One reason to agree is that Soviet expansion into Eastern Europe directly threatened Western security.<br>
+                <strong>E:</strong> By 1948, Stalin had imposed communist governments on Poland, Czechoslovakia, Hungary, Romania and Bulgaria — the "Iron Curtain" described by Churchill in 1946.<br>
+                <strong>E:</strong> This showed that the USSR was aggressively expanding its sphere of influence rather than cooperating with its wartime allies.<br>
+                <strong>L:</strong> This therefore supports the view that the Soviet Union was primarily responsible, as it was Soviet actions — not American ones — that first broke the post-war alliance and created the conditions for Cold War tension.
+              </p>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> The Level Descriptors</div>
+            <p class="content-text">
+              <strong>Level 1 (1–4):</strong> Simple statements, limited knowledge, no real argument.<br>
+              <strong>Level 2 (5–8):</strong> Some explanation, some evidence, but one-sided or undeveloped.<br>
+              <strong>Level 3 (9–12):</strong> Explains both sides, uses specific evidence, begins to reach a judgement.<br>
+              <strong>Level 4 (13–16):</strong> Analytical, well-evidenced on both sides, clear and convincing overall judgement explaining <em>why</em> one factor outweighs the other.
+            </p>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-lightbulb"></i> Examiner Tips</div>
+            <p class="content-text">
+              The conclusion is where Level 4 is won or lost. Don't just say "Overall I agree." 
+              Say <em>why</em> your argument is stronger — what makes it the most convincing interpretation? 
+              Compare the two sides directly: <em>"While X was important, Y was more significant because…"</em>. 
+              This explicit comparative judgement is what separates top-band from mid-band answers.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 24 MARK -->
+    <div class="topic-card" style="border-left: 4px solid #ef4444;">
+      <div class="topic-header" onclick="toggleTopic(this)" style="cursor:pointer;">
+        <div class="topic-header-content">
+          <div class="topic-title">24-Mark Question <span style="font-size:0.85rem;font-weight:500;color:var(--text-muted);margin-left:0.5rem;">(+4 SPaG)</span></div>
+          <div class="topic-meta">
+            <span class="meta-item"><i class="fas fa-clock"></i> ~35–40 minutes</span>
+            <span class="meta-item"><i class="fas fa-pen"></i> 6–8 paragraphs</span>
+            <span class="meta-item"><i class="fas fa-tag"></i> Extended essay / Significance / Change & Continuity</span>
+          </div>
+        </div>
+        <div class="topic-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="topic-body" id="body-struct-24">
+        <div class="topic-content">
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> What Is This Question?</h3>
+            <p class="content-text">
+              The biggest question on the paper — a full essay worth 24 marks for content 
+              plus 4 additional marks for <strong>SPaG</strong> (Spelling, Punctuation and Grammar). 
+              Usually phrased as <em>"[Statement]. How far do you agree?"</em> or 
+              <em>"[Factor] was the main reason for [event]. How far do you agree?"</em>
+              You are expected to write a fully structured, balanced, analytical essay demonstrating 
+              the highest level of historical thinking.
+            </p>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-list-ol"></i> What You Need</h3>
+            <ul class="content-list">
+              <li><strong>Introduction</strong> — clear thesis stating your overall argument, the factors you'll discuss, and a brief counter-argument signpost</li>
+              <li><strong>3 paragraphs SUPPORTING the statement</strong> — each with point, specific evidence, explanation, and explicit link to the question</li>
+              <li><strong>2–3 paragraphs CHALLENGING the statement</strong> — developed alternative factors with the same level of evidence and explanation</li>
+              <li><strong>Conclusion</strong> — a fully reasoned judgement that compares the relative importance of factors, not just a summary</li>
+              <li><strong>SPaG (4 marks)</strong> — clear sentences, accurate spelling, correct punctuation, varied vocabulary; avoid bullet points in essay</li>
+            </ul>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-pen-fancy"></i> Full Essay Framework</div>
+            <div class="impact-content">
+              <p class="content-text" style="background:rgba(16,185,129,0.08);padding:1rem;border-radius:8px;margin-bottom:1rem;">
+                <strong>INTRODUCTION (3–4 sentences):</strong><br>
+                I [agree / largely agree / disagree] that [restate the statement]. 
+                [Factor in statement] was significant because [one-sentence reason]. 
+                However, [alternative factor 1] and [alternative factor 2] were also important in [context]. 
+                Overall, I believe [your main argument] was the most significant factor because [headline reason].<br><br>
+
+                <strong>PARAGRAPH 1 — Main factor (agrees with statement):</strong><br>
+                <strong>P:</strong> [Statement factor] was important because [POINT].<br>
+                <strong>E:</strong> [SPECIFIC EVIDENCE — date, name, statistic].<br>
+                <strong>E:</strong> This demonstrates that [EXPLANATION — how it answers the question].<br>
+                <strong>L:</strong> This therefore supports the argument that [DIRECT LINK BACK TO QUESTION WORDING].<br><br>
+
+                <strong>PARAGRAPH 2 — Second point agreeing:</strong><br>
+                <strong>P:</strong> Furthermore, [POINT].<br>
+                <strong>E:</strong> [EVIDENCE]. <strong>E:</strong> [EXPLANATION]. <strong>L:</strong> This links to [question] because [LINK].<br><br>
+
+                <strong>PARAGRAPH 3 — Third point agreeing:</strong><br>
+                <strong>P:</strong> In addition, [POINT]. <strong>E / E / L…</strong><br><br>
+
+                <strong>PARAGRAPH 4 — Counter-argument (challenges statement):</strong><br>
+                <strong>P:</strong> However, there is evidence that [ALTERNATIVE FACTOR] was equally / more important.<br>
+                <strong>E:</strong> [SPECIFIC EVIDENCE].<br>
+                <strong>E:</strong> This suggests that [EXPLANATION — how this factor also caused the outcome].<br>
+                <strong>L:</strong> This challenges the statement because without [ALTERNATIVE FACTOR], [outcome] might not have happened in the same way.<br><br>
+
+                <strong>PARAGRAPH 5 — Second counter-argument:</strong><br>
+                <strong>P:</strong> Additionally, [ANOTHER ALTERNATIVE FACTOR]. <strong>E / E / L…</strong><br><br>
+
+                <strong>PARAGRAPH 6 (optional — synthesis):</strong><br>
+                <strong>P/L:</strong> [FACTOR A] and [FACTOR B] were connected because… — showing how factors interlink earns the highest marks.<br><br>
+
+                <strong>CONCLUSION (4–6 sentences):</strong><br>
+                Overall, I [agree / disagree / partially agree] that [restate statement]. 
+                [Main supporting argument — why factor in question was significant]. 
+                However, [best counter-argument]. 
+                The most important factor was [YOUR CHOICE] because [WHY IT OUTWEIGHS THE REST — consider scale, timing, or consequence]. 
+                While [other factors] played a role, [your chosen factor] was ultimately decisive because [final reason].
+              </p>
+            </div>
+          </div>
+
+          <div class="impact-box" style="border-left-color: #f59e0b;">
+            <div class="impact-title" style="color:#f59e0b;"><i class="fas fa-spell-check"></i> SPaG — 4 Bonus Marks</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li><strong>Spelling:</strong> Spell key terms correctly — "Khrushchev", "containment", "propaganda", "excommunication". Practise the hard ones.</li>
+                <li><strong>Punctuation:</strong> Use full stops, commas, and capital letters correctly. Avoid run-on sentences.</li>
+                <li><strong>Grammar:</strong> Write in full sentences. No bullet points. Keep tenses consistent (past tense throughout).</li>
+                <li><strong>Vocabulary:</strong> Use precise historical language — don't just write "things got worse"; write "tensions escalated", "relations deteriorated", "the crisis intensified".</li>
+                <li><strong>4 SPaG marks breakdown:</strong> 4 = high level of accuracy and varied vocabulary; 3 = generally accurate with some errors; 1–2 = frequent errors that obscure meaning</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> The Level Descriptors</div>
+            <p class="content-text">
+              <strong>Level 1 (1–6):</strong> Simple narrative, limited knowledge, no real argument or structure.<br>
+              <strong>Level 2 (7–12):</strong> Some explanation, some evidence, but one-sided or lacks developed analysis.<br>
+              <strong>Level 3 (13–18):</strong> Balanced — addresses both sides, uses specific evidence, attempts an overall judgement.<br>
+              <strong>Level 4 (19–24):</strong> Analytical throughout, both sides fully developed, convincing judgement comparing the relative weight of factors. The best answers explain <em>why</em> one factor is more significant than the others — not just what each factor was.
+            </p>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-lightbulb"></i> Top Exam Tips</div>
+            <p class="content-text">
+              <strong>Plan before you write</strong> — spend 2–3 minutes jotting down your 3 agreeing points and 2–3 counter points. This stops you going blank mid-essay.<br><br>
+              <strong>Specific evidence is everything</strong> — vague answers stay at Level 2. "The Berlin Wall was built in 1961 to stop 3.5 million East Germans from fleeing West" is far stronger than "the wall was built to stop people escaping."<br><br>
+              <strong>The conclusion is where Level 4 is won</strong> — explicitly compare your strongest argument with your best counter-argument and explain why yours wins. Use the phrase "the most significant factor was… because…" to signal top-band thinking.<br><br>
+              <strong>Time management</strong> — 35–40 minutes max. If you run out of time, write your conclusion first before finishing all your paragraphs.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end structuresGrid -->
+</section>
+
   </main>
 
   <!-- Site Footer -->
@@ -1508,6 +1955,20 @@ main {
       const navbar = document.getElementById('navbar');
       navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
+
+    // ═══════════════════════════════════════════════════════════
+    // DYNAMIC NAV HEIGHT — keeps hero clear of fixed navbar
+    // ═══════════════════════════════════════════════════════════
+
+    function adjustMainPadding() {
+      const navHeight = document.getElementById('navbar').offsetHeight;
+      document.querySelector('main').style.paddingTop = (navHeight + 24) + 'px';
+    }
+
+    window.addEventListener('resize', adjustMainPadding);
+    // Run after fonts/layout settle
+    window.addEventListener('load', adjustMainPadding);
+    document.addEventListener('DOMContentLoaded', adjustMainPadding);
 
     // ═══════════════════════════════════════════════════════════
     // DATA STRUCTURES - EXPANDED CONTENT
@@ -2395,6 +2856,157 @@ main {
           </div>
         `
       },
+
+      {
+        id: "bay-of-pigs",
+        title: "Bay of Pigs Invasion (1961)",
+        icon: "fa-water",
+        period: "1959–1961",
+        content: `
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-question-circle"></i> What Was It?</h3>
+            <p class="content-text">
+              The Bay of Pigs (Bahía de Cochinos) was a failed CIA-backed invasion of Cuba in April 1961, 
+              carried out by approximately 1,400 Cuban exiles trained and funded by the United States. 
+              Its goal was to overthrow Fidel Castro's communist government — and it ended in complete 
+              disaster within 72 hours, becoming one of the most embarrassing foreign policy failures in 
+              US history.
+            </p>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-history"></i> Background — Why Cuba Mattered</h3>
+            <ul class="content-list">
+              <li><strong>Cuban Revolution (1959):</strong> Fidel Castro overthrew US-backed dictator Batista. Castro seized American-owned businesses and property, turning Washington firmly against him.</li>
+              <li><strong>Communist alignment:</strong> By 1960 Castro was aligning with the USSR — accepting Soviet aid and trade. Cuba became a communist state just 90 miles from Florida.</li>
+              <li><strong>US economic pressure:</strong> Eisenhower cut off sugar imports (Cuba's main export) and imposed a trade embargo in 1960, pushing Cuba further into Soviet arms.</li>
+              <li><strong>CIA plan approved:</strong> Eisenhower authorised the CIA in March 1960 to train Cuban exiles for an invasion. Kennedy inherited the plan when he took office in January 1961.</li>
+              <li><strong>Domino fear:</strong> US policymakers feared Cuba would inspire communist revolutions across Latin America.</li>
+            </ul>
+          </div>
+
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-calendar-alt"></i> Timeline of the Invasion</h3>
+
+            <div class="timeline-item">
+              <div class="timeline-date">1960</div>
+              <div class="timeline-content">
+                <strong>Planning begins:</strong> CIA recruits and trains approximately 1,400 Cuban exiles (Brigade 2506) 
+                in Guatemala. The plan assumes a popular uprising against Castro will follow the landing — 
+                an assumption that proved fatally wrong.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">Jan 1961</div>
+              <div class="timeline-content">
+                <strong>Kennedy takes over:</strong> New President Kennedy is briefed on the CIA plan. He is uneasy 
+                but approves it, partly not wanting to appear "soft" on communism. He makes one crucial 
+                change — he refuses to allow direct US air support, trying to maintain plausible deniability.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">15 Apr 1961</div>
+              <div class="timeline-content">
+                <strong>Air strikes fail:</strong> Eight CIA-supplied B-26 bombers (painted to look like Cuban air force 
+                planes) attack Cuban airfields to destroy Castro's air force. The strikes destroy only a fraction 
+                of Castro's planes — the air force survives largely intact. The deception fools no one; the 
+                world realises the US is involved.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">17 Apr 1961</div>
+              <div class="timeline-content">
+                <strong>Landings begin:</strong> Brigade 2506 lands at the Bay of Pigs on Cuba's southern coast. 
+                Almost immediately things go wrong — the area is swarming with Cuban militia (Castro had been 
+                tipped off by intelligence leaks). Coral reefs damage landing craft. Radio equipment is lost. 
+                Supply ships are sunk by Castro's surviving air force.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">17–19 Apr 1961</div>
+              <div class="timeline-content">
+                <strong>Collapse:</strong> Kennedy cancels a second wave of air strikes (afraid of US involvement 
+                being exposed internationally). Without air cover, the exiles are hopelessly outgunned. 
+                Castro personally helps direct the counterattack. Within 72 hours the invasion collapses.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">19 Apr 1961</div>
+              <div class="timeline-content">
+                <strong>Defeat:</strong> ~1,200 of the 1,400 invaders are captured; 114 are killed. Castro parades 
+                prisoners on Cuban television — a propaganda triumph. The US publicly humiliated. Kennedy 
+                accepts full responsibility: "Victory has a hundred fathers and defeat is an orphan."
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">Dec 1962</div>
+              <div class="timeline-content">
+                <strong>Ransom deal:</strong> The 1,179 surviving prisoners are eventually ransomed back by the US — 
+                Cuba receives $53 million worth of food and medicine. The last public reminder of the 
+                humiliation.
+              </div>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-times-circle"></i> Why Did It Fail?</div>
+            <div class="content-text">
+              <strong>Intelligence failures:</strong> The CIA massively overestimated popular opposition to Castro — no uprising materialised.<br><br>
+              <strong>Leaks:</strong> The operation was an open secret; Castro knew an invasion was coming and had time to prepare.<br><br>
+              <strong>Kennedy's hesitation:</strong> Cancelling the second air strike left the exiles without air cover — a fatal compromise between action and deniability.<br><br>
+              <strong>Geography:</strong> The Bay of Pigs landing site was surrounded by swamps, making retreat impossible.<br><br>
+              <strong>Overconfidence:</strong> The CIA assumed Castro's regime was fragile and unpopular — in reality, many Cubans supported the revolution.<br><br>
+              <strong>No US backup:</strong> Kennedy refused to commit US troops or direct air power, which left the plan dependent on wishful thinking.
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-bolt"></i> Immediate Consequences</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Kennedy's credibility severely damaged — seen as weak and incompetent in his first major foreign policy test</li>
+                <li>Castro's position in Cuba enormously strengthened — a US-backed invasion had been repelled, boosting nationalist pride</li>
+                <li>Cuba formally declared a socialist state; Castro drew even closer to the USSR for protection</li>
+                <li>Khrushchev emboldened — concluded Kennedy was inexperienced and could be pressured (contributed to Berlin ultimatum and Cuba missiles)</li>
+                <li>Latin American opinion turned against the USA — confirmed fears of US imperialism and intervention</li>
+                <li>CIA's reputation for competence was shattered; Kennedy sacked CIA Director Allen Dulles</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Long-term Significance</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li><strong>Direct road to Cuban Missile Crisis:</strong> The failed invasion convinced Khrushchev and Castro that Cuba needed Soviet nuclear missiles for protection — leading directly to the October 1962 crisis</li>
+                <li>Kennedy learned from the failure — during the Missile Crisis he was far more sceptical of military and CIA advice, and insisted on more cautious options (quarantine not invasion)</li>
+                <li>US trade embargo on Cuba tightened and lasted for decades (only partially eased under Obama in 2015)</li>
+                <li>Showed the limits of CIA covert operations — the US could not overthrow unfriendly governments without political cost</li>
+                <li>Cuba remained communist throughout the Cold War and beyond — the invasion achieved nothing except entrenching Castro's rule</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-title"><i class="fas fa-star"></i> Exam Tips</div>
+            <p class="content-text">
+              The Bay of Pigs is best used as <strong>context and cause for the Cuban Missile Crisis</strong> — 
+              examiners often ask why missiles ended up in Cuba, and this is a key reason. 
+              Also strong for questions about US Cold War policy failures, the limits of covert operations, 
+              and Kennedy's decision-making. Key argument: the failed invasion <em>caused</em> the Missile Crisis 
+              by convincing the USSR and Cuba they needed nuclear deterrence. Compare Kennedy's handling here 
+              (indecisive, compromised) with his handling of the Missile Crisis (firm, cautious) to show how 
+              he learned from failure.
+            </p>
+          </div>
+        `
+      },
     ];
 
     const elizabethanTopics = [
@@ -3076,6 +3688,9 @@ main {
       { q: "Who was the Soviet leader during the Cuban Missile Crisis?", a: "khrushchev", hint: "He de-Stalinised the USSR; later ousted in 1964 partly because of the crisis" },
       { q: "Who was the US President during the Cuban Missile Crisis?", a: "kennedy", hint: "JFK — assassinated in November 1963" },
       { q: "Name the CIA-backed invasion of Cuba in 1961 that ended in disaster.", a: "bay of pigs", hint: "Named after a bay on Cuba's southern coast; a catastrophic failure" },
+      { q: "Who led the Cuban Revolution that brought a communist government to power in 1959?", a: "fidel castro", hint: "He overthrew the US-backed dictator Batista and ruled Cuba for decades" },
+      { q: "How many Cuban exile fighters were captured after the Bay of Pigs invasion failed?", a: "1200", hint: "Around 1,200 out of 1,400 invaders were taken prisoner" },
+      { q: "Why did Kennedy cancel the second wave of air strikes during the Bay of Pigs invasion?", a: "to maintain plausible deniability", hint: "He feared exposing direct US involvement — but the decision left the exiles without air cover" },
       { q: "What was the name of the US spy plane shot down over Cuba on Black Saturday?", a: "u-2", hint: "A high-altitude reconnaissance aircraft" },
       { q: "In what year was the Berlin Wall built?", a: "1961", hint: "Built by East Germany to stop the flood of citizens escaping to the West" },
       { q: "How many East Germans fled West before the Wall was built?", a: "3 million", hint: "Around ___ million people left between 1945 and 1961" },
@@ -3238,11 +3853,13 @@ main {
       const coldSection = document.getElementById('cold');
       const elizSection = document.getElementById('elizabeth');
       const quizPanel = document.getElementById('quizPanel');
+      const structuresSection = document.getElementById('structures');
       const btns = document.querySelectorAll('.nav-btn');
 
       coldSection.style.display = 'none';
       elizSection.style.display = 'none';
       quizPanel.style.display = 'none';
+      structuresSection.style.display = 'none';
 
       btns.forEach(b => b.classList.remove('active'));
 
@@ -3254,6 +3871,9 @@ main {
         elizSection.style.display = 'block';
         btns[1].classList.add('active');
         activeTab = 'elizabeth';
+      } else if (tab === 'structures') {
+        structuresSection.style.display = 'block';
+        btns[2].classList.add('active');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -3275,11 +3895,12 @@ main {
 
       document.getElementById('cold').style.display = 'none';
       document.getElementById('elizabeth').style.display = 'none';
+      document.getElementById('structures').style.display = 'none';
       const quizPanel = document.getElementById('quizPanel');
       quizPanel.style.display = 'block';
 
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.nav-btn')[2].classList.add('active');
+      document.querySelectorAll('.nav-btn')[3].classList.add('active');
 
       // Update quiz header to reflect the current topic
       document.getElementById('quizTopicLabel').innerHTML = `<i class="fas ${topicIcon}" style="margin-right:0.4rem;"></i>${topicLabel}`;
