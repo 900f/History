@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Year 11 History Revision Hub | Professional Study Platform</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,6 +53,7 @@ body {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; /* prevent iOS font size change on rotate */
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -214,7 +215,7 @@ body {
 
 main {
   padding-top: 100px;
-  padding-bottom: 6rem;
+  padding-bottom: 8rem;
   min-height: 100vh;
 }
 
@@ -628,6 +629,11 @@ main {
   font-size: 1rem;
 }
 
+#quizTopicLabel {
+  color: var(--primary-light);
+  font-weight: 700;
+}
+
 .progress-section {
   margin-bottom: 2.5rem;
 }
@@ -1014,12 +1020,13 @@ main {
 @media (max-width: 768px) {
   /* Nav stacks — reduce main top padding to match smaller nav height */
   main {
-    padding-top: 155px;
+    padding-top: 150px;
+    padding-bottom: 5rem;
   }
 
   .nav-container {
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.5rem;
     padding: 0.75rem 1rem;
   }
 
@@ -1045,9 +1052,10 @@ main {
   }
 
   .nav-btn {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.82rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
     gap: 0.4rem;
+    min-height: 42px; /* better touch target */
   }
 
   .hero-badge {
@@ -1090,8 +1098,9 @@ main {
   }
 
   .topic-header {
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 1.25rem;
     gap: 0.75rem;
+    min-height: 60px; /* easier to tap */
   }
 
   .topic-title {
@@ -1117,6 +1126,10 @@ main {
     padding: 1.25rem;
   }
 
+  .content-heading {
+    font-size: 1rem;
+  }
+
   /* Timeline stacks vertically on mobile */
   .timeline-item {
     flex-direction: column;
@@ -1139,6 +1152,11 @@ main {
 
   .impact-box {
     padding: 1.1rem;
+  }
+
+  /* topic-card hover lift disabled on touch */
+  .topic-card:hover {
+    transform: none;
   }
 
   #quizPanel {
@@ -1174,9 +1192,10 @@ main {
   }
 
   .quiz-btn {
-    padding: 0.85rem 0.75rem;
+    padding: 0.9rem 0.75rem;
     font-size: 0.85rem;
     gap: 0.4rem;
+    min-height: 48px; /* good touch target */
   }
 
   .score-grid {
@@ -1200,12 +1219,22 @@ main {
     min-width: auto;
     top: 75px;
   }
+
+  /* Tighten section headers on mobile */
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .topics-grid {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   /* Very small phones — nav is tallest here */
   main {
-    padding-top: 175px;
+    padding-top: 170px;
+    padding-bottom: 4rem;
   }
 
   .container {
@@ -1242,6 +1271,19 @@ main {
   .content-list li {
     padding-left: 1.5rem;
     margin-left: 0.5rem;
+    font-size: 0.92rem;
+  }
+
+  .content-text {
+    font-size: 0.92rem;
+  }
+
+  .impact-title {
+    font-size: 0.97rem;
+  }
+
+  .key-point {
+    padding: 1rem;
   }
 
   .quiz-actions {
@@ -1255,6 +1297,17 @@ main {
 
   .score-value {
     font-size: 1.4rem;
+  }
+
+  /* Prevent long words from overflowing on very small screens */
+  .topic-title,
+  .content-heading,
+  .content-text,
+  .impact-title,
+  .impact-content,
+  .key-point-title {
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 }
 
@@ -1360,10 +1413,10 @@ main {
 </section>
 
 <!-- Quiz Panel -->
-<section id="quizPanel">
+<section id="quizPanel" style="padding-bottom: 2rem;">
   <div class="quiz-header">
     <h2 class="quiz-title">Knowledge Assessment</h2>
-    <p class="quiz-subtitle">Test your understanding with targeted questions</p>
+    <p class="quiz-subtitle">Testing: <strong id="quizTopicLabel"><i class="fas fa-globe" style="margin-right:0.4rem;"></i>Cold War</strong></p>
   </div>
 
   <div class="progress-section">
@@ -1425,6 +1478,26 @@ main {
 </section>
 
   </main>
+
+  <!-- Site Footer -->
+  <footer style="
+    text-align: center;
+    padding: 2.5rem 1rem 3.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    background: rgba(10,10,10,0.6);
+    backdrop-filter: blur(8px);
+  ">
+    <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.5rem;">
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <i class="fas fa-graduation-cap" style="color:black;font-size:0.85rem;"></i>
+      </div>
+      <span style="font-weight:700;color:var(--text-secondary);font-size:0.95rem;">History Revision Hub</span>
+    </div>
+    <p style="margin-bottom:0.25rem;">Year 11 GCSE History &mdash; Cold War &amp; Elizabethan England</p>
+    <p style="color:var(--text-muted);font-size:0.78rem;">Revision materials &bull; Interactive quiz &bull; Exam technique</p>
+  </footer>
 
   <script>
     // ═══════════════════════════════════════════════════════════
@@ -2335,27 +2408,55 @@ main {
             <h3 class="content-heading"><i class="fas fa-question-circle"></i> Problems on Accession</h3>
             <p class="content-text">Elizabeth inherited a deeply divided and financially weak country in 1558. Religious division, foreign threats, succession uncertainty, and weak finances created immediate challenges.</p>
             <ul class="content-list">
-              <li><strong>Religion:</strong> England had swung between Catholicism (Mary I) and Protestantism (Edward VI)</li>
+              <li><strong>Religion:</strong> England had swung between Catholicism (Mary I) and Protestantism (Edward VI) — people exhausted by change</li>
               <li><strong>Threats:</strong> France (Mary Queen of Scots + French alliance), Spain (growing power), Papacy (excommunication 1570)</li>
-              <li><strong>Succession:</strong> No clear heir — Mary Queen of Scots had strong claim</li>
-              <li><strong>Finance:</strong> Debt ~£300,000; debased coinage caused inflation</li>
-              <li><strong>Gender:</strong> Many doubted a woman could rule effectively</li>
+              <li><strong>Succession:</strong> No clear heir — Mary Queen of Scots had strong claim; pressure on Elizabeth to marry immediately</li>
+              <li><strong>Finance:</strong> Debt ~£300,000; debased coinage caused inflation; war with France had drained treasury</li>
+              <li><strong>Gender:</strong> John Knox had published "The First Blast of the Trumpet Against the Monstrous Regiment of Women" (1558) — many doubted women could rule</li>
+              <li><strong>Legitimacy:</strong> Catholics viewed Elizabeth as illegitimate (daughter of Anne Boleyn, whose marriage Henry VIII had engineered)</li>
+            </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-user-tie"></i> Elizabeth's Key Advisors</h3>
+            <p class="content-text">Elizabeth relied heavily on a small group of trusted councillors, particularly in the early years of her reign.</p>
+            <ul class="content-list">
+              <li><strong>William Cecil (Lord Burghley):</strong> Chief Secretary of State 1558–1572, then Lord Treasurer; the most important adviser of her reign — cautious, methodical, loyal for over 40 years</li>
+              <li><strong>Robert Dudley (Earl of Leicester):</strong> Elizabeth's favourite and rumoured love interest; Master of the Horse; controversial figure at court</li>
+              <li><strong>Sir Francis Walsingham:</strong> Principal Secretary from 1573; built spy network that uncovered Catholic plots; fiercely Protestant</li>
+              <li><strong>Sir Nicholas Bacon:</strong> Lord Keeper of the Great Seal; Cecil's brother-in-law; moderate Protestant voice</li>
             </ul>
           </div>
           <div class="content-section">
             <h3 class="content-heading"><i class="fas fa-check-circle"></i> Settlement of Religion (1559)</h3>
-            <p class="content-text">Elizabeth's Religious Settlement aimed for a moderate Protestant church that most people could accept — the via media.</p>
+            <p class="content-text">Elizabeth's Religious Settlement aimed for a moderate Protestant church that most people could accept — the via media (middle way) between extreme Catholicism and radical Protestantism.</p>
             <ul class="content-list">
-              <li>Act of Supremacy: Elizabeth "Supreme Governor" (not Supreme Head)</li>
-              <li>Act of Uniformity: One prayer book (1559 version — more moderate)</li>
-              <li>Compromise elements: crucifixes allowed, clerical vestments, bishops retained</li>
-              <li>Fines for non-attendance (1 shilling)</li>
-              <li>Success: Most people conformed; extremists (puritans + Catholics) unhappy</li>
+              <li><strong>Act of Supremacy:</strong> Elizabeth "Supreme Governor" (not Supreme Head — a deliberate compromise, more acceptable to Catholics)</li>
+              <li><strong>Act of Uniformity:</strong> One prayer book (1559 version — more moderate than Edward VI's 1552 version); fines of 1 shilling per Sunday for non-attendance</li>
+              <li><strong>Compromise elements:</strong> Crucifixes and candles allowed in royal chapels; clerical vestments retained; bishops kept their positions</li>
+              <li><strong>39 Articles (1563):</strong> Defined Church of England's Protestant doctrine — Calvinist in theology but Catholic in structure</li>
+              <li><strong>The Settlement in practice:</strong> Elizabeth insisted on outward conformity; famous quote — "I will make no windows into men's souls"</li>
             </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-ring"></i> The Marriage Question</h3>
+            <p class="content-text">Parliament and councillors repeatedly urged Elizabeth to marry and produce an heir. Her refusal became one of the defining features of her reign.</p>
+            <div class="timeline-item">
+              <div class="timeline-date">1559–1560</div>
+              <div class="timeline-content"><strong>Philip II of Spain proposed</strong> — wanted to maintain influence over England; Elizabeth diplomatically declined without causing war</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">1560s</div>
+              <div class="timeline-content"><strong>Robert Dudley (Earl of Leicester)</strong> — closest to marriage; but his wife Amy Robsart died in suspicious circumstances (1560), making marriage politically impossible</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">1570s–80s</div>
+              <div class="timeline-content"><strong>French Anjou negotiations</strong> — Elizabeth appeared genuinely tempted; Cecil and Leicester both opposed; she called Anjou her "little frog"; ultimately rejected amid public opposition</div>
+            </div>
+            <p class="content-text" style="margin-top:1rem;">Elizabeth used the <strong>marriage question as a diplomatic tool</strong> — keeping European powers hopeful of alliance through marriage without ever committing. Her title as "The Virgin Queen" became a powerful piece of propaganda.</p>
           </div>
           <div class="key-point">
             <div class="key-point-title"><i class="fas fa-star"></i> Exam Focus</div>
-            <p class="content-text">Explain how the Settlement was a political as well as religious compromise. Assess success — prevented civil war in 1560s but stored up problems (Catholic plots, Puritan pressure).</p>
+            <p class="content-text">Explain how the Settlement was a political as well as religious compromise. Note the <strong>genius of the via media</strong>: broad enough to include most people, vague enough to avoid forcing Catholics into rebellion. Assess success — prevented civil war in 1560s but stored up problems (Catholic plots, Puritan pressure). On the marriage question: Elizabeth's refusal preserved her independence but left England without a clear Protestant succession.</p>
           </div>
         `
       },
@@ -2367,21 +2468,69 @@ main {
         content: `
           <div class="content-section">
             <h3 class="content-heading"><i class="fas fa-exclamation-triangle"></i> Why was Mary a Threat?</h3>
-            <p class="content-text">Mary was Elizabeth's cousin, a Catholic, with a strong claim to the English throne — and she was in England from 1568 onwards.</p>
+            <p class="content-text">Mary Stuart was simultaneously Elizabeth's closest living relative and her most dangerous enemy. As a Catholic with royal blood, she was the natural figurehead for anyone who wanted to overthrow Protestant England.</p>
+            <ul class="content-list">
+              <li><strong>Claim to the throne:</strong> Granddaughter of Henry VIII's sister Margaret Tudor — had a strong hereditary claim</li>
+              <li><strong>Catholic legitimacy:</strong> For Catholics who saw Elizabeth as illegitimate, Mary was the rightful Queen of England</li>
+              <li><strong>Foreign backing:</strong> France and Spain both had reasons to support her; Philip II eventually backed plots using Mary as the Catholic alternative</li>
+              <li><strong>Presence in England:</strong> From 1568 she lived under house arrest — a constant rallying point for English Catholics</li>
+              <li><strong>Personal magnetism:</strong> Charismatic, educated, and capable — more dangerous than a passive prisoner</li>
+            </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-crown"></i> Mary's Background & Fall in Scotland</h3>
+            <p class="content-text">Mary's path to England was shaped by a turbulent reign in Scotland, multiple marriages, and political disaster.</p>
+            <div class="timeline-item">
+              <div class="timeline-date">1542–1560</div>
+              <div class="timeline-content"><strong>Queen of Scotland from infancy</strong> — raised in France; married French Dauphin (later Francis II) in 1558. Also styled herself Queen of England, directly challenging Elizabeth.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">1561</div>
+              <div class="timeline-content"><strong>Returns to Scotland</strong> as a young widow after Francis II died. Catholic queen ruling a Protestant Scotland — already a difficult position.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">1565</div>
+              <div class="timeline-content"><strong>Married Lord Darnley</strong> — her Catholic cousin; marriage quickly turned sour. Darnley was weak and jealous.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">1566</div>
+              <div class="timeline-content"><strong>Murder of Rizzio</strong> — Mary's Italian secretary David Rizzio stabbed to death in front of the pregnant Mary; Darnley suspected to be involved.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">1567</div>
+              <div class="timeline-content"><strong>Darnley murdered</strong> — found dead after explosion at Kirk o' Field. Mary swiftly married the Earl of Bothwell (chief suspect). Scottish nobility rebelled; Mary forced to abdicate. Her infant son became James VI.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">1568</div>
+              <div class="timeline-content"><strong>Flees to England</strong> — defeated at Battle of Langside. Expected Elizabeth's help to retake throne. Instead, imprisoned at Carlisle then various castles for 19 years.</div>
+            </div>
           </div>
           <div class="impact-box">
-            <div class="impact-title"><i class="fas fa-bolt"></i> Key Events Timeline</div>
+            <div class="impact-title"><i class="fas fa-bolt"></i> Mary's Years in Captivity (1568–1587)</div>
             <div class="impact-content">
-              <div class="timeline-item"><div class="timeline-date">1568</div><div class="timeline-content">Mary flees Scotland → imprisoned by Elizabeth</div></div>
-              <div class="timeline-item"><div class="timeline-date">1570</div><div class="timeline-content">Pope Pius V excommunicates Elizabeth → encourages plots</div></div>
-              <div class="timeline-item"><div class="timeline-date">1571</div><div class="timeline-content">Ridolfi Plot discovered</div></div>
-              <div class="timeline-item"><div class="timeline-date">1586</div><div class="timeline-content">Babington Plot — letters intercepted by Walsingham</div></div>
-              <div class="timeline-item"><div class="timeline-date">1587</div><div class="timeline-content">Mary executed after trial</div></div>
+              <div class="timeline-item"><div class="timeline-date">1569</div><div class="timeline-content"><strong>Northern Rebellion</strong> — Catholic earls raised army partly to free Mary; crushed by Elizabeth's forces. 450 rebels executed.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1570</div><div class="timeline-content"><strong>Papal Bull "Regnans in Excelsis"</strong> — Pope excommunicates Elizabeth; effectively made every Catholic in England a potential traitor if they obeyed the Pope over their queen.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1571</div><div class="timeline-content"><strong>Ridolfi Plot</strong> — Italian banker Roberto Ridolfi planned Spanish invasion + Duke of Norfolk to marry Mary. Norfolk executed — only duke executed in Elizabeth's reign. Mary implicated but Elizabeth refused to execute her.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1583</div><div class="timeline-content"><strong>Throckmorton Plot</strong> — planned French-Spanish invasion; Francis Throckmorton acted as messenger for Mary. Discovered; Throckmorton executed; Spanish ambassador Mendoza expelled.</div></div>
+              <div class="timeline-item"><div class="timeline-date">1586</div><div class="timeline-content"><strong>Babington Plot</strong> — Anthony Babington planned to assassinate Elizabeth and place Mary on throne. Walsingham used double agent Gilbert Gifford; Mary's coded letters intercepted via beer barrel. Mary explicitly approved assassination of Elizabeth — fatal mistake.</div></div>
+              <div class="timeline-item"><div class="timeline-date">8 Feb 1587</div><div class="timeline-content"><strong>Execution at Fotheringhay Castle</strong> — Mary dressed in crimson (colour of Catholic martyrdom). First blow of the axe did not kill her. Reported that her lips kept moving for 15 minutes after decapitation. Her dog was found hidden under her skirts.</div></div>
+            </div>
+          </div>
+          <div class="impact-box">
+            <div class="impact-title"><i class="fas fa-globe"></i> Consequences of Mary's Execution</div>
+            <div class="impact-content">
+              <ul class="content-list">
+                <li>Philip II used execution as justification for launching Spanish Armada (1588) — gave him moral authority</li>
+                <li>James VI of Scotland (Mary's son) was angry but accepted the situation — he was Elizabeth's likely heir</li>
+                <li>Elizabeth signed death warrant then claimed her Secretary Davison had acted without authorisation — publicly distanced herself from the decision</li>
+                <li>Removed the Catholic figurehead — no more legitimate Catholic alternative to Protestant Elizabeth</li>
+                <li>Mary became a Catholic martyr figure — propaganda victory for Catholics across Europe</li>
+              </ul>
             </div>
           </div>
           <div class="key-point">
             <div class="key-point-title"><i class="fas fa-star"></i> Why Elizabeth hesitated to execute Mary</div>
-            <p class="content-text">Killing an anointed monarch set dangerous precedent → could encourage plots against herself. Also feared backlash from Catholic Europe.</p>
+            <p class="content-text">Elizabeth delayed for <strong>19 years</strong> despite enormous pressure from Cecil and Parliament. Key reasons: (1) Killing an anointed monarch set a dangerous precedent — could encourage subjects to execute their own monarchs. (2) Feared backlash from Catholic Europe, especially France. (3) Mary's son James VI was Protestant and Elizabeth's likely heir — she did not want to alienate him. (4) Elizabeth may have genuinely found the decision morally troubling. When she finally signed the warrant in February 1587, she claimed it was sent without her authorisation — a transparent fiction that fooled no one.</p>
           </div>
         `
       },
@@ -2411,18 +2560,42 @@ main {
               <div class="timeline-item"><div class="timeline-date">Sep–Oct 1588</div><div class="timeline-content">Storms destroy ~44 ships; ~20,000 Spaniards die — most to weather, not battle</div></div>
             </div>
           </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-anchor"></i> The Armada's Plan & Why It Failed</h3>
+            <p class="content-text">The Spanish plan (the "Enterprise of England") was ambitious but flawed from the start — it required perfect coordination between two separate forces.</p>
+            <ul class="content-list">
+              <li><strong>The plan:</strong> 130-ship Armada would sail to Netherlands, collect the Duke of Parma's 17,000-strong veteran army, then escort it across the Channel to invade England</li>
+              <li><strong>Fatal flaw:</strong> No deep-water port for Armada to anchor near Netherlands — shallow coastal waters kept Armada offshore</li>
+              <li><strong>Dutch flyboats:</strong> Small, fast Dutch rebel ships blockaded Parma's army in port — he could never embark his troops</li>
+              <li><strong>Communication failure:</strong> Medina Sidonia (Armada commander) and Parma could never coordinate effectively</li>
+              <li><strong>English tactics:</strong> English ships were faster, lower, with longer-range guns — fought at a distance, avoided the Spanish boarding tactics</li>
+            </ul>
+          </div>
           <div class="key-point">
             <div class="key-point-title"><i class="fas fa-star"></i> Exam: Why England Won</div>
-            <p class="content-text">Better English tactics and ships (faster, lower), fire ships at Calais, English seamanship, Drake's leadership — but critically, Protestant storms ("God blew and they were scattered"). Also: Parma's army never embarked — Dutch flyboats blockaded Netherlands ports.</p>
+            <p class="content-text">Better English tactics and ships (faster, lower, longer range guns), fire ships at Gravelines scattered the Armada's tight formation, English seamanship and Drake's experience — but critically, <strong>Protestant storms</strong> ("God blew and they were scattered" — the Protestant propaganda). Also: Parma's army never embarked — Dutch flyboats blockaded Netherlands ports. The Armada was already damaged and scattered before the worst storms hit.</p>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-scroll"></i> Elizabeth's Tilbury Speech (August 1588)</h3>
+            <p class="content-text">With invasion still feared, Elizabeth rode out to address her troops at Tilbury — one of the most famous speeches in English history. She dressed in white with silver breastplate, riding a grey horse.</p>
+            <div class="impact-box">
+              <div class="impact-title"><i class="fas fa-quote-left"></i> Key Lines from the Speech</div>
+              <div class="impact-content">
+                <p class="content-text">"I know I have the body of a weak and feeble woman; but I have the heart and stomach of a king, and of a king of England too."</p>
+                <p class="content-text">The speech addressed the central anxiety of her reign — her gender — and transformed it into strength. It became a defining moment of Elizabethan propaganda.</p>
+              </div>
+            </div>
           </div>
           <div class="impact-box">
-            <div class="impact-title"><i class="fas fa-globe"></i> Significance</div>
+            <div class="impact-title"><i class="fas fa-globe"></i> Significance & Consequences</div>
             <div class="impact-content">
               <ul class="content-list">
-                <li>Confirmed England as a major Protestant naval power</li>
-                <li>Elizabeth's Tilbury speech — "I have the body of a weak woman but the heart of a king" — boosted morale</li>
-                <li>Spain rebuilt fleet; war continued until 1604 — victory not decisive</li>
-                <li>Elizabeth's prestige at home soared enormously</li>
+                <li>Confirmed England as a major Protestant naval power — psychological turning point in Anglo-Spanish rivalry</li>
+                <li>Elizabeth's prestige at home soared enormously — celebrated as national triumph and proof of Protestant God's favour</li>
+                <li>Spain rebuilt fleet; <strong>war continued until 1604</strong> — Armada's defeat was not war's end; Spain remained powerful</li>
+                <li>England sent its own failed armada counter-attack in 1589 — showed limits of English naval power too</li>
+                <li>Encouraged further English privateering and colonial ambitions — Drake, Raleigh, Hawkins all became national heroes</li>
+                <li>Propaganda value enormous — "Armada portraits" of Elizabeth showed her hand resting on the globe, commanding the seas</li>
               </ul>
             </div>
           </div>
@@ -2483,13 +2656,47 @@ main {
           </div>
           <div class="content-section">
             <h3 class="content-heading"><i class="fas fa-compass"></i> Exploration & Expansion</h3>
+            <p class="content-text">Elizabethan England was gripped by a spirit of adventure and ambition. Explorers and "sea dogs" sought wealth, glory, and new trade routes — often with Elizabeth's secret backing and plausible deniability.</p>
             <ul class="content-list">
-              <li><strong>Francis Drake (1577–80):</strong> Second person to circumnavigate globe; returned with £600,000 in plunder</li>
-              <li><strong>Walter Raleigh:</strong> Attempted colonies in Virginia (Roanoke, 1587) — "Lost Colony"</li>
-              <li><strong>John Hawkins:</strong> Began English involvement in slave trade; reformed Royal Navy</li>
-              <li><strong>East India Company (1600):</strong> Founded last year of reign — began England's commercial empire</li>
-              <li><strong>Purpose of exploration:</strong> wealth (gold/silver), trade routes, spreading Protestantism, glory</li>
+              <li><strong>Purpose of exploration:</strong> Wealth (gold/silver/plunder), new trade routes, spreading Protestantism, national glory, weakening Spain</li>
+              <li><strong>The "Sea Dogs":</strong> Elizabeth's privateers operated in a legal grey zone — state-sponsored pirates who raided Spanish shipping with unofficial royal approval</li>
+              <li><strong>East India Company (1600):</strong> Founded in the final year of Elizabeth's reign — launched England's commercial empire in Asia; competed with Portuguese and Dutch</li>
             </ul>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-ship"></i> Francis Drake — England's Greatest Explorer</h3>
+            <p class="content-text">Sir Francis Drake was the most celebrated English sailor of the Elizabethan age — privateer, circumnavigator, and naval hero of the Armada campaign. Elizabeth called him "my pirate."</p>
+            <div class="impact-box">
+              <div class="impact-title"><i class="fas fa-calendar-alt"></i> Drake's Career Timeline</div>
+              <div class="impact-content">
+                <div class="timeline-item"><div class="timeline-date">1560s–70s</div><div class="timeline-content"><strong>Early career as privateer:</strong> Sailed with his cousin John Hawkins on slave-trading expeditions to West Africa and the Caribbean. At the Battle of San Juan de Ulúa (1568), Spanish forces ambushed and decimated their fleet — Drake vowed revenge against Spain.</div></div>
+                <div class="timeline-item"><div class="timeline-date">1572–73</div><div class="timeline-content"><strong>Raid on Nombre de Dios (Panama):</strong> Drake led a daring raid on the Spanish silver port. Became the first Englishman to see the Pacific Ocean — reportedly prayed to sail an English ship on those waters. Returned with enormous plunder.</div></div>
+                <div class="timeline-item"><div class="timeline-date">1577–80</div><div class="timeline-content"><strong>Circumnavigation of the globe:</strong> Set out with 5 ships; only his flagship <em>Golden Hind</em> completed the voyage. Raided Spanish ports along South America's Pacific coast (completely undefended — Spain never expected attack from there). Captured the treasure ship <em>Cacafuego</em> — single richest prize in Elizabethan history. Returned with £600,000 in plunder (equivalent to almost twice the Crown's annual income). Elizabeth boarded the Golden Hind at Deptford and knighted Drake on the deck.</div></div>
+                <div class="timeline-item"><div class="timeline-date">1585–86</div><div class="timeline-content"><strong>Caribbean raids:</strong> Sacked Santo Domingo and Cartagena; rescued Raleigh's struggling Roanoke colonists on the return journey. Demonstrated Spain's colonial empire was vulnerable.</div></div>
+                <div class="timeline-item"><div class="timeline-date">1587</div><div class="timeline-content"><strong>"Singeing the King of Spain's beard":</strong> Drake raided the port of Cadiz, destroying over 30 Spanish ships being prepared for the Armada. This bold pre-emptive strike delayed the Armada by a full year — arguably saving England.</div></div>
+                <div class="timeline-item"><div class="timeline-date">1588</div><div class="timeline-content"><strong>Spanish Armada:</strong> Served as Vice Admiral under Lord Howard. Famous legend of finishing his game of bowls on Plymouth Hoe before sailing out — probably apocryphal, but reflects his cool nerve. His tactics at the Battle of Gravelines were crucial.</div></div>
+                <div class="timeline-item"><div class="timeline-date">1596</div><div class="timeline-content"><strong>Death:</strong> Died of dysentery off the coast of Panama during a disastrous final Caribbean expedition. Buried at sea in a lead-lined coffin near Portobelo — legends say drums can still be heard when England is in danger.</div></div>
+              </div>
+            </div>
+            <div class="key-point">
+              <div class="key-point-title"><i class="fas fa-star"></i> Why Drake Mattered</div>
+              <p class="content-text">Drake was more than an adventurer — he was a <strong>strategic weapon</strong>. His raids drained Spanish resources, disrupted treasure fleets that funded Philip II's wars, and delivered a massive propaganda victory. His circumnavigation proved English sailors could operate anywhere in the world. Elizabeth used him to challenge Spain without officially declaring war — giving her plausible deniability while reaping enormous financial rewards.</p>
+            </div>
+          </div>
+          <div class="content-section">
+            <h3 class="content-heading"><i class="fas fa-globe-americas"></i> Other Key Explorers</h3>
+            <div class="timeline-item">
+              <div class="timeline-date">John Hawkins</div>
+              <div class="timeline-content"><strong>Slave trader & naval reformer:</strong> Made three voyages to West Africa and the Americas (1562–68) trading enslaved Africans — beginning England's involvement in the transatlantic slave trade. Also reformed and modernised the Royal Navy as Treasurer — ships made faster and lower, crucial for defeating the Armada.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Walter Raleigh</div>
+              <div class="timeline-content"><strong>Coloniser & Elizabeth's favourite:</strong> Organised expeditions to establish the first English colonies in North America — "Virginia" (named after the Virgin Queen). The Roanoke Colony (1585, 1587) both failed; the second settlers (117 people) completely disappeared — the "Lost Colony," one of history's enduring mysteries. Raleigh popularised tobacco and potatoes in England. Lost Elizabeth's favour after secretly marrying one of her ladies-in-waiting.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Martin Frobisher</div>
+              <div class="timeline-content"><strong>Arctic explorer:</strong> Made three voyages (1576–78) searching for the Northwest Passage to Asia through the Arctic. Brought back what he believed was gold ore — turned out to be worthless iron pyrite. Served in the Armada campaign; knighted for his service.</div>
+            </div>
           </div>
           <div class="content-section">
             <h3 class="content-heading"><i class="fas fa-utensils"></i> Daily Life</h3>
@@ -2503,7 +2710,7 @@ main {
           </div>
           <div class="key-point">
             <div class="key-point-title"><i class="fas fa-star"></i> Exam: Why Was This a "Golden Age"?</div>
-            <p class="content-text">Stable monarchy allowed arts to flourish; wealth from trade and privateering funded culture; Elizabeth herself was educated and patronised the arts; printing press spread literacy. But: only wealthy benefited; most people's lives remained hard.</p>
+            <p class="content-text">Stable monarchy allowed arts to flourish; wealth from trade and privateering (Drake's circumnavigation alone brought in nearly twice the Crown's annual income) funded culture; Elizabeth herself was educated and patronised the arts; printing press spread literacy. Exploration expanded England's horizons and national confidence — Drake, Raleigh and Hawkins became national heroes. But: only wealthy benefited; most people's lives remained hard; colonial ventures like Roanoke failed; the slave trade began in this period.</p>
           </div>
         `
       },
@@ -2845,7 +3052,7 @@ main {
 
     coldWarTopics.push(...extraColdWarTopics);
 
-    const quizQuestions = [
+    const coldWarQuestions = [
       { q: "What year did the Berlin Wall fall?", a: "1989", hint: "A famous year of revolutions across Eastern Europe" },
       { q: "What policy did the USA adopt to prevent the spread of communism?", a: "containment", hint: "It means holding something within limits — stopping it from spreading" },
       { q: "Which speech first used the phrase 'Iron Curtain'?", a: "iron curtain speech", hint: "Spoken by Churchill in Fulton, Missouri in 1946" },
@@ -2909,6 +3116,9 @@ main {
       { q: "What year did the Korean War end?", a: "1953", hint: "Armistice signed July ___ — technically still no peace treaty" },
       { q: "What date did the Truman Doctrine speech take place?", a: "march 1947", hint: "Truman pledged to support free peoples resisting subjugation — Greece and Turkey given $400 million" },
       { q: "What was Operation Cyclone?", a: "cia arming of mujahideen", hint: "The covert CIA programme to arm Afghan resistance fighters against the Soviets" },
+    ];
+
+    const elizabethanQuestions = [
       { q: "In what year did Elizabeth I come to the throne?", a: "1558", hint: "She succeeded her Catholic half-sister Mary I" },
       { q: "What was the title given to Elizabeth under the 1559 Act of Supremacy?", a: "supreme governor", hint: "NOT Supreme Head (which Henry VIII used) — a deliberate compromise to avoid offending Catholics" },
       { q: "What was the fine for not attending Church of England services under the 1559 Settlement?", a: "one shilling", hint: "1 shilling per Sunday — not enough to deter wealthy Catholics" },
@@ -2949,10 +3159,13 @@ main {
       { q: "What term describes Elizabeth's strategy of keeping foreign suitors interested without committing to marriage?", a: "marriage negotiations", hint: "She used the possibility of marriage as a diplomatic tool for decades" },
     ];
 
+    const allQuestions = [...coldWarQuestions, ...elizabethanQuestions];
+
     // ═══════════════════════════════════════════════════════════
     // QUIZ STATE
     // ═══════════════════════════════════════════════════════════
 
+    let activeTab = 'cold'; // tracks which section the user is currently viewing
     let shuffledQuestions = [];
     let currentIndex = 0;
     let score = 0;
@@ -3036,9 +3249,11 @@ main {
       if (tab === 'cold') {
         coldSection.style.display = 'block';
         btns[0].classList.add('active');
+        activeTab = 'cold';
       } else if (tab === 'elizabeth') {
         elizSection.style.display = 'block';
         btns[1].classList.add('active');
+        activeTab = 'elizabeth';
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -3048,7 +3263,11 @@ main {
     // ═══════════════════════════════════════════════════════════
 
     function openQuiz() {
-      shuffledQuestions = shuffleArray(quizQuestions);
+      const questionPool = activeTab === 'elizabeth' ? elizabethanQuestions : coldWarQuestions;
+      const topicLabel = activeTab === 'elizabeth' ? 'Elizabethan England' : 'Cold War';
+      const topicIcon = activeTab === 'elizabeth' ? 'fa-crown' : 'fa-globe';
+
+      shuffledQuestions = shuffleArray(questionPool);
       currentIndex = 0;
       score = 0;
       totalAnswered = 0;
@@ -3062,6 +3281,8 @@ main {
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.nav-btn')[2].classList.add('active');
 
+      // Update quiz header to reflect the current topic
+      document.getElementById('quizTopicLabel').innerHTML = `<i class="fas ${topicIcon}" style="margin-right:0.4rem;"></i>${topicLabel}`;
       document.getElementById('totalQ').textContent = shuffledQuestions.length;
       updateScoreDisplay();
       loadQuestion();
@@ -3070,7 +3291,7 @@ main {
 
     function closeQuiz() {
       document.getElementById('quizPanel').style.display = 'none';
-      switchTab('cold');
+      switchTab(activeTab);
     }
 
     function loadQuestion() {
@@ -3215,8 +3436,8 @@ main {
       const totalTopics = coldWarTopics.length + elizabethanTopics.length;
       const statValues = document.querySelectorAll('.stat-value');
       if (statValues[0]) statValues[0].textContent = totalTopics;
-      if (statValues[1]) statValues[1].textContent = quizQuestions.length;
-      document.getElementById('totalQ').textContent = quizQuestions.length;
+      if (statValues[1]) statValues[1].textContent = allQuestions.length;
+      document.getElementById('totalQ').textContent = coldWarQuestions.length;
     });
 
   </script>
